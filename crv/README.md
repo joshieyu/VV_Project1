@@ -1,6 +1,6 @@
 # Constrained-random work - pending
 
-Proposed owner: third teammate, name to be confirmed.
+Proposed owner: Jackal, pending team agreement.
 
 1. Add a pyvsc transaction with `wr_en`, `rd_en`, and `wr_data`.
 2. Keep a non-random reference occupancy/phase field when shaping requests.

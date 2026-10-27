@@ -2,15 +2,15 @@
 
 **Last updated:** 2026-10-27
 
-The split below is proposed. Kyle has started setup and the verification plan. The other owners need to confirm their tasks. The third member's name and the actual Webcourses deadline are still pending.
+The split below is proposed. Kyle has started setup and the verification plan. The other owners need to confirm their tasks. Jackal is the third member. The actual Webcourses deadline and Jackal's repo access still need confirmation.
 
 ## 1. Ownership
 
 | Owner | Work | Done when | Review by |
 |-------|------|-----------|-----------|
 | Kyle | Verification plan, queue scoreboard, coverage model, closure analysis | Checks match the spec; coverage exports show hits and holes; closure claims cite runs. | joshieyu |
-| joshieyu (proposed) | Driver/monitor extraction, reset and cycle interface, environment demo | Existing checks pass after moving reusable layers out of the test; pin samples agree with what the scoreboard receives. | Third member |
-| Third member (unassigned) | pyvsc transactions, burst/boundary constraints, seeded regression, mutation campaigns | Distribution is measured, seeds replay, random-phase X1 closes, and mutation evidence is saved. | Kyle |
+| joshieyu (proposed) | Driver/monitor extraction, reset and cycle interface, environment demo | Existing checks pass after moving reusable layers out of the test; pin samples agree with what the scoreboard receives. | Jackal |
+| Jackal (proposed) | pyvsc transactions, burst/boundary constraints, seeded regression, mutation campaigns | Distribution is measured, seeds replay, random-phase X1 closes, and mutation evidence is saved. | Kyle |
 | Everyone | Findings, report sections, demo, contributions | Each person explains their own layer and reviews another person's work. | Rotate |
 
 ## 2. Integration agreement

@@ -1,6 +1,6 @@
 # Contributions - Project 1 FIFO
 
-**Members:** Kyle Coutray (`kylecoutray`), `joshieyu`, third member to confirm.
+**Members:** Kyle Coutray (`kylecoutray`), `joshieyu`, Jackal (GitHub username to confirm).
 **Repo:** https://github.com/joshieyu/VV_Project1
 **Last updated:** 2026-10-27
 
@@ -23,7 +23,7 @@ for the other members yet.
 |--------|---------------|--------|
 | Kyle Coutray | Scoreboard, coverage model, vplan, and closure analysis. | Initial baseline complete; CRV integration and final analysis pending. |
 | joshieyu | Driver/monitor extraction, sampled interface, environment demo. | Awaiting team agreement. |
-| Third member | pyvsc transactions, constraints, seeded regression, mutation campaigns. | Name and ownership to confirm. |
+| Jackal | pyvsc transactions, constraints, seeded regression, mutation campaigns. | Awaiting team agreement. |
 
 ## 3. Reviews and shared work
 
@@ -33,7 +33,8 @@ Each person writes their report section and contributes to the demo.
 
 ## 4. Final checks
 
-- [ ] Third member identified and added to the repo.
+- [x] Third member identified: Jackal.
+- [ ] Jackal's GitHub username and repo access confirmed.
 - [ ] Each member has made their own commits.
 - [ ] Every completed-work claim has supporting code or evidence.
 - [ ] Each member has reviewed another layer.

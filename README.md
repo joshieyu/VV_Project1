@@ -75,5 +75,5 @@ The starter import is commit `17ae090`. The unchanged HW4 reuse is commit
 `7d77943`. `SOURCE.md` records where that code came from. Each person should
 make their own commits and update the contribution record when work is done.
 
-The actual deadline and third team member still need confirmation. Read
+The actual deadline and Jackal's repo access still need confirmation. Read
 `TASKS.md` before starting a layer so we agree on the interfaces.
