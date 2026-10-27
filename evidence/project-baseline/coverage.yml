@@ -1,0 +1,473 @@
+fifo:
+  cover_percentage: 100.0
+  coverage: 294
+  size: 294
+  type: <class 'cocotb_coverage.coverage.CoverItem'>
+fifo.directed:
+  cover_percentage: 100.0
+  coverage: 49
+  size: 49
+  type: <class 'cocotb_coverage.coverage.CoverItem'>
+fifo.directed.occupancy:
+  at_least: 1
+  bins:_hits:
+    0: 12110
+    1: 10499
+    2: 4053
+    3: 3779
+    4: 3515
+    5: 3250
+    6: 2986
+    7: 4794
+    8: 2405
+  cover_percentage: 100.0
+  coverage: 9
+  size: 9
+  type: <class 'cocotb_coverage.coverage.CoverPoint'>
+  weight: 1
+fifo.directed.occupancy_x_request:
+  at_least: 1
+  bins:_hits:
+    (0, 'idle'): 58
+    (0, 'read'): 4746
+    (0, 'simultaneous'): 2105
+    (0, 'write'): 5201
+    (1, 'idle'): 72
+    (1, 'read'): 7277
+    (1, 'simultaneous'): 2136
+    (1, 'write'): 1014
+    (2, 'idle'): 64
+    (2, 'read'): 989
+    (2, 'simultaneous'): 2128
+    (2, 'write'): 872
+    (3, 'idle'): 64
+    (3, 'read'): 850
+    (3, 'simultaneous'): 2128
+    (3, 'write'): 737
+    (4, 'idle'): 64
+    (4, 'read'): 720
+    (4, 'simultaneous'): 2128
+    (4, 'write'): 603
+    (5, 'idle'): 64
+    (5, 'read'): 589
+    (5, 'simultaneous'): 2128
+    (5, 'write'): 469
+    (6, 'idle'): 64
+    (6, 'read'): 459
+    (6, 'simultaneous'): 2128
+    (6, 'write'): 335
+    (7, 'idle'): 72
+    (7, 'read'): 329
+    (7, 'simultaneous'): 2136
+    (7, 'write'): 2257
+    (8, 'idle'): 59
+    (8, 'read'): 148
+    (8, 'simultaneous'): 2107
+    (8, 'write'): 91
+  cover_percentage: 100.0
+  coverage: 36
+  size: 36
+  type: <class 'cocotb_coverage.coverage.CoverCross'>
+  weight: 1
+fifo.directed.request:
+  at_least: 1
+  bins:_hits:
+    idle: 581
+    read: 16107
+    simultaneous: 19124
+    write: 11579
+  cover_percentage: 100.0
+  coverage: 4
+  size: 4
+  type: <class 'cocotb_coverage.coverage.CoverPoint'>
+  weight: 1
+fifo.hw4_seed_4701:
+  cover_percentage: 100.0
+  coverage: 49
+  size: 49
+  type: <class 'cocotb_coverage.coverage.CoverItem'>
+fifo.hw4_seed_4701.occupancy:
+  at_least: 1
+  bins:_hits:
+    0: 21
+    1: 34
+    2: 39
+    3: 53
+    4: 51
+    5: 96
+    6: 88
+    7: 82
+    8: 36
+  cover_percentage: 100.0
+  coverage: 9
+  size: 9
+  type: <class 'cocotb_coverage.coverage.CoverPoint'>
+  weight: 1
+fifo.hw4_seed_4701.occupancy_x_request:
+  at_least: 1
+  bins:_hits:
+    (0, 'idle'): 4
+    (0, 'read'): 8
+    (0, 'simultaneous'): 6
+    (0, 'write'): 3
+    (1, 'idle'): 8
+    (1, 'read'): 8
+    (1, 'simultaneous'): 9
+    (1, 'write'): 9
+    (2, 'idle'): 11
+    (2, 'read'): 8
+    (2, 'simultaneous'): 9
+    (2, 'write'): 11
+    (3, 'idle'): 12
+    (3, 'read'): 10
+    (3, 'simultaneous'): 13
+    (3, 'write'): 18
+    (4, 'idle'): 8
+    (4, 'read'): 17
+    (4, 'simultaneous'): 10
+    (4, 'write'): 16
+    (5, 'idle'): 24
+    (5, 'read'): 15
+    (5, 'simultaneous'): 25
+    (5, 'write'): 32
+    (6, 'idle'): 11
+    (6, 'read'): 31
+    (6, 'simultaneous'): 27
+    (6, 'write'): 19
+    (7, 'idle'): 20
+    (7, 'read'): 18
+    (7, 'simultaneous'): 23
+    (7, 'write'): 21
+    (8, 'idle'): 9
+    (8, 'read'): 12
+    (8, 'simultaneous'): 8
+    (8, 'write'): 7
+  cover_percentage: 100.0
+  coverage: 36
+  size: 36
+  type: <class 'cocotb_coverage.coverage.CoverCross'>
+  weight: 1
+fifo.hw4_seed_4701.request:
+  at_least: 1
+  bins:_hits:
+    idle: 107
+    read: 127
+    simultaneous: 130
+    write: 136
+  cover_percentage: 100.0
+  coverage: 4
+  size: 4
+  type: <class 'cocotb_coverage.coverage.CoverPoint'>
+  weight: 1
+fifo.hw4_seed_4702:
+  cover_percentage: 100.0
+  coverage: 49
+  size: 49
+  type: <class 'cocotb_coverage.coverage.CoverItem'>
+fifo.hw4_seed_4702.occupancy:
+  at_least: 1
+  bins:_hits:
+    0: 80
+    1: 208
+    2: 195
+    3: 237
+    4: 279
+    5: 228
+    6: 277
+    7: 345
+    8: 199
+  cover_percentage: 100.0
+  coverage: 9
+  size: 9
+  type: <class 'cocotb_coverage.coverage.CoverPoint'>
+  weight: 1
+fifo.hw4_seed_4702.occupancy_x_request:
+  at_least: 1
+  bins:_hits:
+    (0, 'idle'): 18
+    (0, 'read'): 19
+    (0, 'simultaneous'): 20
+    (0, 'write'): 23
+    (1, 'idle'): 54
+    (1, 'read'): 42
+    (1, 'simultaneous'): 61
+    (1, 'write'): 51
+    (2, 'idle'): 44
+    (2, 'read'): 50
+    (2, 'simultaneous'): 47
+    (2, 'write'): 54
+    (3, 'idle'): 60
+    (3, 'read'): 53
+    (3, 'simultaneous'): 53
+    (3, 'write'): 71
+    (4, 'idle'): 78
+    (4, 'read'): 70
+    (4, 'simultaneous'): 68
+    (4, 'write'): 63
+    (5, 'idle'): 64
+    (5, 'read'): 63
+    (5, 'simultaneous'): 46
+    (5, 'write'): 55
+    (6, 'idle'): 65
+    (6, 'read'): 55
+    (6, 'simultaneous'): 83
+    (6, 'write'): 74
+    (7, 'idle'): 94
+    (7, 'read'): 74
+    (7, 'simultaneous'): 88
+    (7, 'write'): 89
+    (8, 'idle'): 50
+    (8, 'read'): 44
+    (8, 'simultaneous'): 45
+    (8, 'write'): 60
+  cover_percentage: 100.0
+  coverage: 36
+  size: 36
+  type: <class 'cocotb_coverage.coverage.CoverCross'>
+  weight: 1
+fifo.hw4_seed_4702.request:
+  at_least: 1
+  bins:_hits:
+    idle: 527
+    read: 470
+    simultaneous: 511
+    write: 540
+  cover_percentage: 100.0
+  coverage: 4
+  size: 4
+  type: <class 'cocotb_coverage.coverage.CoverPoint'>
+  weight: 1
+fifo.hw4_seed_4703:
+  cover_percentage: 100.0
+  coverage: 49
+  size: 49
+  type: <class 'cocotb_coverage.coverage.CoverItem'>
+fifo.hw4_seed_4703.occupancy:
+  at_least: 1
+  bins:_hits:
+    0: 174
+    1: 295
+    2: 246
+    3: 276
+    4: 291
+    5: 276
+    6: 211
+    7: 187
+    8: 92
+  cover_percentage: 100.0
+  coverage: 9
+  size: 9
+  type: <class 'cocotb_coverage.coverage.CoverPoint'>
+  weight: 1
+fifo.hw4_seed_4703.occupancy_x_request:
+  at_least: 1
+  bins:_hits:
+    (0, 'idle'): 47
+    (0, 'read'): 52
+    (0, 'simultaneous'): 36
+    (0, 'write'): 39
+    (1, 'idle'): 87
+    (1, 'read'): 74
+    (1, 'simultaneous'): 70
+    (1, 'write'): 64
+    (2, 'idle'): 64
+    (2, 'read'): 63
+    (2, 'simultaneous'): 58
+    (2, 'write'): 61
+    (3, 'idle'): 73
+    (3, 'read'): 61
+    (3, 'simultaneous'): 65
+    (3, 'write'): 77
+    (4, 'idle'): 78
+    (4, 'read'): 77
+    (4, 'simultaneous'): 62
+    (4, 'write'): 74
+    (5, 'idle'): 70
+    (5, 'read'): 74
+    (5, 'simultaneous'): 80
+    (5, 'write'): 52
+    (6, 'idle'): 53
+    (6, 'read'): 52
+    (6, 'simultaneous'): 59
+    (6, 'write'): 47
+    (7, 'idle'): 45
+    (7, 'read'): 47
+    (7, 'simultaneous'): 50
+    (7, 'write'): 45
+    (8, 'idle'): 22
+    (8, 'read'): 24
+    (8, 'simultaneous'): 21
+    (8, 'write'): 25
+  cover_percentage: 100.0
+  coverage: 36
+  size: 36
+  type: <class 'cocotb_coverage.coverage.CoverCross'>
+  weight: 1
+fifo.hw4_seed_4703.request:
+  at_least: 1
+  bins:_hits:
+    idle: 539
+    read: 524
+    simultaneous: 501
+    write: 484
+  cover_percentage: 100.0
+  coverage: 4
+  size: 4
+  type: <class 'cocotb_coverage.coverage.CoverPoint'>
+  weight: 1
+fifo.hw4_seed_4704:
+  cover_percentage: 100.0
+  coverage: 49
+  size: 49
+  type: <class 'cocotb_coverage.coverage.CoverItem'>
+fifo.hw4_seed_4704.occupancy:
+  at_least: 1
+  bins:_hits:
+    0: 119
+    1: 249
+    2: 217
+    3: 251
+    4: 245
+    5: 262
+    6: 261
+    7: 288
+    8: 156
+  cover_percentage: 100.0
+  coverage: 9
+  size: 9
+  type: <class 'cocotb_coverage.coverage.CoverPoint'>
+  weight: 1
+fifo.hw4_seed_4704.occupancy_x_request:
+  at_least: 1
+  bins:_hits:
+    (0, 'idle'): 31
+    (0, 'read'): 31
+    (0, 'simultaneous'): 32
+    (0, 'write'): 25
+    (1, 'idle'): 74
+    (1, 'read'): 56
+    (1, 'simultaneous'): 52
+    (1, 'write'): 67
+    (2, 'idle'): 40
+    (2, 'read'): 66
+    (2, 'simultaneous'): 50
+    (2, 'write'): 61
+    (3, 'idle'): 62
+    (3, 'read'): 60
+    (3, 'simultaneous'): 59
+    (3, 'write'): 70
+    (4, 'idle'): 54
+    (4, 'read'): 69
+    (4, 'simultaneous'): 57
+    (4, 'write'): 65
+    (5, 'idle'): 67
+    (5, 'read'): 64
+    (5, 'simultaneous'): 68
+    (5, 'write'): 63
+    (6, 'idle'): 66
+    (6, 'read'): 62
+    (6, 'simultaneous'): 69
+    (6, 'write'): 64
+    (7, 'idle'): 85
+    (7, 'read'): 63
+    (7, 'simultaneous'): 58
+    (7, 'write'): 82
+    (8, 'idle'): 40
+    (8, 'read'): 38
+    (8, 'simultaneous'): 43
+    (8, 'write'): 35
+  cover_percentage: 100.0
+  coverage: 36
+  size: 36
+  type: <class 'cocotb_coverage.coverage.CoverCross'>
+  weight: 1
+fifo.hw4_seed_4704.request:
+  at_least: 1
+  bins:_hits:
+    idle: 519
+    read: 509
+    simultaneous: 488
+    write: 532
+  cover_percentage: 100.0
+  coverage: 4
+  size: 4
+  type: <class 'cocotb_coverage.coverage.CoverPoint'>
+  weight: 1
+fifo.reset:
+  cover_percentage: 100.0
+  coverage: 49
+  size: 49
+  type: <class 'cocotb_coverage.coverage.CoverItem'>
+fifo.reset.occupancy:
+  at_least: 1
+  bins:_hits:
+    0: 1165
+    1: 4
+    2: 4
+    3: 5
+    4: 4
+    5: 4
+    6: 4
+    7: 4
+    8: 4
+  cover_percentage: 100.0
+  coverage: 9
+  size: 9
+  type: <class 'cocotb_coverage.coverage.CoverPoint'>
+  weight: 1
+fifo.reset.occupancy_x_request:
+  at_least: 1
+  bins:_hits:
+    (0, 'idle'): 1162
+    (0, 'read'): 1
+    (0, 'simultaneous'): 1
+    (0, 'write'): 1
+    (1, 'idle'): 1
+    (1, 'read'): 1
+    (1, 'simultaneous'): 1
+    (1, 'write'): 1
+    (2, 'idle'): 1
+    (2, 'read'): 1
+    (2, 'simultaneous'): 1
+    (2, 'write'): 1
+    (3, 'idle'): 2
+    (3, 'read'): 1
+    (3, 'simultaneous'): 1
+    (3, 'write'): 1
+    (4, 'idle'): 1
+    (4, 'read'): 1
+    (4, 'simultaneous'): 1
+    (4, 'write'): 1
+    (5, 'idle'): 1
+    (5, 'read'): 1
+    (5, 'simultaneous'): 1
+    (5, 'write'): 1
+    (6, 'idle'): 1
+    (6, 'read'): 1
+    (6, 'simultaneous'): 1
+    (6, 'write'): 1
+    (7, 'idle'): 1
+    (7, 'read'): 1
+    (7, 'simultaneous'): 1
+    (7, 'write'): 1
+    (8, 'idle'): 1
+    (8, 'read'): 1
+    (8, 'simultaneous'): 1
+    (8, 'write'): 1
+  cover_percentage: 100.0
+  coverage: 36
+  size: 36
+  type: <class 'cocotb_coverage.coverage.CoverCross'>
+  weight: 1
+fifo.reset.request:
+  at_least: 1
+  bins:_hits:
+    idle: 1171
+    read: 9
+    simultaneous: 9
+    write: 9
+  cover_percentage: 100.0
+  coverage: 4
+  size: 4
+  type: <class 'cocotb_coverage.coverage.CoverPoint'>
+  weight: 1

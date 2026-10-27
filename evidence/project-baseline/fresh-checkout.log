@@ -1,0 +1,49 @@
+rm -f results.xml
+"/Library/Developer/CommandLineTools/usr/bin/make" -f Makefile results.xml
+mkdir -p sim_build
+/opt/homebrew/bin/iverilog -o sim_build/sim.vvp -D COCOTB_SIM=1 -s fifo -g2012 -f sim_build/cmds.f  /private/var/folders/75/cq537w0x36x2h1n0g5jfb7nw0000gp/T/vv-project1-clean-2f8fu7t0/tb/fifo/../../dut/fifo.sv
+rm -f results.xml
+MODULE=test_fifo TESTCASE= TOPLEVEL=fifo TOPLEVEL_LANG=verilog \
+         /opt/homebrew/bin/vvp -M /Users/kylecoutray/EEE4701/VV_Project1/.venv/lib/python3.12/site-packages/cocotb/libs -m libcocotbvpi_icarus   sim_build/sim.vvp  
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:109  in set_program_name_in_venv        Using Python virtual environment interpreter at /Users/kylecoutray/EEE4701/VV_Project1/.venv/bin/python
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:101  in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 13.0 (stable)
+     0.00ns INFO     cocotb                             Running tests with cocotb v1.9.2 from /Users/kylecoutray/EEE4701/VV_Project1/.venv/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb                             Seeding Python random module with supplied seed 4701
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb.regression                  Found test test_fifo.test_fifo
+     0.00ns INFO     cocotb.regression                  running test_fifo (1/1)
+552341.00ns INFO     cocotb.fifo                        fifo : <cocotb_coverage.coverage.CoverItem object at 0x105f464e0>, coverage=294, size=294 
+552341.00ns INFO     cocotb.fifo                           fifo.directed : <cocotb_coverage.coverage.CoverItem object at 0x105f46480>, coverage=49, size=49 
+552341.00ns INFO     cocotb.fifo                              fifo.directed.occupancy : <cocotb_coverage.coverage.CoverPoint object at 0x105f46450>, coverage=9, size=9 
+552341.00ns INFO     cocotb.fifo                              fifo.directed.occupancy_x_request : <cocotb_coverage.coverage.CoverCross object at 0x105f46420>, coverage=36, size=36 
+552341.00ns INFO     cocotb.fifo                              fifo.directed.request : <cocotb_coverage.coverage.CoverPoint object at 0x105f46510>, coverage=4, size=4 
+552341.00ns INFO     cocotb.fifo                           fifo.hw4_seed_4701 : <cocotb_coverage.coverage.CoverItem object at 0x105f64320>, coverage=49, size=49 
+552341.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4701.occupancy : <cocotb_coverage.coverage.CoverPoint object at 0x105f65250>, coverage=9, size=9 
+552341.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4701.occupancy_x_request : <cocotb_coverage.coverage.CoverCross object at 0x105f46fc0>, coverage=36, size=36 
+552341.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4701.request : <cocotb_coverage.coverage.CoverPoint object at 0x105f64590>, coverage=4, size=4 
+552341.00ns INFO     cocotb.fifo                           fifo.hw4_seed_4702 : <cocotb_coverage.coverage.CoverItem object at 0x105f46ae0>, coverage=49, size=49 
+552341.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4702.occupancy : <cocotb_coverage.coverage.CoverPoint object at 0x105f47cb0>, coverage=9, size=9 
+552341.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4702.occupancy_x_request : <cocotb_coverage.coverage.CoverCross object at 0x105f47710>, coverage=36, size=36 
+552341.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4702.request : <cocotb_coverage.coverage.CoverPoint object at 0x105f47a10>, coverage=4, size=4 
+552341.00ns INFO     cocotb.fifo                           fifo.hw4_seed_4703 : <cocotb_coverage.coverage.CoverItem object at 0x105f64110>, coverage=49, size=49 
+552341.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4703.occupancy : <cocotb_coverage.coverage.CoverPoint object at 0x105f644d0>, coverage=9, size=9 
+552341.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4703.occupancy_x_request : <cocotb_coverage.coverage.CoverCross object at 0x105f47e90>, coverage=36, size=36 
+552341.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4703.request : <cocotb_coverage.coverage.CoverPoint object at 0x105f64e00>, coverage=4, size=4 
+552341.00ns INFO     cocotb.fifo                           fifo.hw4_seed_4704 : <cocotb_coverage.coverage.CoverItem object at 0x105f65e20>, coverage=49, size=49 
+552341.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4704.occupancy : <cocotb_coverage.coverage.CoverPoint object at 0x105f646e0>, coverage=9, size=9 
+552341.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4704.occupancy_x_request : <cocotb_coverage.coverage.CoverCross object at 0x105d8c0b0>, coverage=36, size=36 
+552341.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4704.request : <cocotb_coverage.coverage.CoverPoint object at 0x105f64170>, coverage=4, size=4 
+552341.00ns INFO     cocotb.fifo                           fifo.reset : <cocotb_coverage.coverage.CoverItem object at 0x105f466c0>, coverage=49, size=49 
+552341.00ns INFO     cocotb.fifo                              fifo.reset.occupancy : <cocotb_coverage.coverage.CoverPoint object at 0x105f46690>, coverage=9, size=9 
+552341.00ns INFO     cocotb.fifo                              fifo.reset.occupancy_x_request : <cocotb_coverage.coverage.CoverCross object at 0x105f46660>, coverage=36, size=36 
+552341.00ns INFO     cocotb.fifo                              fifo.reset.request : <cocotb_coverage.coverage.CoverPoint object at 0x105f466f0>, coverage=4, size=4 
+552341.00ns INFO     cocotb.regression                  test_fifo passed
+552341.00ns INFO     cocotb.regression                  **************************************************************************************
+                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        **************************************************************************************
+                                                        ** test_fifo.test_fifo            PASS      552341.00           2.66     207311.70  **
+                                                        **************************************************************************************
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0             552341.00           2.67     206909.34  **
+                                                        **************************************************************************************
+                                                        
