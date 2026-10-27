@@ -1,10 +1,12 @@
 # requests -> driver -> FIFO -> monitor -> scoreboard (FifoModel)
 import random
+from pathlib import Path
 
 import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import RisingEdge, FallingEdge, Timer
 from models.fifo_model import FifoModel
+from fifo_coverage import make_sampler, export_coverage, require_closed
 
 
 class FifoDriver:
@@ -80,12 +82,16 @@ async def test_fifo(dut):
     driver = FifoDriver(dut)
     monitor = FifoMonitor(dut)
     scoreboard = FifoScoreboard()
+    sample_directed = make_sampler("fifo.directed")
+    sample_reset = make_sampler("fifo.reset")
+    sample_traffic = sample_directed
 
     async def cycle(wr_en=0, rd_en=0, wr_data=0):
         # Check the head being consumed before updating the model.
         before_edge = cocotb.start_soon(monitor.before_edge())
         await driver.cycle(wr_en, rd_en, wr_data)
         scoreboard.check(await before_edge)
+        sample_traffic(scoreboard.model.count, wr_en, rd_en)
         scoreboard.step(wr_en, rd_en, wr_data)
         scoreboard.check(monitor.sample())
 
@@ -94,6 +100,7 @@ async def test_fifo(dut):
         await driver.reset(wr_en, rd_en, wr_data)
         # Reset is synchronous, so the old state must hold before the edge.
         scoreboard.check(await before_edge)
+        sample_reset(scoreboard.model.count, wr_en, rd_en)
         scoreboard.model.reset()
         scoreboard.check(monitor.sample())
 
@@ -136,15 +143,18 @@ async def test_fifo(dut):
             await cycle(0, 1)
 
     rng = random.Random(4701)
+    sample_traffic = make_sampler("fifo.hw4_seed_4701")
     for _ in range(500):
         await cycle(rng.randrange(2), rng.randrange(2), rng.randrange(256))
 
     # Drain anything left so the last stored values also get checked.
+    sample_traffic = sample_directed
     for _ in range(8):
         await cycle(0, 1)
     await cycle()
 
     # Reset with data still in the queue, then use it again.
+    sample_traffic = sample_directed
     for value in [0, 0xff, 0x55]:
         await cycle(1, 0, value)
     await reset()
@@ -195,7 +205,14 @@ async def test_fifo(dut):
 
     for seed in [4702, 4703, 4704]:
         rng = random.Random(seed)
+        sample_traffic = make_sampler(f"fifo.hw4_seed_{seed}")
         for _ in range(2048):
             await cycle(rng.randrange(2), rng.randrange(2), rng.randrange(256))
+        sample_traffic = sample_directed
         for _ in range(8):
             await cycle(0, 1)
+
+    export_coverage(Path(__file__).resolve().parents[2] / "artifacts/coverage.yml",
+                    dut._log.info)
+    require_closed("fifo.directed")
+    require_closed("fifo.reset")
