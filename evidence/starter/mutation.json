@@ -1,0 +1,57 @@
+{
+  "found": 1,
+  "total": 8,
+  "percent": 12.5,
+  "threshold": 90.0,
+  "pass": false,
+  "mutants": [
+    {
+      "id": "full_offbyone",
+      "found": false,
+      "why": "passed",
+      "desc": "full asserts one entry too early (cnt == DEPTH-1)"
+    },
+    {
+      "id": "empty_offbyone",
+      "found": false,
+      "why": "passed",
+      "desc": "empty asserts one entry too early (cnt == 1)"
+    },
+    {
+      "id": "ignore_full",
+      "found": false,
+      "why": "passed",
+      "desc": "writes are accepted even when full (overflow)"
+    },
+    {
+      "id": "ignore_empty",
+      "found": false,
+      "why": "passed",
+      "desc": "reads are accepted even when empty (underflow)"
+    },
+    {
+      "id": "count_wr_dec",
+      "found": true,
+      "why": "test-failed",
+      "desc": "a write-only cycle decrements the count"
+    },
+    {
+      "id": "rd_data_wrptr",
+      "found": false,
+      "why": "passed",
+      "desc": "rd_data reads from the write pointer instead of the read pointer"
+    },
+    {
+      "id": "mem_corrupt",
+      "found": false,
+      "why": "passed",
+      "desc": "stored data is corrupted (+1) on write"
+    },
+    {
+      "id": "wrptr_wrap_early",
+      "found": false,
+      "why": "passed",
+      "desc": "write pointer wraps one slot early"
+    }
+  ]
+}

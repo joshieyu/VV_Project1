@@ -1,0 +1,14 @@
+[baseline] running clean fifo.sv through fifo ...
+  clean RTL: 1 tests passed.
+
+  [SURVIVED] full_offbyone        (passed)  -- full asserts one entry too early (cnt == DEPTH-1)
+  [SURVIVED] empty_offbyone       (passed)  -- empty asserts one entry too early (cnt == 1)
+  [SURVIVED] ignore_full          (passed)  -- writes are accepted even when full (overflow)
+  [SURVIVED] ignore_empty         (passed)  -- reads are accepted even when empty (underflow)
+  [found  ] count_wr_dec         (test-failed)  -- a write-only cycle decrements the count
+  [SURVIVED] rd_data_wrptr        (passed)  -- rd_data reads from the write pointer instead of the read pointer
+  [SURVIVED] mem_corrupt          (passed)  -- stored data is corrupted (+1) on write
+  [SURVIVED] wrptr_wrap_early     (passed)  -- write pointer wraps one slot early
+
+==== found/total = 1/8  =  12.5%  (threshold 90%) ====
+surviving mutants: full_offbyone, empty_offbyone, ignore_full, ignore_empty, rd_data_wrptr, mem_corrupt, wrptr_wrap_early
