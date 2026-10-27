@@ -2,7 +2,9 @@
 
 **Last updated:** 2026-10-27
 
-The split below is proposed. Kyle has started setup and the verification plan. The other owners need to confirm their tasks. Jackal is the third member. The actual Webcourses deadline and Jackal's repo access still need confirmation.
+**Deadline:** November 8, 2026 (Webcourses date confirmed by Kyle).
+
+The split below is proposed. Kyle has started setup and the verification plan. The other owners need to confirm their tasks. Jackal is the third member; his repo access still needs confirmation.
 
 ## 1. Ownership
 
@@ -25,13 +27,23 @@ The split below is proposed. Kyle has started setup and the verification plan. T
 
 ## 3. Order of work
 
-1. Confirm team access, current project spec, deadline, and proposed owners.
+1. Confirm team access, current project spec, and proposed owners.
 2. Everyone reproduces the clean run before changing code.
 3. Driver/monitor extraction and pyvsc work can proceed against the agreed interface.
 4. Measure initial random coverage and distribution. Save that evidence before tuning constraints.
 5. Close holes, rerun released mutations, inspect failures, and record seed replay.
 6. Write the 4-6 page report and record the demo from the final tested revision.
 7. A different teammate checks out the final revision and repeats the documented commands.
+
+Proposed checkpoints, leaving the final day for submission:
+
+| Date | Target |
+|------|--------|
+| November 1 | Everyone can run the baseline; driver/monitor extraction and initial pyvsc stimulus are ready for integration. |
+| November 4 | Integrated random regression runs; initial coverage, distribution, and seed-replay evidence are saved. |
+| November 6 | Coverage holes addressed, mutations rerun, cross-reviews completed, and report draft ready. |
+| November 7 | Final report and demo ready; another teammate reproduces the final revision. |
+| November 8 | Check the final deliverables and submit by the Webcourses cutoff. |
 
 ## 4. Commit workflow
 
@@ -45,4 +57,4 @@ Record reused HW4 code separately from new work. Update `CONTRIBUTIONS.md` with 
 - Implement and validate the pyvsc regression, including the course-pinned pyvsc version and actual seed replay.
 - Complete CRV convergence analysis; baseline coverage is not CRV closure.
 - Write `REPORT.pdf` (4-6 pages) and record/link the demo.
-- Confirm each person's contributions and final submission deadline in Webcourses.
+- Confirm each person's contributions and submit by November 8.

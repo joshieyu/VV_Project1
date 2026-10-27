@@ -4,6 +4,8 @@ EEE4701 team repo. The current starting point is Kyle's HW4 FIFO testbench,
 with a project verification plan and functional-coverage instrumentation.
 The pyvsc regression, final report, and demo are still pending.
 
+**Deadline:** November 8, 2026 (Webcourses date confirmed by Kyle).
+
 ## 1. Setup
 
 Use Python 3.12, Icarus Verilog, and make. From the repo root:
@@ -75,5 +77,5 @@ The starter import is commit `17ae090`. The unchanged HW4 reuse is commit
 `7d77943`. `SOURCE.md` records where that code came from. Each person should
 make their own commits and update the contribution record when work is done.
 
-The actual deadline and Jackal's repo access still need confirmation. Read
+Jackal's repo access still needs confirmation. Read
 `TASKS.md` before starting a layer so we agree on the interfaces.
