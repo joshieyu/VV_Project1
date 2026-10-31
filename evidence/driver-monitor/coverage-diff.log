@@ -1,0 +1,2 @@
+$ diff artifacts/coverage.yml evidence/project-baseline/coverage.yml
+(no output: identical)

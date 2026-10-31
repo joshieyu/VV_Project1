@@ -12,17 +12,18 @@
 | Kyle Coutray | Reused his existing HW4 testbench and measured the original starter's 1/8 released score. | `7d77943`; `evidence/starter/` |
 | Kyle Coutray | Drafted the Project 1 vplan, instrumented phase-specific occupancy/request coverage, and checked the baseline suite. | `dba08bb`; `evidence/hw4/`, `evidence/project-baseline/` |
 | Kyle Coutray | Prepared setup instructions, proposed task split, baseline survivor analysis, and coverage status. | `README.md`, `TASKS.md`, `FINDINGS.md`, `closure.md` |
+| joshieyu | Extracted the driver and monitor into `tb/fifo/fifo_driver.py` and `fifo_monitor.py`, added the shared per-cycle `FifoEnv`, extended monitor samples with `rst_n`/`wr_en`/`rd_en`/`wr_data`, and stepped the scoreboard from sampled inputs after checking them against the request. Validated by an unchanged clean run (byte-identical coverage), 8/8 released, and three injected environment faults. | branch `josh-driver-monitor`; `evidence/driver-monitor/`; `report/environment.md` |
+| joshieyu | EEE5703 graduate extension: measured pyvsc rates, Markov-chain occupancy and corner bound, and a coverage vs. found/total regression. | `grad/` |
 
 The HW4 driver, monitor, scoreboard, and sequences are reused work. They are
-not claimed as new Project 1 code. No implementation or review is recorded
-for the other members yet.
+not claimed as new Project 1 code. No review is recorded yet.
 
 ## 2. Proposed responsibilities
 
 | Member | Proposed work | Status |
 |--------|---------------|--------|
 | Kyle Coutray | Scoreboard, coverage model, vplan, and closure analysis. | Initial baseline complete; CRV integration and final analysis pending. |
-| joshieyu | Driver/monitor extraction, sampled interface, environment demo. | Awaiting team agreement. |
+| joshieyu | Driver/monitor extraction, sampled interface, environment demo. | Implemented and validated; awaiting review by Jackal. |
 | Jackal | pyvsc transactions, constraints, seeded regression, mutation campaigns. | Awaiting team agreement. |
 
 ## 3. Reviews and shared work

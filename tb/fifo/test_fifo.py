@@ -3,52 +3,9 @@ import random
 from pathlib import Path
 
 import cocotb
-from cocotb.clock import Clock
-from cocotb.triggers import RisingEdge, FallingEdge, Timer
 from models.fifo_model import FifoModel
 from fifo_coverage import make_sampler, export_coverage, require_closed
-
-
-class FifoDriver:
-    def __init__(self, dut):
-        self.dut = dut
-
-    async def reset(self, wr_en=0, rd_en=0, wr_data=0):
-        await FallingEdge(self.dut.clk)
-        self.dut.rst_n.value = 0
-        self.dut.wr_en.value = wr_en
-        self.dut.rd_en.value = rd_en
-        self.dut.wr_data.value = wr_data
-        await RisingEdge(self.dut.clk)
-        await Timer(1, units="ns")
-
-    async def cycle(self, wr_en=0, rd_en=0, wr_data=0):
-        await FallingEdge(self.dut.clk)
-        self.dut.rst_n.value = 1
-        self.dut.wr_en.value = wr_en
-        self.dut.rd_en.value = rd_en
-        self.dut.wr_data.value = wr_data
-        await RisingEdge(self.dut.clk)
-        await Timer(1, units="ns")
-
-
-class FifoMonitor:
-    def __init__(self, dut):
-        self.dut = dut
-
-    async def before_edge(self):
-        await FallingEdge(self.dut.clk)
-        await Timer(1, units="ns")
-        return self.sample()
-
-    def sample(self):
-        empty = int(self.dut.empty.value)
-        return {
-            "count": int(self.dut.count.value),
-            "full": int(self.dut.full.value),
-            "empty": empty,
-            "rd_data": int(self.dut.rd_data.value) if not empty else None,
-        }
+from fifo_env import FifoEnv
 
 
 class FifoScoreboard:
@@ -72,41 +29,13 @@ class FifoScoreboard:
 
 @cocotb.test()
 async def test_fifo(dut):
-    dut.clk.value = 0
-    dut.rst_n.value = 0
-    dut.wr_en.value = 0
-    dut.rd_en.value = 0
-    dut.wr_data.value = 0
-    cocotb.start_soon(Clock(dut.clk, 10, units="ns").start())
-
-    driver = FifoDriver(dut)
-    monitor = FifoMonitor(dut)
     scoreboard = FifoScoreboard()
     sample_directed = make_sampler("fifo.directed")
-    sample_reset = make_sampler("fifo.reset")
-    sample_traffic = sample_directed
+    env = FifoEnv(dut, scoreboard, sample_directed, make_sampler("fifo.reset"))
+    cycle = env.cycle
+    reset = env.reset
 
-    async def cycle(wr_en=0, rd_en=0, wr_data=0):
-        # Check the head being consumed before updating the model.
-        before_edge = cocotb.start_soon(monitor.before_edge())
-        await driver.cycle(wr_en, rd_en, wr_data)
-        scoreboard.check(await before_edge)
-        sample_traffic(scoreboard.model.count, wr_en, rd_en)
-        scoreboard.step(wr_en, rd_en, wr_data)
-        scoreboard.check(monitor.sample())
-
-    async def reset(wr_en=0, rd_en=0, wr_data=0):
-        before_edge = cocotb.start_soon(monitor.before_edge())
-        await driver.reset(wr_en, rd_en, wr_data)
-        # Reset is synchronous, so the old state must hold before the edge.
-        scoreboard.check(await before_edge)
-        sample_reset(scoreboard.model.count, wr_en, rd_en)
-        scoreboard.model.reset()
-        scoreboard.check(monitor.sample())
-
-    await driver.reset()
-    scoreboard.model.reset()
-    scoreboard.check(monitor.sample())
+    await env.start()
 
     await cycle()
     await cycle(0, 1)  # read while empty
@@ -143,18 +72,18 @@ async def test_fifo(dut):
             await cycle(0, 1)
 
     rng = random.Random(4701)
-    sample_traffic = make_sampler("fifo.hw4_seed_4701")
+    env.sample_traffic = make_sampler("fifo.hw4_seed_4701")
     for _ in range(500):
         await cycle(rng.randrange(2), rng.randrange(2), rng.randrange(256))
 
     # Drain anything left so the last stored values also get checked.
-    sample_traffic = sample_directed
+    env.sample_traffic = sample_directed
     for _ in range(8):
         await cycle(0, 1)
     await cycle()
 
     # Reset with data still in the queue, then use it again.
-    sample_traffic = sample_directed
+    env.sample_traffic = sample_directed
     for value in [0, 0xff, 0x55]:
         await cycle(1, 0, value)
     await reset()
@@ -205,10 +134,10 @@ async def test_fifo(dut):
 
     for seed in [4702, 4703, 4704]:
         rng = random.Random(seed)
-        sample_traffic = make_sampler(f"fifo.hw4_seed_{seed}")
+        env.sample_traffic = make_sampler(f"fifo.hw4_seed_{seed}")
         for _ in range(2048):
             await cycle(rng.randrange(2), rng.randrange(2), rng.randrange(256))
-        sample_traffic = sample_directed
+        env.sample_traffic = sample_directed
         for _ in range(8):
             await cycle(0, 1)
 
