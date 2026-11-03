@@ -43,6 +43,8 @@ Recorded on 2026-10-31 with Python 3.12, Icarus 13.0 (Homebrew), cocotb 1.9.2,
 cocotb-coverage 1.2.0, PyYAML 6.0.3, and pyvsc 0.9.5.27214109393, on macOS.
 The mutation campaign was run first, then the clean run, using the commands
 above.
+joshieyu repeated the clean run on Eustis (course environment, Icarus 12.0)
+on 2026-11-03, and it passed. That log is not stored here.
 
 | File | Contents |
 |------|----------|

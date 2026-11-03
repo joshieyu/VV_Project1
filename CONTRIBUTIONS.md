@@ -23,7 +23,7 @@ not claimed as new Project 1 code. No review is recorded yet.
 | Member | Proposed work | Status |
 |--------|---------------|--------|
 | Kyle Coutray | Scoreboard, coverage model, vplan, and closure analysis. | Initial baseline complete; CRV integration and final analysis pending. |
-| joshieyu | Driver/monitor extraction, sampled interface, environment demo. | Implemented and validated; awaiting review by Jackal. |
+| joshieyu | Driver/monitor extraction, sampled interface, environment demo. | Implemented and validated locally; clean run repeated on Eustis. |
 | Jackal | pyvsc transactions, constraints, seeded regression, mutation campaigns. | Awaiting team agreement. |
 
 ## 3. Reviews and shared work
