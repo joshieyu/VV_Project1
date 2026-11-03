@@ -44,12 +44,14 @@ cocotb-coverage 1.2.0, PyYAML 6.0.3, and pyvsc 0.9.5.27214109393, on macOS.
 The mutation campaign was run first, then the clean run, using the commands
 above.
 joshieyu repeated the clean run on Eustis (course environment, Icarus 12.0)
-on 2026-11-03, and it passed. That log is not stored here.
+on 2026-11-03. It passed at the same simulated time with the same coverage
+totals (`driver-monitor/eustis-clean.log`).
 
 | File | Contents |
 |------|----------|
 | `driver-monitor/clean.log` | Clean run: 1/1 passed at 552,341 ns, the same simulated time as the baseline. |
 | `driver-monitor/coverage-diff.log` | `artifacts/coverage.yml` from that run is identical to `project-baseline/coverage.yml`. |
+| `driver-monitor/eustis-clean.log` | The same clean run on Eustis with Icarus 12.0: 1/1 passed at 552,341 ns, 294/294 bins. |
 | `driver-monitor/mutation.log`, `mutation.json` | Released pool 8/8, all `test-failed`. |
 | `driver-monitor/sabotage.log` | Three injected driver/monitor timing faults and the check that caught each one. |
 | `driver-monitor/trace.log` | `FIFO_TRACE=4` output: before- and after-edge samples for the first four cycles. |
