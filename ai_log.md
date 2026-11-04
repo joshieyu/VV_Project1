@@ -33,7 +33,7 @@ The teammate's task list for the driver/monitor layer was pasted with it.
 | 2 | Stepping the queue from sampled inputs would hide a broken driver unless sampled inputs are checked against the request. | Injected faults in `evidence/driver-monitor/sabotage.log`. All three fail, and two fail on the input check. | Held. The input check was kept. |
 | 3 | A roll-plus-`implies` constraint on the pinned pyvsc would not give its nominal rate. HW5 measured compression toward 0.5. | Nominal 0.30 measured 0.37. With `vsc.solve_order(roll, enable)` it measured 0.31. | Held. The extension constraint uses `solve_order`, and the analysis measures every band instead of trusting the text. |
 | 4 | With 50/50 end bands, the phased constraint would close X1 about as fast as uniform. The estimate was about 0.014 per cycle for the rarest end bin, against about 0.016 for uniform. | `grad/results/regression.csv`: phased closed X1 in 5/5 seeds at N=256. Uniform closed it in 3/5 at N=256 and 5/5 at N=512. | **Wrong.** Phased was about twice as fast, because the uniform walk diffuses and takes long stretches away from the ends. The extension reports the measured result. |
-| 5 | The exact chain says a=0.75 reaches full-with-read within 48 draws with P=0.9999. A pyvsc Monte Carlo should agree. | 2998/3000 seeds, 0.9993 [0.9976, 0.9998]. The chain built on measured rates gives 0.9998. | Consistent. 3000 seeds cannot resolve the fourth digit, and the write-up says so. |
+| 5 | The exact chain says a=0.75 reaches full-with-read within 48 draws with P=0.9999. A pyvsc Monte Carlo should agree. | After the reseeding fix (error 5): 2999/3000 seeds, 0.9997 [0.9981, 0.9999]. The chain built on measured rates gives 0.9998. The first run reported 0.9993 [0.9976, 0.9998] from one continuing stream. | Consistent both times. 3000 seeds cannot resolve the fourth digit, and the write-up says so. |
 
 **Errors the assistant made and fixed:**
 
@@ -50,6 +50,20 @@ The teammate's task list for the driver/monitor layer was pasted with it.
 4. The first extension draft said the regression was 720 simulations. The
    harness also reruns clean RTL for every point, so the real count is 800.
    The draft was corrected.
+5. Kyle Coutray's review of PR 1 (2026-11-04) found that `monte_carlo` in
+   `grad/analyze.py` built one pyvsc object outside the loop. A pyvsc object
+   seeds its own generator from the stdlib one on its first `randomize()`, so
+   the later `random.seed()` calls did nothing. The 3000 "trials" were one
+   continuing stream. The assistant had assumed pyvsc reads the stdlib
+   generator on every draw. Each trial now seeds and then builds a new
+   object, and the analysis was rerun. Phased went from 0.9993 to 0.9997,
+   unordered from 0.8997 to 0.8983, and uniform from 0.1897 to 0.2010. All
+   three still contain the chain value. `grad/results/mc_reproduce.log` shows
+   nine trials reproducing when run alone. It also shows that changing an
+   earlier seed no longer changes a later trial.
+6. Rebuilding the write-up with `-halt-on-error` showed that it used
+   `\mathbb` without loading `amssymb`. The first PDF had been built past that
+   error. The package was added and the PDF rebuilt with no errors.
 
 The numbers in the report and the extension come from the logged runs in
 `evidence/driver-monitor/` and `grad/results/`, not from the assistant's

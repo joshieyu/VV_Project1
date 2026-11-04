@@ -1,14 +1,18 @@
 """Distribution, corner bound, and coverage/mutation correlation.
 
     PYTHONPATH=lib:grad python grad/analyze.py
+    PYTHONPATH=lib:grad python grad/analyze.py --trial phased 10042
 
 Reads grad/results/regression*.{csv,json} from run_regression.py and writes
-grad/results/analysis.json plus the figures in grad/figures/.
+grad/results/analysis.json plus the figures in grad/figures/. --trial reruns
+one Monte Carlo trial by itself and prints its outcome and stream hash.
 """
 import csv
+import hashlib
 import json
 import math
 import random
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -31,7 +35,7 @@ STATES = [(0, FILL)] + [(c, p) for c in range(1, DEPTH) for p in (FILL, DRAIN)] 
 INDEX = {s: i for i, s in enumerate(STATES)}
 CORNER = "full with rd_en"
 P_TARGET, N_TARGET = 0.999, 6 * DEPTH
-MC_SEEDS = 3000
+MC_SEEDS, MC_BASE = 3000, 10_000
 
 
 @vsc.randobj
@@ -42,6 +46,10 @@ class UnorderedTxn(PhasedTxn):
     def c_rolls(self):
         self.roll_w < 100
         self.roll_r < 100
+
+
+MC_STIMULI = {"phased": PhasedTxn, "unordered": UnorderedTxn,
+              "uniform": UniformTxn}
 
 
 def measure(cls, draws, seed=2026, **kw):
@@ -129,22 +137,33 @@ def expected_fill_time(a, end_write):
     return total
 
 
-def monte_carlo(cls, n, seeds, **kw):
-    """Fraction of seeds whose pyvsc stream reaches the corner within n draws."""
-    txn = cls(**kw)
-    hits = 0
-    for seed in range(seeds):
-        random.seed(10_000 + seed)
-        model, phase = FifoModel(8, DEPTH), FILL
-        for _ in range(n):
-            txn.count, txn.phase = model.count, phase
-            txn.randomize()
-            if model.count == DEPTH and int(txn.rd_en):
-                hits += 1
-                break
-            model.step(int(txn.wr_en), int(txn.wr_data), int(txn.rd_en))
-            phase = next_phase(phase, model.count)
-    return hits / seeds
+def mc_trial(cls, n, seed):
+    """One seeded trial: (draw that hit the corner or None, stream hash).
+
+    A pyvsc object seeds its own generator from the stdlib one on its first
+    randomize() and ignores random.seed() after that, so every trial builds a
+    new object after seeding.
+    """
+    random.seed(seed)
+    txn = cls()
+    model, phase = FifoModel(8, DEPTH), FILL
+    stream, hit = [], None
+    for draw in range(n):
+        txn.count, txn.phase = model.count, phase
+        txn.randomize()
+        request = (int(txn.wr_en), int(txn.rd_en), int(txn.wr_data))
+        stream.append(request)
+        if model.count == DEPTH and request[1]:
+            hit = draw
+            break
+        model.step(request[0], request[2], request[1])
+        phase = next_phase(phase, model.count)
+    return hit, hashlib.sha256(repr(stream).encode()).hexdigest()[:16]
+
+
+def monte_carlo(cls, n, seeds):
+    """Per-seed results of trials MC_BASE .. MC_BASE + seeds - 1."""
+    return {MC_BASE + i: mc_trial(cls, n, MC_BASE + i) for i in range(seeds)}
 
 
 def wilson(p, n, z=1.96):
@@ -266,11 +285,14 @@ def main():
                                      if d[f"P_within_{N_TARGET}"] >= P_TARGET)
 
     mc = {}
-    for name, cls in (("phased", PhasedTxn), ("unordered", UnorderedTxn),
-                      ("uniform", UniformTxn)):
-        p = monte_carlo(cls, N_TARGET, MC_SEEDS)
-        mc[name] = {"p": p, "ci95": [round(v, 4) for v in wilson(p, MC_SEEDS)]}
-    out["monte_carlo"] = {"N": N_TARGET, "seeds": MC_SEEDS, **mc}
+    for name, cls in MC_STIMULI.items():
+        trials = monte_carlo(cls, N_TARGET, MC_SEEDS)
+        p = sum(hit is not None for hit, _ in trials.values()) / MC_SEEDS
+        mc[name] = {"p": p, "ci95": [round(v, 4) for v in wilson(p, MC_SEEDS)],
+                    "sample": {s: trials[s] for s in (MC_BASE, MC_BASE + 42,
+                                                      MC_BASE + MC_SEEDS - 1)}}
+    out["monte_carlo"] = {"N": N_TARGET, "seeds": MC_SEEDS,
+                          "first_seed": MC_BASE, **mc}
 
     # Regression check: did each RTL run hit the corner bins?
     reg_corner = {}
@@ -363,4 +385,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if sys.argv[1:2] == ["--trial"]:
+        name, seed = sys.argv[2], int(sys.argv[3])
+        hit, digest = mc_trial(MC_STIMULI[name], N_TARGET, seed)
+        print(f"stim={name} seed={seed} hit_at={hit} stream={digest}")
+    else:
+        main()

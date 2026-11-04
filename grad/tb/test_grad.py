@@ -31,7 +31,7 @@ async def test_grad(dut):
     env = FifoEnv(dut, FifoScoreboard(), make_sampler(f"grad.{stim}_{seed}"))
     await env.start()
 
-    random.seed(seed)  # pyvsc draws from the stdlib generator
+    random.seed(seed)  # seeds txn's own generator on its first randomize()
     txn = STIMULI[stim]()
     phase = FILL
     stream = []
