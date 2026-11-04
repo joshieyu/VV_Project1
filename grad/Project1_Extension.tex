@@ -3,6 +3,7 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{xcolor}
@@ -150,23 +151,23 @@ it crosses $0.999$ at $N = 42$. Figure~\ref{fig:corner} shows the whole curve.
 \toprule
 \textbf{stimulus} & chain, $P_{48}$ & $N$ for $0.999$ & pyvsc, 3000 seeds, $P_{48}$ [95\% CI] \\
 \midrule
-phased, \texttt{solve\_order}  & .9998 & 42  & .9993 [.9976, .9998] \\
-phased text, no ordering       & .8981 & 101 & .8997 [.8884, .9099] \\
-uniform                        & .1934 & 751 & .1897 [.1760, .2041] \\
+phased, \texttt{solve\_order}  & .9998 & 42  & .9997 [.9981, .9999] \\
+phased text, no ordering       & .8981 & 101 & .8983 [.8870, .9086] \\
+uniform                        & .1934 & 751 & .2010 [.1870, .2157] \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.82\textwidth]{figures/corner.pdf}
+\includegraphics[width=0.75\textwidth]{figures/corner.pdf}
 \caption{Exact $P(\mathcal{C}$ within $N)$ from each measured chain. The lines mark $N = 48$ and $p = 0.999$.}
 \label{fig:corner}
 \end{figure}
 
 \noindent
-The Monte Carlo runs pyvsc itself against the reference queue. It agrees with
-the chain in every row, but 3000 seeds cannot tell $0.9993$ from $0.9998$; that
+The Monte Carlo runs pyvsc itself against the reference queue, with a fresh
+transaction per seed (10000--12999). It agrees with the chain in every row, but 3000 seeds cannot tell $0.9997$ from $0.9998$; that
 would need about $10^5$. The RTL regression agrees too. The phased runs hit
 $\mathcal{C}$ in 3/5 seeds at $N = 16$, where the chain predicts $0.42$, and in
 5/5 from $N = 32$ ($0.985$). Uniform hits it in 1/5 at 64 ($0.30$), 3/5 at 128
@@ -199,7 +200,7 @@ uniform: mean found     & 5.0 & 5.8 & 6.2 & 6.4 & 7.4 & 7.8 & 8.0 & 8.0 \\
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.82\textwidth]{figures/coverage_vs_found.pdf}
+\includegraphics[width=0.75\textwidth]{figures/coverage_vs_found.pdf}
 \caption{X1 bins against released found, one marker per point (jittered; size grows with $N$).}
 \label{fig:cov}
 \end{figure}
@@ -246,22 +247,23 @@ Five seeds per point. The released pool has eight mutants, and the hidden pool
 may weight the classes differently. WIDTH and DEPTH are both 8. The constraint
 analyzed is the extension's own, not the team's final \texttt{crv/} class.
 Commands, seeds and per-run stream hashes are in \texttt{grad/README.md} and
-\texttt{grad/results/}. All 80 streams are distinct, and rerunning
-\texttt{analyze.py} reproduces \texttt{analysis.json} byte for byte.
+\texttt{grad/results/}. All 80 streams are distinct. Rerunning
+\texttt{analyze.py} reproduces \texttt{analysis.json} byte for byte, and
+Monte Carlo trials rerun alone match the loop (\texttt{mc\_reproduce.log}).
 
 \section*{AI Assistance Disclosure}
 
 I used a general-purpose frontier assistant, terminal interface, to implement
 the analysis scripts, run the regression, and draft this write-up. Every
 number is taken from the logged results in \texttt{grad/results/}. The
-predictions, evidence and fixes are recorded in \texttt{ai\_log.md}. The
-relevant prompt:
+predictions, evidence and fixes are recorded in \texttt{ai\_log.md}, including a
+Monte Carlo seeding bug a teammate's review caught. The prompt:
 
 \begin{lstlisting}
 "Help me complete my portion of my verification/validation group project ... Also help me complete the graduate extension as a latex file ... Make sure to include AI disclosures where appropriate."
 \end{lstlisting}
 
 \noindent
-Accessed on 10/31/26.
+Accessed on 10/31/26 and 11/4/26.
 
 \end{document}

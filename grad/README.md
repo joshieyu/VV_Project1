@@ -21,12 +21,20 @@ python -m pip install pyvsc==0.9.5.27214109393 numpy matplotlib
 make -C grad/tb SIM=icarus GRAD_STIM=phased GRAD_SEED=1 GRAD_CYCLES=256   # one run
 python grad/run_regression.py --jobs 6                                     # 80 points, ~10 min locally
 PYTHONPATH=lib:grad python grad/analyze.py                                 # ~5 min
+PYTHONPATH=lib:grad python grad/analyze.py --trial phased 10042            # one Monte Carlo trial
 cd grad && pdflatex Project1_Extension.tex
 ```
 
 Every run logs `stream=<hash>`, a hash of its generated transactions. The same
 stimulus, seed, and budget give the same hash. Set `GRAD_TXNS=path.csv` to
 save the transactions themselves.
+
+The Monte Carlo in `analyze.py` runs trials with seeds 10000 to 12999. Each
+trial seeds the stdlib generator and then builds a new transaction. A pyvsc
+object takes its own seed from the stdlib generator on its first
+`randomize()` and ignores `random.seed()` after that. `--trial` reruns one
+trial alone. `analysis.json` stores the outcome and stream hash of three
+sample trials per stimulus, so the two can be compared.
 
 To analyze the team constraint once `crv/` lands, register its class in
 `STIMULI` in `stimulus.py`. It needs `wr_en`, `rd_en`, `wr_data`, and the
