@@ -74,7 +74,7 @@ evidence so the report cannot be mistaken for a clean run after a mutant run.
 | `FINDINGS.md` | Mutation evidence and residual risk. |
 | `closure.md` | Coverage status and remaining CRV work. |
 | `CONTRIBUTIONS.md` | Actual completed work and proposed responsibilities. |
-| `report/` | Report sections and demo notes. |
+| `report/` | Team report (`report/latex/`, synced with Overleaf) and demo notes. |
 | `grad/` | EEE5703 graduate extension: distribution, corner bound, coverage vs. mutation. |
 
 The starter import is commit `17ae090`. The unchanged HW4 reuse is commit
