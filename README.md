@@ -65,13 +65,17 @@ evidence so the report cannot be mistaken for a clean run after a mutant run.
 | `dut/` | Unchanged supplied RTL and spec. |
 | `lib/models/` | Supplied reference queue. |
 | `lib/fifo_coverage.py` | Coverage sampler and closure checks. |
-| `tb/fifo/test_fifo.py` | Reused HW4 driver, monitor, scoreboard, and sequences. |
+| `tb/fifo/test_fifo.py` | Reused HW4 scoreboard and directed/random sequences. |
+| `tb/fifo/fifo_driver.py`, `fifo_monitor.py` | Pin driver and monitor, extracted from the HW4 test. |
+| `tb/fifo/fifo_env.py` | Per-cycle glue shared by directed and random tests. |
 | `crv/` | Handoff for the constrained-random work; implementation pending. |
 | `vplan.md` | Requirements, coverage model, test matrix, and closure criteria. |
 | `TASKS.md` | Proposed ownership, interface agreement, and remaining work. |
 | `FINDINGS.md` | Mutation evidence and residual risk. |
 | `closure.md` | Coverage status and remaining CRV work. |
 | `CONTRIBUTIONS.md` | Actual completed work and proposed responsibilities. |
+| `report/` | Report sections and demo notes. |
+| `grad/` | EEE5703 graduate extension: distribution, corner bound, coverage vs. mutation. |
 
 The starter import is commit `17ae090`. The unchanged HW4 reuse is commit
 `7d77943`. `SOURCE.md` records where that code came from. Each person should

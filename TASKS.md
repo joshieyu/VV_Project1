@@ -21,6 +21,7 @@ The split below is proposed. Kyle has started setup and the verification plan. T
 - Current request arguments are `(wr_en, rd_en, wr_data)`. `FifoModel.step` takes `(wr_en, wr_data, rd_en)`; preserve that distinction.
 - Drive at the falling edge; check the outgoing FWFT head before advancing the queue; check updated state after the rising edge.
 - The driver owns pins, the monitor samples pins, and the scoreboard owns expected state. Extend the monitor to capture request/reset inputs when separating the layers.
+- Done (joshieyu): `FifoEnv(dut, scoreboard, sample_traffic, sample_reset)` in `tb/fifo/fifo_env.py`. Call `await env.start()`, then `await env.cycle(wr_en, rd_en, wr_data)` or `await env.reset(...)`; each returns `(before, after)` monitor samples. Samples are dicts with `rst_n`, `wr_en`, `rd_en`, `wr_data`, `count`, `full`, `empty`, `rd_data` (`None` while empty). The env checks that sampled inputs equal the request, then steps the scoreboard from the sampled inputs. A scoreboard needs `model`, `step(wr_en, rd_en, wr_data)`, and `check(sample)`. Set `env.sample_traffic` to switch coverage phase. `grad/tb/test_grad.py` is a working pyvsc example.
 - Update constraints from reference occupancy, not a possibly faulty DUT flag.
 - Keep idle, write-only, read-only, and simultaneous requests reachable at every occupancy. Full writes and empty reads are legal requests with defined blocked behavior.
 - Reuse the coverage sampler from the random sequence. Give it a separate phase name so directed coverage cannot fill random-phase holes.

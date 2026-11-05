@@ -1,0 +1,18 @@
+# Injected environment faults. Each was applied to a working copy, run with
+#   make -C tb/fifo SIM=icarus
+# and reverted. Only the first failure of each run is shown.
+
+== A_monitor_no_settle
+fault: FifoMonitor.before_edge samples at the falling edge (Timer(1 ns) removed)
+ ** TESTS=1 PASS=0 FAIL=1 SKIP=0 21.00 0.01 3558.83 **
+AssertionError: rst_n: drove 1, monitor saw 0
+
+== B_driver_drops_rd_en
+fault: FifoDriver drives rd_en = 0 always
+ ** TESTS=1 PASS=0 FAIL=1 SKIP=0 31.00 0.01 5981.31 **
+AssertionError: rd_en: drove 1, monitor saw 0
+
+== C_driver_no_post_edge_settle
+fault: FifoDriver returns at the rising edge (Timer(1 ns) removed)
+ ** TESTS=1 PASS=0 FAIL=1 SKIP=0 40.00 0.01 7598.57 **
+AssertionError: count: got 0, expected 1
