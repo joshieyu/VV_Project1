@@ -1,0 +1,15 @@
+\section{Check the Machine: AI use}
+\label{sec:ai}
+
+\todo{Everyone. For each AI-drafted coverage model or constraint block: the
+prompt, the prediction made before running it, the measured result, and every
+fix. Summarize \texttt{ai\_log.md}; the full record stays there.}
+
+Two entries from the environment and extension work, for the summary table.
+We predicted that a roll-plus-\texttt{implies} constraint would not give its
+nominal rate on the pinned pyvsc. It did not: a nominal 0.30 measured 0.37, and
+0.31 with \texttt{solve\_order}. We also predicted that the phased constraint
+would close X1 about as fast as uniform stimulus. That was wrong; it closed
+about twice as fast. Separately, the first Monte Carlo reused one pyvsc object
+across seeds, so its trials were not independent. A teammate's review caught
+it (\texttt{ai\_log.md}, error 5).

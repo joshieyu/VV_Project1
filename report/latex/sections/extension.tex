@@ -1,0 +1,29 @@
+\section{Graduate extension (summary)}
+\label{sec:ext}
+
+The full analysis is in \texttt{grad/EEE5703\_Project1\_Extension.pdf}, and
+\texttt{grad/README.md} lists its commands and seeds. It analyzes a two-phase
+sweep constraint. In the FILL phase, writes have probability $a = 0.75$; DRAIN
+is the mirror image; at empty and full both enables are $1/2$.
+
+\begin{itemize}
+\item \textbf{Measured rates.} On the pinned pyvsc, a roll plus an
+\texttt{implies} gives rates compressed toward 0.5. Adding
+\texttt{solve\_order(roll, enable)} restores them. Every later number uses the
+measured joint request probabilities, not the constraint text.
+\item \textbf{Occupancy.} The induced histogram (a Markov chain on count and
+phase) is within 0.033 total-variation distance of uniform stimulus. The
+histogram alone hides what the constraint changes: it crosses the FIFO directly
+instead of diffusing.
+\item \textbf{Corner.} The corner is \texttt{full} with a read on the same draw.
+$a \ge 0.72$ reaches it within $N = 48$ draws with $P > 0.999$. At $a = 0.75$,
+the chain gives 0.9998, and 3000 pyvsc seeds give 0.9997 [0.9981, 0.9999].
+Uniform stimulus gives 0.19.
+\item \textbf{Closure and found/total.} Over 80 regression points, Spearman
+$\rho = 0.87$. But closing X1 was sufficient, not necessary: 18 runs found 8/8
+with holes still open. The correlation comes from two boundary bins that gate
+\texttt{ignore\_full} and \texttt{full\_offbyone}. X1 says nothing about the
+other mutant classes. That argues for a pointer-wrap coverpoint next to X1.
+\end{itemize}
+
+\todo{Rerun the extension tables on the team \texttt{crv/} class once it lands.}
