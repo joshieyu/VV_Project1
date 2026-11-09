@@ -68,3 +68,27 @@ The teammate's task list for the driver/monitor layer was pasted with it.
 The numbers in the report and the extension come from the logged runs in
 `evidence/driver-monitor/` and `grad/results/`, not from the assistant's
 claims.
+
+### Security & Trust coverpoint (2026-11-09)
+
+**Prompt:** "Build it" (accepting the assistant's offer to build the missing
+Security & Trust coverpoint).
+**Reviewed for functionality by joshieyu:** [ ]
+
+The assistant drafted `tb/fifo/fifo_trust.py`, the observer hook in
+`fifo_env.py`, the `rd_data_raw` field in `fifo_monitor.py`, the S1 sequence
+in `test_fifo.py`, and the vplan, README, and evidence notes.
+
+| # | Prediction before running | Evidence | Outcome |
+|---|---------------------------|----------|---------|
+| 6 | Reset clears the pointers but not memory, so an empty FIFO right after a reset would show a word written before it. This was predicted from the RTL, which is why it is reported as a trust finding and not as a spec failure. | `evidence/security/clean.log`: 2439 of 7058 read requests at empty showed a pre-reset word. `strict.log` fails at 10,011 ns on 0xaa. | Held. |
+| 7 | The observer only reads samples, so the released pool would stay 8/8 and no mutant result would change. | `evidence/security/mutation.log`: 8/8, all `test-failed`. | Held. |
+
+**Errors in this part:**
+
+- The first draft only counted the after-reset case when the reset discarded
+  data. A reset of an empty FIFO also moves the read pointer back to slot 0,
+  so it can expose old data too. Fixed before the first run.
+- The first evidence note said every coverage item other than `fifo.trust`
+  was unchanged. A YAML diff showed the directed and reset hit counts grew
+  (all bins still closed). The note was corrected before commit.

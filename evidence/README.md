@@ -55,3 +55,22 @@ totals (`driver-monitor/eustis-clean.log`).
 | `driver-monitor/mutation.log`, `mutation.json` | Released pool 8/8, all `test-failed`. |
 | `driver-monitor/sabotage.log` | Three injected driver/monitor timing faults and the check that caught each one. |
 | `driver-monitor/trace.log` | `FIFO_TRACE=4` output: before- and after-edge samples for the first four cycles. |
+
+## Security & Trust (joshieyu)
+
+Recorded on 2026-11-09 with the same local environment as the driver/monitor
+evidence, from branch `josh-security-trust`. The mutation campaign was run
+first, then the clean run, using the commands above. `strict.log` adds
+`FIFO_TRUST_STRICT=1` to the clean command.
+
+| File | Contents |
+|------|----------|
+| `security/clean.log` | Clean run: 1/1 passed at 552,631 ns. S1: 7058 read requests at empty, 2439 showed a word from before the latest reset. |
+| `security/coverage.yml` | Coverage from that run, including `fifo.trust` at 4/4 bins. |
+| `security/strict.log` | Strict mode fails at 10,011 ns: an empty FIFO shows 0xaa right after a reset, a word written only before it. |
+| `security/mutation.log`, `mutation.json` | Released pool still 8/8, all `test-failed`. |
+
+The clean run is 290 ns longer than `driver-monitor/` because of the new S1
+sequence. Its coverage file adds the `fifo.trust` items. That sequence also
+adds hits to the directed and reset bins, which stay closed. The HW4 random
+seed items are unchanged.

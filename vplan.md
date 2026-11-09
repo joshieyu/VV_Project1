@@ -23,6 +23,7 @@
 | F5 | Full, empty, and count agree with the reference queue | Behavior 5 | H | checks before and after each edge |
 | F6 | Valid FWFT head and FIFO ordering are correct | Behavior 3, 6 | H | compare the outgoing head before advancing the queue; drain each campaign |
 | F7 | Repeated accepted reads and writes preserve order through wrap | Corner cases | H | repeated fill/drain and interleaved traffic |
+| S1 | Security & Trust: what `rd_data` shows while empty, after a reset or a drain | Ports (`rd_data` valid only when not empty); Behavior 1, 3 | M | S1 coverage; exposure count; opt-in strict assertion |
 
 ## 3. Coverage model
 
@@ -39,10 +40,13 @@
 |----|-------|-------------------------------|
 | X1 | C1 x C2: 36 bins | Incorrect gating and count updates at a particular occupancy. |
 | X2 | C3 x C4: 36 bins | Reset ignored or delayed when requests are active. |
+| XS1 | Empty context (after reset, after drain) x request (read, read racing a write): 4 bins | Whether an empty FIFO exposes words a reset should have discarded. |
 
 Sample occupancy from the checked reference queue before its update. Sample the requested operation, including dropped/ignored requests. Record directed and random phases separately so directed tests cannot hide gaps in CRV. These bins do not measure every data pattern, pointer position, or request history; F6/F7 still need their checks and tests.
 
 **Illegal / ignore bins:** None in these crosses. The spec explicitly permits write-while-full and read-while-empty. Do not exclude those bins. `rd_data` while empty is not compared because the spec does not define it. Out-of-range count is a scoreboard failure, not an ignored bin.
+
+**Security & Trust (S1, added by joshieyu).** `rd_data` is undefined while empty, so the scoreboard does not compare it. `tb/fifo/fifo_trust.py` samples XS1 on every read request at empty and counts how often `rd_data` shows a word that was written only before the latest reset. Memory starts as X, so such a word must be left over from before the reset. The spec allows this, so the count is reported, not failed. `FIFO_TRUST_STRICT=1` makes it an assertion; the clean RTL then fails, because reset clears the pointers but not the memory.
 
 ## 4. Test matrix
 
@@ -53,6 +57,7 @@ Sample occupancy from the checked reference queue before its update. Sample the 
 | Simultaneous requests and request-pair sweep | F2-F6 | directed | At empty only write is accepted; at full only read; inside the boundaries both are accepted. |
 | Repeated wrap and data sweeps | F2-F7 | directed | Reference queue and valid head match across repeated reuse of slots. |
 | Existing HW4 seeded traffic | F2-F7 | Python random baseline | Every checked sample agrees with the queue; trailing data drains correctly. |
+| S1 empty-read sequence | S1, F1 | directed | Reset with a full FIFO and requests during reset, then read at empty alone and racing a write, after reset and after a drain; XS1 closes. |
 | Project constrained-random campaigns | F2-F7 | pyvsc, pending | Multiple recorded seeds pass; normal occupancy x request coverage closes; measured rates support the claimed distribution. |
 
 ## 5. Risk and spec ambiguity
@@ -61,7 +66,7 @@ Sample occupancy from the checked reference queue before its update. Sample the 
 |---|-------------------|-------------------|-------------------|----------|
 | 1 | Handout mentions almost_full and optional FWFT; packet has neither option. | Handout vs. ports/parameters | Plan follows the packet's FWFT contract. | Confirm whether Webcourses supplies a newer project DUT. |
 | 2 | Handout asks for two survivor analyses even if final released score is perfect. | Mutation task | Preserve measured starter survivors and compare them with the improved suite. | Confirm that baseline survivor analysis is acceptable. |
-| 3 | Security task asks for illegal/undefined controls, but example reset/boundary cases are defined here. | Handout Security & Trust | Cover reset with requests and boundary behavior; describe the contract accurately. | Confirm whether these satisfy that task or another case is required. |
+| 3 | Security task asks for illegal/undefined controls, but example reset/boundary cases are defined here. | Handout Security & Trust | Cover reset with requests and boundary behavior; describe the contract accurately. Added S1 for the one undefined output: `rd_data` while empty. | S1 shows the clean RTL exposes pre-reset data while empty. This is allowed by the spec, so it is reported as a trust finding, not a failure. |
 | 4 | A high score can hide weak random stimulus. | Project coverage/reproducibility tasks | Keep phase-specific coverage and measure distributions. | CRV and seed replay remain pending. |
 
 ## 6. Closure criteria
