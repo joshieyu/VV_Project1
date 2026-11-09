@@ -1,15 +1,33 @@
 \section{Check the Machine: AI use}
 \label{sec:ai}
 
-\todo{Everyone. For each AI-drafted coverage model or constraint block: the
-prompt, the prediction made before running it, the measured result, and every
-fix. Summarize \texttt{ai\_log.md}; the full record stays there.}
+Each member logged their AI use in \texttt{ai\_log.md}: the prompt, a
+prediction made before running anything, the measured result, and every fix.
+This section summarizes those entries.
 
-Two entries from the environment and extension work, for the summary table.
-We predicted that a roll-plus-\texttt{implies} constraint would not give its
-nominal rate on the pinned pyvsc. It did not: a nominal 0.30 measured 0.37, and
-0.31 with \texttt{solve\_order}. We also predicted that the phased constraint
-would close X1 about as fast as uniform stimulus. That was wrong; it closed
-about twice as fast. Separately, the first Monte Carlo reused one pyvsc object
-across seeds, so its trials were not independent. A teammate's review caught
-it (\texttt{ai\_log.md}, error 5).
+\paragraph{Environment and extension (Joshua).} Claude Code drafted the
+driver and monitor split, the extension's constraint and analysis scripts, and
+the first draft of this report's environment and extension sections. Joshua
+reviewed the code and checked every number against the logged runs.
+\begin{center}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.47\textwidth}>{\raggedright\arraybackslash}p{0.46\textwidth}@{}}
+\toprule
+\textbf{Prediction before running} & \textbf{What we measured} \\
+\midrule
+Splitting the testbench into layers would not change coverage. & Held. Coverage was identical. \\
+Updating the scoreboard from sampled inputs could hide a driver bug without an input check. & Held. The check caught the added driver bugs. \\
+pyvsc would not give the constraint's stated rates. & Held. A stated 0.30 measured 0.37, and 0.31 with a solve order. \\
+The fill and drain constraint would close coverage no faster than uniform requests. & Wrong. It closed about twice as fast. \\
+A pyvsc simulation would match the model's corner probability. & Held, after a fix (below). \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent
+The AI also made mistakes that review caught. The worst was in the corner
+simulation: it reused one random generator across all 3000 seeds, so the
+trials were not independent. Kyle found this in code review. After the fix the
+result moved from 0.9993 to 0.9997, still matching the model. The log lists
+five smaller errors, such as a wrong simulation count in a draft.
+
+\todo{Kyle and Jackal. Add a paragraph and table like the one above for your
+AI-drafted coverage model or constraints.}
