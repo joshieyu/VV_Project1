@@ -1,6 +1,6 @@
 # Contributions - Project 1 FIFO
 
-**Members:** Kyle Coutray (`kylecoutray`), `joshieyu`, Jackal (GitHub username to confirm).
+**Members:** Kyle Coutray (`kylecoutray`), `joshieyu`, Jackal (`atm101010`).
 **Repo:** https://github.com/joshieyu/VV_Project1
 **Last updated:** 2026-10-27
 
