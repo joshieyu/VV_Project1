@@ -62,10 +62,14 @@ Recorded on 2026-11-09 with the same local environment as the driver/monitor
 evidence, from branch `josh-security-trust`. The mutation campaign was run
 first, then the clean run, using the commands above. `strict.log` adds
 `FIFO_TRUST_STRICT=1` to the clean command.
+joshieyu repeated the clean run on Eustis (course environment, Icarus 12.0)
+on 2026-11-12 from a fresh clone. It passed at the same simulated time with
+the same S1 counts and coverage (`security/eustis-clean.log`).
 
 | File | Contents |
 |------|----------|
 | `security/clean.log` | Clean run: 1/1 passed at 552,631 ns. S1: 7058 read requests at empty, 2439 showed a word from before the latest reset. |
+| `security/eustis-clean.log` | The same clean run on Eustis with Icarus 12.0: 1/1 passed at 552,631 ns, the same S1 line, `fifo.trust` 4/4. |
 | `security/coverage.yml` | Coverage from that run, including `fifo.trust` at 4/4 bins. |
 | `security/strict.log` | Strict mode fails at 10,011 ns: an empty FIFO shows 0xaa right after a reset, a word written only before it. |
 | `security/mutation.log`, `mutation.json` | Released pool still 8/8, all `test-failed`. |
