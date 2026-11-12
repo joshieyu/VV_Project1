@@ -31,9 +31,13 @@ not claimed as new Project 1 code. No review is recorded yet.
 
 ## 3. Reviews and shared work
 
-No cross-review has been completed yet. Each member should review another
-layer and add the commit or artifact reviewed plus what was checked here.
-Each person writes their report section and contributes to the demo.
+Each member reviews another layer and adds the commit or artifact reviewed
+plus what was checked here. Each person writes their report section and
+contributes to the demo.
+
+| Reviewer | Reviewed | What was checked | Result |
+|----------|----------|------------------|--------|
+| joshieyu (with Claude Code, 2026-11-12) | Kyle's `7d77943`, `dba08bb`, and `3cc7995`: `vplan.md`, `FifoScoreboard` in `tb/fifo/test_fifo.py`, `lib/fifo_coverage.py`, `closure.md`, `FINDINGS.md` | Scoreboard steps the supplied reference queue and checks count, full, empty, and the head before and after every edge. Coverage bins match vplan C1-C4 and X1-X2, sampled from the reference count before the edge. The startup reset is not sampled, as `closure.md` says. Every closure row (36/36 per phase) matches `evidence/project-baseline/coverage.yml`. Every score in `FINDINGS.md` matches the `mutation.log` files in `evidence/starter/`, `evidence/hw4/`, and `evidence/project-baseline/`. | No errors found. Open items: `vplan.md`, `closure.md`, and `FINDINGS.md` still describe pyvsc as pending and need updating once `crv/` lands; vplan ambiguities 1 and 2 are still unconfirmed with course staff; each reset-cross bin is hit only once, so reset coverage has no margin. |
 
 ## 4. Final checks
 

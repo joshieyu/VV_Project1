@@ -73,11 +73,13 @@ claims.
 
 **Prompt:** "Build it" (accepting the assistant's offer to build the missing
 Security & Trust coverpoint).
-**Reviewed for functionality by joshieyu:** [ ]
+**Reviewed for functionality by joshieyu:** [x]
 
 The assistant drafted `tb/fifo/fifo_trust.py`, the observer hook in
 `fifo_env.py`, the `rd_data_raw` field in `fifo_monitor.py`, the S1 sequence
-in `test_fifo.py`, and the vplan, README, and evidence notes.
+in `test_fifo.py`, and the vplan, README, and evidence notes. It also
+rewrote `report/demo_environment.md` to add the S1 segment. Each command in
+that script was rerun and its output matched the script.
 
 | # | Prediction before running | Evidence | Outcome |
 |---|---------------------------|----------|---------|
