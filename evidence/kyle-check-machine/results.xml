@@ -1,6 +1,0 @@
-<testsuites name="results">
-  <testsuite name="all" package="all">
-    <property name="random_seed" value="4701" />
-    <testcase name="compare_compact_and_exact_coverage" classname="test_coverage_probe" file="/Users/kylecoutray/EEE4701/tmp/project1-kyle-report/tb/fifo/test_coverage_probe.py" lineno="42" time="0.03770923614501953" sim_time_ns="4571.001" ratio_time="121217.01384830936" />
-  </testsuite>
-</testsuites>

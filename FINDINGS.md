@@ -7,8 +7,6 @@
 | Supplied starter / released | 1 | 8 | 12.5% |
 | Reused HW4 / released | 8 | 8 | 100% |
 | HW4 with Project 1 coverage / released | 8 | 8 | 100% |
-| PR 4 security integration / released | 8 | 8 | 100% |
-| Fresh-clone report/security integration candidate / released | 8 | 8 | 100% |
 | Hidden (reported at grading) | not run | not available | - |
 
 **Command run:**
@@ -30,11 +28,6 @@ was rerun against that source and remained 8/8; evidence is in
 `evidence/project-baseline/`. This establishes the instrumented baseline,
 not completion of the constrained-random project.
 
-The November 12 review reran PR 4 at `04384c1` and the combined report/security
-candidate at `384eb1e` from a fresh clone. Both passed clean RTL and found
-8/8 through `test-failed`; see `evidence/kyle-review/` for logs, JSON, source
-heads, and versions. No final team `crv/` campaign is claimed by these rows.
-
 ## Survivors
 
 These are measured **starter survivors**, not survivors of the final project
@@ -45,11 +38,6 @@ that baseline survivor analysis meets the handout's two-survivor requirement.
 |--------|-----------------|--------------------------------|-------------------------------|---------------------------------|
 | ignore_full | Accepts writes even while full. | No. The starter writes only three entries into an eight-entry FIFO. | Its count check could expose overflow if reached, but the starter never gets there. | Fill all eight entries, attempt another write, check count/full and drain the original contents. The reused HW4 suite catches it. |
 | mem_corrupt | Stores each written byte plus one. | Yes. Every starter write activates the fault. | No. The starter checks count but never data. | Check the valid FWFT head and every outgoing item against the reference queue. The reused HW4 suite catches it. |
-
-`ignore_full` traces to F2/F5 and the full/write bins of X1; hitting the bin
-must be paired with checks for rejected writes and preserved contents.
-`mem_corrupt` traces to F6: occupancy/request coverage cannot replace the
-data scoreboard. The current PR 4 and fresh-clone suites also catch both.
 
 The other starter survivors were `full_offbyone`, `empty_offbyone`,
 `ignore_empty`, `rd_data_wrptr`, and `wrptr_wrap_early`. Only `count_wr_dec`
@@ -70,15 +58,10 @@ been implemented or that coverage improvements caused the baseline score.
 
 1. Reachability: only WIDTH=8 and DEPTH=8 are tested. Coverage of every count
    and request pair does not cover every stored-data combination or long
-   request history. The team CRV distribution and replay remain pending;
-   Joshua's measured pyvsc graduate experiment in `grad/` is separate.
+   request history. The pyvsc distribution and replay behavior remain untested.
 2. Observability: count, flags, and valid head data are sampled before and after
    the active edge. Between-sample glitches can be missed. Empty `rd_data` is
-   excluded from functional correctness checks because the contract leaves
-   it undefined. S1 now observes it separately: 2,439 of 7,058 sampled empty
-   reads expose a value seen only before the latest reset in the retained
-   clean run. Strict mode fails clean RTL intentionally; it is not enabled
-   in the mutation score above. See `evidence/kyle-review/pr4/strict.log`.
+   not checked because the contract leaves it undefined.
 3. The released pool has only eight mutants. A perfect released score does
    not establish the hidden score or correctness for every fault class.
 

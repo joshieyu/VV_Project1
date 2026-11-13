@@ -1,6 +1,0 @@
-<testsuites name="results">
-  <testsuite name="all" package="all">
-    <property name="random_seed" value="4701" />
-    <testcase name="test_fifo" classname="test_fifo" file="/Users/kylecoutray/EEE4701/tmp/project1-pr4-review/tb/fifo/test_fifo.py" lineno="31" time="3.596341133117676" sim_time_ns="552631.001" ratio_time="153664.78889084782" />
-  </testsuite>
-</testsuites>

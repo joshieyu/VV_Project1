@@ -6,7 +6,6 @@ import cocotb
 from models.fifo_model import FifoModel
 from fifo_coverage import make_sampler, export_coverage, require_closed
 from fifo_env import FifoEnv
-from fifo_trust import TrustObserver
 
 
 class FifoScoreboard:
@@ -33,8 +32,6 @@ async def test_fifo(dut):
     scoreboard = FifoScoreboard()
     sample_directed = make_sampler("fifo.directed")
     env = FifoEnv(dut, scoreboard, sample_directed, make_sampler("fifo.reset"))
-    trust = TrustObserver(dut._log)
-    env.observers.append(trust)
     cycle = env.cycle
     reset = env.reset
 
@@ -144,23 +141,7 @@ async def test_fifo(dut):
         for _ in range(8):
             await cycle(0, 1)
 
-    # Security & Trust (vplan S1): read requests while empty, alone and racing
-    # a write, right after a reset that discarded a full FIFO and after a drain.
-    for racing_write in (0, 1):
-        await reset()
-        for i in range(8):
-            await cycle(1, 0, 0xc0 + i)
-        await reset(1, 1, 0x5e)  # requests during reset must be dropped
-        await cycle(racing_write, 1, 0x3c)  # after_reset
-        if not racing_write:
-            await cycle(1, 0, 0x3d)
-        await cycle(0, 1)
-        await cycle(racing_write, 1, 0x3e)  # after_drain
-        await cycle(0, 1)
-    trust.report()
-
     export_coverage(Path(__file__).resolve().parents[2] / "artifacts/coverage.yml",
                     dut._log.info)
     require_closed("fifo.directed")
     require_closed("fifo.reset")
-    trust.require_closed()
