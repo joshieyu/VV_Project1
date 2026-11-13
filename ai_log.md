@@ -182,3 +182,22 @@ and final submission reproduction are still pending.
   A six-page scratch preview was built and visually checked with Tectonic,
   then with the prescribed latexmk/pdfLaTeX command. The final TeX pass has
   no warnings; see `evidence/kyle-review/report-preview/`.
+
+### New coverage-model experiment - November 12, 2026
+
+**Follow-up prompt (verbatim, abridged):** "yeah can you just do that"
+(accepting a new, dated Check the Machine experiment).
+
+Codex drafted `tb/fifo/test_coverage_probe.py` and the before-run record in
+`evidence/kyle-check-machine/prediction.md`. The candidate crosses three
+occupancy bands with four requests. Before execution, the prediction is that
+it can close 12/12 while the same selected probe cycles close only 12/36 in
+the exact model: the compact model hides 24 interior-count/request holes.
+The comparison runs on the clean DUT through the existing environment and
+scoreboard. A separate full matrix checks the exact model at all 36 pairs.
+Setup/reset/drain cycles are checked but excluded from the probe sampling.
+
+This is a new experiment; it does not backdate an October prediction. The
+prediction and test source are committed before the first run. Outcome and
+any fixes will be recorded afterward. Kyle's human-review checkbox remains
+unticked.
