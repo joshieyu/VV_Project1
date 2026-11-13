@@ -198,6 +198,17 @@ scoreboard. A separate full matrix checks the exact model at all 36 pairs.
 Setup/reset/drain cycles are checked but excluded from the probe sampling.
 
 This is a new experiment; it does not backdate an October prediction. The
-prediction and test source are committed before the first run. Outcome and
-any fixes will be recorded afterward. Kyle's human-review checkbox remains
-unticked.
+prediction and test source were committed in `ed2b5cc` before the first run.
+Kyle's human-review checkbox remains unticked.
+
+**Measured outcome:** the clean-DUT experiment passed at 4,571 ns. The same
+12 sampled probes gave compact coverage 12/12 and exact coverage 12/36;
+all four requests at counts 2-7 were missing from the exact model. A separate
+full matrix closed exact coverage at 36/36. The prediction held. Evidence:
+`evidence/kyle-check-machine/` contains the original prediction, source
+revision, sampled triples and holes, coverage YAML, run log and JUnit.
+
+**Decision/fixes:** reject the compact candidate as an X1 replacement and
+retain the exact occupancy model. No implementation fix was needed after
+the first run. This model-selection check is separate from the team CRV
+regression and does not claim a mutation improvement.

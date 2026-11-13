@@ -6,7 +6,9 @@ simultaneous requests: 36 bins. X2 uses the same dimensions when reset is
 applied. No bins are illegal or ignored because the contract defines both
 blocked boundary requests. Startup reset has no initialized prior state
 and is excluded from X2. Directed and random traffic have distinct sampler
-names so directed hits cannot fill random holes (F1-F5).
+names so directed hits cannot fill random holes (F1-F5). The controlled model-quality check in
+Section~\ref{sec:ai} supports retaining all nine occupancy bins: merging
+interior counts can hide specific count/request holes.
 
 The retained clean run tests integration candidate \path{384eb1e}:
 

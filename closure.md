@@ -72,6 +72,14 @@ Reset coverage counts each request pair at every pre-reset occupancy. The
 initial startup reset is excluded because there is no initialized prior state
 to compare. Subsequent resets are checked before and after the rising edge.
 
+The November 12 model-quality experiment supports keeping all nine occupancy
+bins rather than combining counts 1-7 into one interior bin. On the same 12
+selected probe cycles, a three-band candidate closed 12/12 while the exact
+model hit 12/36 and exposed 24 missing pairs. A separate full probe matrix
+closed 36/36. The before-run prediction, controlled sampling scope, code,
+and measured results are in `evidence/kyle-check-machine/`. This validates
+the bin distinction; it is separate from CRV convergence.
+
 ## 4. What the cross is aimed at
 
 The normal cross targets state-dependent acceptance, flag, and count errors.

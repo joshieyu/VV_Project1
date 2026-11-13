@@ -31,19 +31,33 @@ five smaller errors, such as a wrong simulation count in a draft.
 
 \paragraph{Coverage and review (Kyle).} Kyle's project scope covers the
 verification plan, scoreboard/coverage layer, closure and survivor analysis,
-and cross-review. He provided the existing HW4 testbench used as the
-baseline, including its queue scoreboard and directed/random sequences
-(\path{SOURCE.md}). For the new project work, Codex assisted with drafting
-the plan, coverage instrumentation, analyses and report text, inspecting PRs,
-and executing validation commands. \path{ai_log.md} records that assistance
-and the evidence.
+and cross-review. His existing HW4 testbench supplies the baseline queue
+scoreboard and directed/random sequences (\path{SOURCE.md}). Codex supported
+new coverage and documentation drafts, code-review analysis, and validation
+runs; \path{ai_log.md} records the prompts, scope, evidence, and fixes.
 
-Before the fresh-clone integration run, the recorded prediction was that
-both 36-bin directed/reset crosses, all four HW4 random crosses, XS1 (4/4),
-and the released score (8/8) would remain closed. The run supported it
-(\path{evidence/kyle-review/}). No before-run prediction was preserved for
-the October work, so none is reconstructed. The assisted PR 1 review caught
-the RNG-lifetime error described above. Kyle's manual functionality-review
-checkbox remains pending.
+\paragraph{Model check.} For F2-F5/X1, commit
+\texttt{ed2b5cc} recorded this prediction before execution: an empty/interior/full model
+could report closure while hiding exact interior-count/request holes.
+A controlled phase sampled every request at counts 0, 1, and 8 on the clean
+DUT; checked setup/reset/drain cycles were outside that sampling phase.
+\begin{center}
+\begin{tabular}{@{}lr@{}}
+\toprule
+Model and sampled phase & Hit / total \\
+\midrule
+Compact model, sparse probes & 12/12 \\
+Exact model, same probes & 12/36 \\
+Exact model, separate full matrix & 36/36 \\
+\bottomrule
+\end{tabular}
+\end{center}
+The prediction held: all four requests at counts 2-7 were absent despite
+100\% compact coverage. The compact candidate was rejected as an X1
+replacement and the exact model retained. No implementation fix was needed
+after the first run. The prompt, original prediction, sampled triples,
+missing bins, command, and passing log are in
+\path{evidence/kyle-check-machine/}. This is a model-quality experiment,
+separate from the team's final CRV regression.
 
 \todo{Jackal. Summarize your AI-drafted constraints and analysis, predictions, evidence and fixes.}
