@@ -73,12 +73,14 @@ The strict run was followed by the retained clean rerun above.
   `josh-mc-reseed`, `josh-report-skeleton`, and `josh-security-trust`.
   `crv/` contains only its README in those branches. Local/unpushed work is
   unknown. Joshua's implemented `grad/` experiment is separate.
-- Overleaf initially denied project access. Access was subsequently granted;
-  Git authentication and the required subtree pull/sync are being set up.
+- Overleaf initially denied project access. After access and Git
+  authentication were enabled, the required subtree pull imported `75d523e`
+  with no content differences. The subtree merge history was preserved.
 
 ## Kyle report draft build
 
-`report/kyle.md` was transferred into a scratch copy of the report's owned
+Kyle's Markdown draft (commit `4e1e695`, `report/kyle.md`) was transferred
+into a scratch copy of the report's owned
 sections for layout review, preserving Joshua's and Jackal's content/TODOs.
 The scratch source is locally retained at
 `/Users/kylecoutray/EEE4701/tmp/project1-report-preview/`. This is a preview,
@@ -97,3 +99,11 @@ unresolved references were resolved by latexmk's second pass;
 All six rendered pages were visually checked. Remaining TODOs are visible,
 so later CRV content still needs a final page-count/layout check. Build
 outputs were kept outside the repo; Joshua still owns the final REPORT.pdf.
+
+After the Overleaf pull, the reviewed text was applied to the owned sections
+in `report/latex/sections/`; the temporary Markdown draft was removed.
+The same latexmk command passed on those actual report files before
+commit. `report-preview/actual-latexmk-build.log` and `actual-final-tex.log`
+record the build: six pages and no final-pass warnings. All six PNG renders
+match the visually checked scratch preview byte-for-byte. The PDF preview
+is retained outside the repo; build outputs were cleaned with latexmk -C.

@@ -12,6 +12,7 @@
 | Kyle Coutray | Reused his existing HW4 testbench and measured the original starter's 1/8 released score. | `7d77943`; `evidence/starter/` |
 | Kyle Coutray | Drafted the Project 1 vplan, instrumented phase-specific occupancy/request coverage, and checked the baseline suite. | `dba08bb`; `evidence/hw4/`, `evidence/project-baseline/` |
 | Kyle Coutray | Prepared setup instructions, proposed task split, baseline survivor analysis, and coverage status. | `README.md`, `TASKS.md`, `FINDINGS.md`, `closure.md` |
+| Kyle Coutray | Drafted the report contract/feature table, baseline coverage, two survivor analyses, own AI summary and reproduction note. | `report/latex/sections/`; `closure.md`, `FINDINGS.md`, `ai_log.md` |
 | Kyle Coutray | Reviewed PRs 3 and 4, reproduced their combined revision from a fresh clone, and updated his coverage, survivor, and AI records. | `evidence/kyle-review/`; section 3 below |
 | joshieyu | Extracted the driver and monitor into `tb/fifo/fifo_driver.py` and `fifo_monitor.py`, added the shared per-cycle `FifoEnv`, extended monitor samples with `rst_n`/`wr_en`/`rd_en`/`wr_data`, and stepped the scoreboard from sampled inputs after checking them against the request. Validated by an unchanged clean run (byte-identical coverage), 8/8 released, and three injected environment faults. | branch `josh-driver-monitor`; `evidence/driver-monitor/`; `report/environment.md` |
 | joshieyu | EEE5703 graduate extension: measured pyvsc rates, Markov-chain occupancy and corner bound, and a coverage vs. found/total regression. | `grad/` |
@@ -26,7 +27,7 @@ not claimed as new Project 1 code. Reviews are recorded in section 3.
 
 | Member | Proposed work | Status |
 |--------|---------------|--------|
-| Kyle Coutray | Scoreboard, coverage model, vplan, and closure analysis. | Baseline and PR 3/4 reviews complete; report draft prepared. Shared-report sync, final team CRV analysis, and final-revision reproduction pending. |
+| Kyle Coutray | Scoreboard, coverage model, vplan, and closure analysis. | Baseline and PR 3/4 reviews complete; owned report sections drafted after the Overleaf pull. Final team CRV analysis and final-revision reproduction pending. |
 | joshieyu | Driver/monitor extraction, sampled interface, environment demo, Security & Trust thread, report setup. | Environment validated locally and on Eustis. Security code, report sections, and demo script written; demo recording pending. |
 | Jackal | pyvsc transactions, constraints, seeded regression, mutation campaigns. | Awaiting team agreement. |
 

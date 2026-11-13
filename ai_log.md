@@ -165,8 +165,10 @@ and final submission reproduction are still pending.
 - No historical prediction was invented for the baseline work. The human
   functionality-review checkbox above remains for Kyle to complete.
 - Shared-project access was initially denied and subsequently granted.
-  Kyle's new report text is staged in `report/kyle.md`; shared LaTeX
-  edits/sync await Git authentication and the required Overleaf pull. A
-  six-page scratch preview was built and visually checked with Tectonic,
+  After Git authentication and pulling Overleaf `75d523e`, the reviewed
+  draft was transferred into Kyle's owned portions of `report/latex/sections/`
+  (`plan.tex`, `coverage.tex`, `mutation.tex`, `ai.tex`, and
+  `reproducibility.tex`). Other members' sections and pending work remain.
+  A six-page scratch preview was built and visually checked with Tectonic,
   then with the prescribed latexmk/pdfLaTeX command. The final TeX pass has
   no warnings; see `evidence/kyle-review/report-preview/`.
