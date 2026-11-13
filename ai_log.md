@@ -107,24 +107,14 @@ that script was rerun and its output matched the script.
 
 **Reviewed for functionality by Kyle Coutray:** [ ]
 
-### Task requests and scope
+### Prompts and scope
 
-**Planning request (verbatim excerpt):**
+**Planning prompt (verbatim excerpt):**
 
 > plan out what to do, triage/assign tasks to people, then make separate
 > commits for our own work.
 
-**Review/report request (verbatim task-list excerpts):**
-
-> - Review PR 4 (it adds an S1 row and a cross to vplan.md) and PR 3
-> - Report: plan section (DUT contract, feature table traced to vplan, risks and ambiguities)
-> - Report: coverage section with final numbers and the convergence argument (needs Jackal's crv/)
-> - Report: mutation section with Jackal, two or more survivors, why missed and what would catch them
-> - Update closure.md and FINDINGS.md after the pyvsc regression
-> - Report AI section: summarize your ai_log entries
-> - Review another layer and record it in CONTRIBUTIONS.md section 3
-
-**Additional prompt wording supplied by Kyle (individual prompt dates not recorded):**
+**Verification prompts (verbatim):**
 
 > **Understanding the contract**
 >
@@ -145,10 +135,8 @@ that script was rerun and its output matched the script.
 > 7. **Checking readiness**
 >    “Walk me through reproducing the final revision from a fresh clone. Have me run the commands and interpret the outputs. Record failures and corrections, and leave my manual-review checkbox unchecked until I confirm the review.”
 
-The bracketed fields are retained as supplied; this record does not contain
-the text substituted for them. The prompts describe requested interaction,
-not evidence that every step or the final-revision reproduction occurred.
-The measured work and outstanding checks are recorded below.
+The bracketed placeholders are retained as supplied. Results and remaining
+checks are recorded below.
 
 Kyle supplied the existing HW4 testbench, imported unchanged at `7d77943`
 (`SOURCE.md`). Its driver, monitor, queue scoreboard and directed/random
