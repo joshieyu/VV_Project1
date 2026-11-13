@@ -98,3 +98,83 @@ that script was rerun and its output matched the script.
 - The first evidence note said every coverage item other than `fifo.trust`
   was unchanged. A YAML diff showed the directed and reset hit counts grew
   (all bins still closed). The note was corrected before commit.
+
+## Kyle Coutray - coverage, reviews, and report
+
+**Tool:** OpenAI Codex, terminal agent.
+
+**Dates:** October 27, November 4, and November 12, 2026.
+
+**Reviewed for functionality by Kyle Coutray:** [x]
+
+### Prompts and scope
+
+**Planning prompt (verbatim excerpt):**
+
+> plan out what to do, triage/assign tasks to people, then make separate
+> commits for our own work.
+
+**Verification prompts (verbatim):**
+
+> **Understanding the contract**
+>
+> “Before suggesting changes, quiz me on reset priority, simultaneous read/write at empty and full, and FWFT behavior. Let me answer first. Then compare my answers against the supplied FIFO contract and identify misunderstandings.”
+>
+> 1. **Reviewing your existing HW4 testbench**
+>    “Inspect my existing HW4 scoreboard against the Project 1 requirements. Identify which requirements it already checks and which need additional verification. Explain each proposed addition and its purpose before implementing it.”
+> 2. **Developing the verification plan**
+>    “Review the F1–F7 requirement-to-test mapping in my draft `vplan.md`. Identify missing requirements, redundant coverage, and assumptions that need clarification. Keep my structure and explain the reason for each suggested change.”
+> 3. **Making a genuine before-run prediction**
+>    “Before running the experiment, I predict that sampling all four requests only at counts 0, 1, and 8 will close the compact 12-bin model but leave the exact model at 12/36, with every request at counts 2–7 missing. Grouping the interior counts would hide those holes. Check whether the experiment can distinguish that prediction from an alternative outcome. Preserve my prediction separately from your feedback, then wait for me to finalize it before execution.”
+> 4. **Interpreting coverage**
+>    “Show me the raw coverage results and ask me to explain what closed and what remains untested. After I answer, check my interpretation. Keep directed coverage separate from random coverage, and explain why 100% occupancy coverage does not establish correct data ordering.”
+> 5. **Analyzing survivors**
+>    “For each survivor, help me distinguish failure to activate the fault from failure to observe its effect. Ask me to propose a catching sequence first. Then evaluate my proposal and identify the exact assertion that should fail.”
+> 6. **Writing the report**
+>    “Edit my analysis into a concise report section: the compact model closed 12/12 on sparse probes while the exact model reached 12/36; the starter did not activate `ignore_full`, and its count-only check could not observe `mem_corrupt`. Preserve my technical conclusions, flag unsupported claims, and trace every numerical result to evidence. Identify any substantive reasoning you add so I can review it.”
+> 7. **Checking readiness**
+>    “Walk me through reproducing the final revision from a fresh clone. Have me run the commands and interpret the outputs. Record failures and corrections, and leave my manual-review checkbox unchecked until I confirm the review.”
+
+Kyle supplied the existing HW4 testbench, imported unchanged at `7d77943`
+(`SOURCE.md`). Its driver, monitor, queue scoreboard and directed/random
+sequences predate this project. The new project assistance was:
+
+| Area | Codex assistance | Record |
+|------|------------------|--------|
+| Plan and coverage | Drafted `vplan.md`, `lib/fifo_coverage.py`, coverage hooks, and baseline setup/analysis docs. | `dba08bb`; `closure.md`, `FINDINGS.md` |
+| Cross-review | Inspected PR 1's environment/graduate analysis and PRs 3/4's report/security layers; executed replay, clean, strict, mutation and build commands. | `CONTRIBUTIONS.md` section 3; `evidence/kyle-review/` |
+| Report | Drafted Kyle's plan, coverage, survivor, AI-use and reproduction text; updated findings, closure and contribution records. | `report/latex/sections/`; this log |
+| Model-quality check | Drafted the compact coverage candidate and `test_coverage_probe.py` to test Kyle's before-run prediction. | `ed2b5cc`; `evidence/kyle-check-machine/` |
+
+### Predictions, measurements and decisions
+
+I forgot to write down a prediction before running the new Project 1 coverage
+model in October. The HW4 testbench was reused work. On November 12, I made
+one for a separate coverage-model experiment and committed it before the run.
+
+| Before-run record | Measurement | Outcome / decision |
+|-------------------|-------------|--------------------|
+| November 12 integration prediction: PRs 3/4 should retain directed/reset X1/X2 at 36/36, all four HW4 random crosses at 36/36, XS1 at 4/4, and released mutation score at 8/8. | Fresh clone of `384eb1e` reproduced those results; mutations all failed tests, and coverage matched security evidence byte-for-byte. | Held. Evidence: `evidence/kyle-review/fresh/`. This is baseline integration, not final team CRV. |
+| Kyle's November 12 model prediction, committed with the candidate in `ed2b5cc` before execution: a compact empty/interior/full cross can close while hiding 24 exact count/request pairs. | The same 12 sampled probes gave compact 12/12 and exact 12/36. Counts 2-7 lacked all four requests. A separate full matrix closed exact coverage 36/36. Clean DUT checks passed at 4,571 ns. | Held. Reject the compact candidate as an X1 replacement and retain the existing exact model. No implementation fix was needed after the first run. Evidence: `evidence/kyle-check-machine/`. |
+
+Kyle made the November 12 prediction before execution, and it was committed
+with the candidate source in `ed2b5cc`. The prediction text remains unchanged;
+the file's attribution note was corrected after Kyle clarified authorship.
+Checked setup/reset/drain cycles are excluded from the probe phase.
+
+### Review findings and corrections
+
+- The PR 1 review found a continuing RNG stream across nominal Monte Carlo
+  seeds. After Joshua's fresh-object fix, all 9,000 trials reproduced totals
+  and sample hashes; see his error 5 above and the PR 1 review.
+- Strict mode returned shell status zero even when cocotb failed. Validation
+  used the test summary/JUnit rather than shell status alone.
+- Report drafts distinguish HW4 Python-random and graduate-extension results
+  from the missing team CRV results. Final CRV claims remain pending.
+- A LaTeX spacing warning in the model-check paragraph was fixed by shortening
+  the heading and reflowing its opening sentence. The six-page draft then
+  built without final-pass warnings; current proposal validation is recorded
+  in `report/restructure-validation.md`.
+- The default suite still passes with byte-identical baseline coverage. The
+  opt-in probe does not change the default test, production sampler or DUT.
+  No mutation-score improvement is attributed to it.
