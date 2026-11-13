@@ -1,0 +1,57 @@
+rm -f results.xml
+"/Library/Developer/CommandLineTools/usr/bin/make" -f Makefile results.xml
+mkdir -p sim_build
+/opt/homebrew/bin/iverilog -o sim_build/sim.vvp -D COCOTB_SIM=1 -s fifo -g2012 -f sim_build/cmds.f  /Users/kylecoutray/EEE4701/tmp/project1-kyle-fresh-20261112/tb/fifo/../../dut/fifo.sv
+rm -f results.xml
+MODULE=test_fifo TESTCASE= TOPLEVEL=fifo TOPLEVEL_LANG=verilog \
+         /opt/homebrew/bin/vvp -M /Users/kylecoutray/EEE4701/VV_Project1/.venv/lib/python3.12/site-packages/cocotb/libs -m libcocotbvpi_icarus   sim_build/sim.vvp  
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:109  in set_program_name_in_venv        Using Python virtual environment interpreter at /Users/kylecoutray/EEE4701/VV_Project1/.venv/bin/python
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:101  in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 13.0 (stable)
+     0.00ns INFO     cocotb                             Running tests with cocotb v1.9.2 from /Users/kylecoutray/EEE4701/VV_Project1/.venv/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb                             Seeding Python random module with supplied seed 4701
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb.regression                  Found test test_fifo.test_fifo
+     0.00ns INFO     cocotb.regression                  running test_fifo (1/1)
+ 10011.00ns INFO     cocotb.fifo                        S1: empty FIFO shows 0xaa (after_reset), a word written only before the latest reset
+ 10021.00ns INFO     cocotb.fifo                        S1: empty FIFO shows 0xaa (after_reset), a word written only before the latest reset
+ 10031.00ns INFO     cocotb.fifo                        S1: empty FIFO shows 0xaa (after_reset), a word written only before the latest reset
+552631.00ns INFO     cocotb.fifo                        S1: 7058 empty read requests covered, 2439 showed a word from before the latest reset
+552631.00ns INFO     cocotb.fifo                        fifo : <cocotb_coverage.coverage.CoverItem object at 0x1064c37d0>, coverage=302, size=302 
+552631.00ns INFO     cocotb.fifo                           fifo.directed : <cocotb_coverage.coverage.CoverItem object at 0x1064c3770>, coverage=49, size=49 
+552631.00ns INFO     cocotb.fifo                              fifo.directed.occupancy : <cocotb_coverage.coverage.CoverPoint object at 0x1064c2ae0>, coverage=9, size=9 
+552631.00ns INFO     cocotb.fifo                              fifo.directed.occupancy_x_request : <cocotb_coverage.coverage.CoverCross object at 0x1059ae360>, coverage=36, size=36 
+552631.00ns INFO     cocotb.fifo                              fifo.directed.request : <cocotb_coverage.coverage.CoverPoint object at 0x1064c3350>, coverage=4, size=4 
+552631.00ns INFO     cocotb.fifo                           fifo.hw4_seed_4701 : <cocotb_coverage.coverage.CoverItem object at 0x1064e5430>, coverage=49, size=49 
+552631.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4701.occupancy : <cocotb_coverage.coverage.CoverPoint object at 0x1061d4830>, coverage=9, size=9 
+552631.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4701.occupancy_x_request : <cocotb_coverage.coverage.CoverCross object at 0x10602dc10>, coverage=36, size=36 
+552631.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4701.request : <cocotb_coverage.coverage.CoverPoint object at 0x1064e4770>, coverage=4, size=4 
+552631.00ns INFO     cocotb.fifo                           fifo.hw4_seed_4702 : <cocotb_coverage.coverage.CoverItem object at 0x1064c2f60>, coverage=49, size=49 
+552631.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4702.occupancy : <cocotb_coverage.coverage.CoverPoint object at 0x1064c0740>, coverage=9, size=9 
+552631.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4702.occupancy_x_request : <cocotb_coverage.coverage.CoverCross object at 0x1064c1760>, coverage=36, size=36 
+552631.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4702.request : <cocotb_coverage.coverage.CoverPoint object at 0x1064c0230>, coverage=4, size=4 
+552631.00ns INFO     cocotb.fifo                           fifo.hw4_seed_4703 : <cocotb_coverage.coverage.CoverItem object at 0x1064e77d0>, coverage=49, size=49 
+552631.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4703.occupancy : <cocotb_coverage.coverage.CoverPoint object at 0x1064e5100>, coverage=9, size=9 
+552631.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4703.occupancy_x_request : <cocotb_coverage.coverage.CoverCross object at 0x1064c07d0>, coverage=36, size=36 
+552631.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4703.request : <cocotb_coverage.coverage.CoverPoint object at 0x1064e6a50>, coverage=4, size=4 
+552631.00ns INFO     cocotb.fifo                           fifo.hw4_seed_4704 : <cocotb_coverage.coverage.CoverItem object at 0x1064e75f0>, coverage=49, size=49 
+552631.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4704.occupancy : <cocotb_coverage.coverage.CoverPoint object at 0x1064e7f80>, coverage=9, size=9 
+552631.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4704.occupancy_x_request : <cocotb_coverage.coverage.CoverCross object at 0x1064c3440>, coverage=36, size=36 
+552631.00ns INFO     cocotb.fifo                              fifo.hw4_seed_4704.request : <cocotb_coverage.coverage.CoverPoint object at 0x1064e7620>, coverage=4, size=4 
+552631.00ns INFO     cocotb.fifo                           fifo.reset : <cocotb_coverage.coverage.CoverItem object at 0x1064c3950>, coverage=49, size=49 
+552631.00ns INFO     cocotb.fifo                              fifo.reset.occupancy : <cocotb_coverage.coverage.CoverPoint object at 0x1064c3920>, coverage=9, size=9 
+552631.00ns INFO     cocotb.fifo                              fifo.reset.occupancy_x_request : <cocotb_coverage.coverage.CoverCross object at 0x1064c38f0>, coverage=36, size=36 
+552631.00ns INFO     cocotb.fifo                              fifo.reset.request : <cocotb_coverage.coverage.CoverPoint object at 0x1064c3980>, coverage=4, size=4 
+552631.00ns INFO     cocotb.fifo                           fifo.trust : <cocotb_coverage.coverage.CoverItem object at 0x1064c3bf0>, coverage=8, size=8 
+552631.00ns INFO     cocotb.fifo                              fifo.trust.context : <cocotb_coverage.coverage.CoverPoint object at 0x1064c3bc0>, coverage=2, size=2 
+552631.00ns INFO     cocotb.fifo                              fifo.trust.context_x_request : <cocotb_coverage.coverage.CoverCross object at 0x1064c3b90>, coverage=4, size=4 
+552631.00ns INFO     cocotb.fifo                              fifo.trust.request : <cocotb_coverage.coverage.CoverPoint object at 0x1064c3c20>, coverage=2, size=2 
+552631.00ns INFO     cocotb.regression                  test_fifo passed
+552631.00ns INFO     cocotb.regression                  **************************************************************************************
+                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        **************************************************************************************
+                                                        ** test_fifo.test_fifo            PASS      552631.00           3.26     169746.01  **
+                                                        **************************************************************************************
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0             552631.00           3.26     169591.44  **
+                                                        **************************************************************************************
+                                                        

@@ -98,3 +98,74 @@ that script was rerun and its output matched the script.
 - The first evidence note said every coverage item other than `fifo.trust`
   was unchanged. A YAML diff showed the directed and reset hit counts grew
   (all bins still closed). The note was corrected before commit.
+
+## Kyle Coutray - coverage, reviews, and report
+
+**Tool:** OpenAI Codex, terminal agent.
+**Dates:** 2026-10-27 (baseline); 2026-11-04 (PR 1 review); 2026-11-12
+(PRs 3 and 4, report and evidence updates).
+**Reviewed for functionality by Kyle Coutray:** [ ]
+
+**Prompts (verbatim, abridged):**
+
+> We gotta plan out what to do, triage/assign tasks to people, then make
+> separate commits for our own work.
+
+> can you take a look at the other PRs, and the repo, and the project itself
+> and see what we need to? also you'll have to do the tasks that my
+> parterner assigned. just do it as if you're me: **Kyle**
+
+The second prompt included the assigned plan, coverage, mutation, AI-log,
+closure, findings, and cross-review work.
+
+### What the assistant drafted or reviewed
+
+- Baseline `vplan.md`, `lib/fifo_coverage.py`, coverage hooks in the reused
+  HW4 test, `closure.md`, `FINDINGS.md`, and team setup/contribution docs.
+- PR 1's environment and graduate analysis, including the per-seed RNG
+  lifetime error recorded above in Joshua's error 5.
+- PR 3's report skeleton and PR 4's monitor/observer, S1 stimulus and XS1
+  coverage, with independent clean, strict, and released-mutation runs.
+- Kyle's report sections and evidence-backed updates to his closure,
+  findings, contribution, and AI records. Jackal's final CRV numbers are
+  pending; the graduate extension is a separate experiment.
+
+### Check the Machine
+
+No before-run prediction was preserved for the October baseline work or
+the earlier PR 1 review. The results below do not retroactively supply one.
+The PR 1 review found a continuing RNG stream across nominal seeds; after
+the fresh-object fix, the 9,000-trial rerun reproduced totals and sample
+hashes. See PR 1's review and `grad/results/mc_reproduce.log`.
+
+**Prediction recorded before the fresh-clone integration run (2026-11-12):**
+combining PRs 3 and 4 should retain X1 and X2 at 36/36, all four HW4 random
+crosses at 36/36, XS1 at 4/4, and the released mutation score at 8/8.
+A failure would indicate integration or environment drift. This predicts
+neither Jackal's CRV closure nor hidden-mutant performance.
+
+**Documentation risk identified before drafting the report:** closed Python
+random bins or the graduate experiment could be mislabeled as the team's
+final CRV result. Keep that distinction and the missing evidence explicit.
+
+**Outcome:** the fresh-clone prediction held. `evidence/kyle-review/fresh/`
+contains the clean JUnit/log, coverage and mutation JSON: both 36-bin
+directed/reset crosses and each HW4 random cross close, XS1 is 4/4, and the
+released score is 8/8 (all test-failed). Coverage is byte-identical to PR 4's
+committed security evidence. The tested source is `384eb1e`; final team CRV
+and final submission reproduction are still pending.
+
+**Review corrections and limits:**
+
+- The strict-mode command returned shell status zero while cocotb reported
+  failure. The review checked the test summary/JUnit, not shell status alone.
+- No missing team CRV measurement was replaced with a Python-random or
+  graduate-extension result. The report draft labels its numbers as baseline
+  and keeps the final-result/convergence TODOs.
+- No historical prediction was invented for the baseline work. The human
+  functionality-review checkbox above remains for Kyle to complete.
+- Shared-project access was initially denied and subsequently granted.
+  Kyle's new report text is staged in `report/kyle.md`; shared LaTeX
+  edits/sync await Git authentication and the required Overleaf pull. A
+  six-page scratch preview builds without warnings and was visually checked
+  with Tectonic; the prescribed latexmk build remains to be checked.
