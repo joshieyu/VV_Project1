@@ -44,6 +44,11 @@ The coverage report is written to `artifacts/coverage.yml`. It separates
 directed normal operations, directed reset cases, and each HW4 random seed.
 The current random tests use Python random; they are not the pyvsc deliverable.
 
+The log ends with an `S1:` line that counts read requests at empty and how
+many showed data from before the latest reset. The spec allows that, so the
+run still passes. `FIFO_TRUST_STRICT=1` turns it into a failing assertion; do
+not set it for grading runs.
+
 Run the released mutation pool:
 
 ```bash
@@ -68,6 +73,7 @@ evidence so the report cannot be mistaken for a clean run after a mutant run.
 | `tb/fifo/test_fifo.py` | Reused HW4 scoreboard and directed/random sequences. |
 | `tb/fifo/fifo_driver.py`, `fifo_monitor.py` | Pin driver and monitor, extracted from the HW4 test. |
 | `tb/fifo/fifo_env.py` | Per-cycle glue shared by directed and random tests. |
+| `tb/fifo/fifo_trust.py` | Security & Trust coverpoint (vplan S1): what `rd_data` shows while empty. |
 | `crv/` | Handoff for the constrained-random work; implementation pending. |
 | `vplan.md` | Requirements, coverage model, test matrix, and closure criteria. |
 | `TASKS.md` | Proposed ownership, interface agreement, and remaining work. |
