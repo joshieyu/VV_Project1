@@ -75,3 +75,25 @@ The strict run was followed by the retained clean rerun above.
   unknown. Joshua's implemented `grad/` experiment is separate.
 - Overleaf initially denied project access. Access was subsequently granted;
   Git authentication and the required subtree pull/sync are being set up.
+
+## Kyle report draft build
+
+`report/kyle.md` was transferred into a scratch copy of the report's owned
+sections for layout review, preserving Joshua's and Jackal's content/TODOs.
+The scratch source is locally retained at
+`/Users/kylecoutray/EEE4701/tmp/project1-report-preview/`. This is a preview,
+not a shared Overleaf edit or final submitted PDF.
+
+After a Tectonic preview, the prescribed command was run using TinyTeX
+2026.11 and latexmk 4.88 from the official rstudio/tinytex-releases package:
+
+```bash
+latexmk -pdf -interaction=nonstopmode -halt-on-error -jobname=REPORT main.tex
+```
+
+`report-preview/latexmk-build.log` records six pages. The initial pass's
+unresolved references were resolved by latexmk's second pass;
+`report-preview/final-tex.log` has no warnings or overfull/underfull boxes.
+All six rendered pages were visually checked. Remaining TODOs are visible,
+so later CRV content still needs a final page-count/layout check. Build
+outputs were kept outside the repo; Joshua still owns the final REPORT.pdf.

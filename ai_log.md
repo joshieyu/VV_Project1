@@ -167,5 +167,6 @@ and final submission reproduction are still pending.
 - Shared-project access was initially denied and subsequently granted.
   Kyle's new report text is staged in `report/kyle.md`; shared LaTeX
   edits/sync await Git authentication and the required Overleaf pull. A
-  six-page scratch preview builds without warnings and was visually checked
-  with Tectonic; the prescribed latexmk build remains to be checked.
+  six-page scratch preview was built and visually checked with Tectonic,
+  then with the prescribed latexmk/pdfLaTeX command. The final TeX pass has
+  no warnings; see `evidence/kyle-review/report-preview/`.
