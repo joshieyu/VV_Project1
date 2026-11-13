@@ -24,6 +24,10 @@ The teammate's task list for the driver/monitor layer was pasted with it.
 - `report/environment.md` and `report/demo_environment.md`.
 - `grad/`: the pyvsc constraint used for the extension, the random-only test,
   the regression and analysis scripts, and `grad/Project1_Extension.tex`.
+- 2026-11-05: the report skeleton in `report/latex/` and its Overleaf subtree
+  setup. The assistant wrote the environment and grad-extension sections, using
+  `report/environment.md` and the extension's own numbers. It also wrote
+  `AGENTS.md` for teammates' agents.
 
 ### Check the Machine: predictions, evidence, fixes
 

@@ -1,0 +1,29 @@
+\section{Graduate extension (summary)}
+\label{sec:ext}
+
+The full analysis is in \path{grad/EEE5703_Project1_Extension.pdf}. It studies
+a constraint that alternates between a fill phase (75\% of requests write) and
+a drain phase (75\% read).
+
+\begin{itemize}
+\item \textbf{Measured rates.} The constraint as written did not produce its
+stated rates. pyvsc pulled them toward 50\% until a solve order was added. All
+results below use measured rates.
+\item \textbf{Occupancy.} The occupancy histogram is almost the same as for
+uniform random requests. The difference is timing: the constraint sweeps from
+empty to full, while uniform requests wander.
+\item \textbf{Hitting a corner.} We chose the corner ``full, with a read on the
+same cycle.'' Writing at least 72\% of the time in the fill phase reaches it
+within 48 requests with probability above 0.999. At 75\%, the model predicts
+0.9998, and 3000 pyvsc seeds measured 0.9997. Uniform requests reach it about
+20\% of the time.
+\item \textbf{Does coverage find mutants?} Across 80 regression runs, coverage
+and mutants found rise together. But 18 runs found all 8 mutants with coverage
+holes still open. The link comes from two boundary bins, each tied to one
+mutant. Four other mutants were caught in every run, even the shortest. One
+more depends on how many writes have happened, which no current bin tracks. A
+coverpoint for pointer wraparound would close that gap.
+\end{itemize}
+
+\todo{Joshua. Rerun the extension on the team \texttt{crv/} class once it is
+merged, or say here that the extension uses its own constraint.}

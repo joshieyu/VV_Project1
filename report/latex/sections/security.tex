@@ -1,0 +1,33 @@
+\section{Security and trust}
+\label{sec:security}
+
+The spec says \texttt{rd\_data} is only valid while the FIFO is not empty. It
+does not say what an empty FIFO should show, so the scoreboard never checks
+it. An empty FIFO that still shows old data is a leak: data a reset was meant
+to discard could be read by the next user of the buffer. We added one
+coverpoint for this undefined case (vplan S1).
+
+\paragraph{What we cover.} Every read request while the FIFO is empty, either
+alone or racing a write, in two situations: right after a reset, and after
+reads have drained the FIFO. That gives four bins. A short directed sequence
+fills the FIFO, resets it with a write and a read held during reset, and then
+reads at empty. All four bins are hit.
+
+\paragraph{What we measure.} Each time, the testbench checks whether
+\texttt{rd\_data} shows a word that was written only before the latest reset.
+Memory starts unknown, so such a word can only be left over from before the
+reset.
+
+\paragraph{What we found.} The clean RTL leaks. In the full suite, 2439 of
+7058 read requests at empty showed pre-reset data. The cause is that reset
+clears the pointers and the count but not the memory, and \texttt{rd\_data}
+always shows the slot at the read pointer. The spec allows this, so the
+default run reports the count and passes. Setting
+\texttt{FIFO\_TRUST\_STRICT=1} turns it into an assertion, and the clean RTL
+then fails on the first leak, at 10{,}011~ns. A hardware fix would be to drive
+\texttt{rd\_data} to zero whenever the FIFO is empty. The
+released pool is still 8/8 with this check added. Logs are in
+\path{evidence/security/}.
+
+\paragraph{Limits.} We only look at the read side. We do not check how long
+old data stays in memory, or anything outside the FIFO's ports.
