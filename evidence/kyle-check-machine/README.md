@@ -6,8 +6,10 @@ experiment for vplan F2-F5/X1, separate from Jackal's pending CRV regression.
 
 The candidate source and `prediction.md` were committed as `ed2b5cc`
 **before the first execution**. `source-revision.txt` records the full hash.
-The prediction is preserved unchanged. It was recorded by Codex in this
-session; it is not a historical prediction or a claim of manual review.
+The prediction wording is unchanged from `ed2b5cc`. Kyle made the prediction,
+and it was committed with the before-run source. The original attribution note
+incorrectly credited Codex and is corrected in `prediction.md`. Kyle later
+confirmed his functionality review in `ai_log.md`.
 
 ## Reproduce
 

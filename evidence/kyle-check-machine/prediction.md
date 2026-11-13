@@ -6,9 +6,10 @@ This is a new experiment, not a reconstructed October record.
 
 **Tool:** OpenAI Codex. **Scope:** vplan F2-F5 and X1.
 
-**Prompt context:** Kyle accepted the proposed new, dated coverage/constraint
-experiment to complete the Check the Machine evidence. Codex proposed and
-drafted the compact model, the comparison test, and this prediction.
+**Prompt context (attribution corrected after the run):** Kyle made the
+prediction below. Codex drafted the compact model and comparison test. The
+prediction wording is unchanged from the before-run commit `ed2b5cc`; that
+commit's note incorrectly attributed the prediction to Codex.
 
 **Candidate model:** cross the three occupancy bands (empty, interior, full)
 with the four requested operations. This compact alternative has 12 bins.
