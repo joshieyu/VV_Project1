@@ -98,3 +98,78 @@ that script was rerun and its output matched the script.
 - The first evidence note said every coverage item other than `fifo.trust`
   was unchanged. A YAML diff showed the directed and reset hit counts grew
   (all bins still closed). The note was corrected before commit.
+
+## Kyle Coutray - coverage, reviews, and report
+
+**Tool:** OpenAI Codex, terminal agent.
+
+**Dates:** October 27, November 4, and November 12, 2026.
+
+**Reviewed for functionality by Kyle Coutray:** [ ]
+
+### Task requests and scope
+
+**Planning request (verbatim excerpt):**
+
+> plan out what to do, triage/assign tasks to people, then make separate
+> commits for our own work.
+
+**Review/report request (verbatim task-list excerpts):**
+
+> - Review PR 4 (it adds an S1 row and a cross to vplan.md) and PR 3
+> - Report: plan section (DUT contract, feature table traced to vplan, risks and ambiguities)
+> - Report: coverage section with final numbers and the convergence argument (needs Jackal's crv/)
+> - Report: mutation section with Jackal, two or more survivors, why missed and what would catch them
+> - Update closure.md and FINDINGS.md after the pyvsc regression
+> - Report AI section: summarize your ai_log entries
+> - Review another layer and record it in CONTRIBUTIONS.md section 3
+
+Kyle supplied the existing HW4 testbench, imported unchanged at `7d77943`
+(`SOURCE.md`). Its driver, monitor, queue scoreboard and directed/random
+sequences predate this project. The new project assistance was:
+
+| Area | Codex assistance | Record |
+|------|------------------|--------|
+| Plan and coverage | Drafted `vplan.md`, `lib/fifo_coverage.py`, coverage hooks, and baseline setup/analysis docs. | `dba08bb`; `closure.md`, `FINDINGS.md` |
+| Cross-review | Inspected PR 1's environment/graduate analysis and PRs 3/4's report/security layers; executed replay, clean, strict, mutation and build commands. | `CONTRIBUTIONS.md` section 3; `evidence/kyle-review/` |
+| Report | Drafted Kyle's plan, coverage, survivor, AI-use and reproduction text; updated findings, closure and contribution records. | `report/latex/sections/`; this log |
+| Model-quality check | Proposed and drafted the compact coverage candidate, before-run prediction, and `test_coverage_probe.py`. | `ed2b5cc`; `evidence/kyle-check-machine/` |
+
+### Predictions, measurements and decisions
+
+No before-run prediction was preserved for the October baseline or the
+earlier PR 1 review. Those historical runs are not presented as satisfying
+the before-run prediction step. The dated November experiment below supplies
+a separate, verifiable coverage-model check.
+
+| Before-run record | Measurement | Outcome / decision |
+|-------------------|-------------|--------------------|
+| November 12 integration prediction: PRs 3/4 should retain directed/reset X1/X2 at 36/36, all four HW4 random crosses at 36/36, XS1 at 4/4, and released mutation score at 8/8. | Fresh clone of `384eb1e` reproduced those results; mutations all failed tests, and coverage matched security evidence byte-for-byte. | Held. Evidence: `evidence/kyle-review/fresh/`. This is baseline integration, not final team CRV. |
+| November 12 model prediction, committed with the candidate in `ed2b5cc` before execution: a compact empty/interior/full cross can close while hiding 24 exact count/request pairs. | The same 12 sampled probes gave compact 12/12 and exact 12/36. Counts 2-7 lacked all four requests. A separate full matrix closed exact coverage 36/36. Clean DUT checks passed at 4,571 ns. | Held. Reject the compact candidate as an X1 replacement and retain the existing exact model. No implementation fix was needed after the first run. Evidence: `evidence/kyle-check-machine/`. |
+
+The assistant proposed the model-check experiment and recorded its prediction
+in the November 12 session. The original prediction and source revision are preserved; this
+entry does not reconstruct an earlier prediction. Checked setup/reset/drain
+cycles are excluded from the explicitly defined probe sampling phase.
+
+### Review findings and corrections
+
+- The PR 1 review found a continuing RNG stream across nominal Monte Carlo
+  seeds. After Joshua's fresh-object fix, all 9,000 trials reproduced totals
+  and sample hashes; see his error 5 above and the PR 1 review.
+- Strict mode returned shell status zero even when cocotb failed. Validation
+  used the test summary/JUnit rather than shell status alone.
+- Report drafts distinguish HW4 Python-random and graduate-extension results
+  from the missing team CRV results. Final CRV claims remain pending.
+- A LaTeX spacing warning in the model-check paragraph was fixed by shortening
+  the heading and reflowing its opening sentence. The six-page draft then
+  built without final-pass warnings; current proposal validation is recorded
+  in `report/restructure-validation.md`.
+- The default suite still passes with byte-identical baseline coverage. The
+  opt-in probe does not change the default test, production sampler or DUT.
+  No mutation-score improvement is attributed to it.
+
+For this local replacement, Codex organized the retained work into technical
+commits, shortened the documentation, and reran the probe, baseline and report
+build. The contribution record describes ownership and deliverables. Tool-assisted
+validation is distinct from Kyle's still-pending manual functionality review.
