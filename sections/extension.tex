@@ -1,29 +1,29 @@
 \section{Graduate extension (summary)}
 \label{sec:ext}
 
-The full analysis is in \texttt{grad/EEE5703\_Project1\_Extension.pdf}, and
-\texttt{grad/README.md} lists its commands and seeds. It analyzes a two-phase
-sweep constraint. In the FILL phase, writes have probability $a = 0.75$; DRAIN
-is the mirror image; at empty and full both enables are $1/2$.
+The full analysis is in \path{grad/EEE5703_Project1_Extension.pdf}. It studies
+a constraint that alternates between a fill phase (75\% of requests write) and
+a drain phase (75\% read).
 
 \begin{itemize}
-\item \textbf{Measured rates.} On the pinned pyvsc, a roll plus an
-\texttt{implies} gives rates compressed toward 0.5. Adding
-\texttt{solve\_order(roll, enable)} restores them. Every later number uses the
-measured joint request probabilities, not the constraint text.
-\item \textbf{Occupancy.} The induced histogram (a Markov chain on count and
-phase) is within 0.033 total-variation distance of uniform stimulus. The
-histogram alone hides what the constraint changes: it crosses the FIFO directly
-instead of diffusing.
-\item \textbf{Corner.} The corner is \texttt{full} with a read on the same draw.
-$a \ge 0.72$ reaches it within $N = 48$ draws with $P > 0.999$. At $a = 0.75$,
-the chain gives 0.9998, and 3000 pyvsc seeds give 0.9997 [0.9981, 0.9999].
-Uniform stimulus gives 0.19.
-\item \textbf{Closure and found/total.} Over 80 regression points, Spearman
-$\rho = 0.87$. But closing X1 was sufficient, not necessary: 18 runs found 8/8
-with holes still open. The correlation comes from two boundary bins that gate
-\texttt{ignore\_full} and \texttt{full\_offbyone}. X1 says nothing about the
-other mutant classes. That argues for a pointer-wrap coverpoint next to X1.
+\item \textbf{Measured rates.} The constraint as written did not produce its
+stated rates. pyvsc pulled them toward 50\% until a solve order was added. All
+results below use measured rates.
+\item \textbf{Occupancy.} The occupancy histogram is almost the same as for
+uniform random requests. The difference is timing: the constraint sweeps from
+empty to full, while uniform requests wander.
+\item \textbf{Hitting a corner.} We chose the corner ``full, with a read on the
+same cycle.'' Writing at least 72\% of the time in the fill phase reaches it
+within 48 requests with probability above 0.999. At 75\%, the model predicts
+0.9998, and 3000 pyvsc seeds measured 0.9997. Uniform requests reach it about
+20\% of the time.
+\item \textbf{Does coverage find mutants?} Across 80 regression runs, coverage
+and mutants found rise together. But 18 runs found all 8 mutants with coverage
+holes still open. The link comes from two boundary bins, each tied to one
+mutant. Four other mutants were caught in every run, even the shortest. One
+more depends on how many writes have happened, which no current bin tracks. A
+coverpoint for pointer wraparound would close that gap.
 \end{itemize}
 
-\todo{Rerun the extension tables on the team \texttt{crv/} class once it lands.}
+\todo{Joshua. Rerun the extension on the team \texttt{crv/} class once it is
+merged, or say here that the extension uses its own constraint.}
