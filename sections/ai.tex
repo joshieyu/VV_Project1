@@ -29,14 +29,21 @@ trials were not independent. Kyle found this in code review. After the fix the
 result moved from 0.9993 to 0.9997, still matching the model. The log lists
 five smaller errors, such as a wrong simulation count in a draft.
 
-\paragraph{Coverage and review (Kyle).} Codex drafted the coverage model, plan, baseline analyses, and these report
-sections, and assisted the PR reviews. \path{ai_log.md} records prompts, files,
-evidence, and corrections. Before the fresh-clone integration run, the
-recorded prediction was that both 36-bin directed/reset crosses, all four
-HW4 random crosses, XS1 (4/4), and the released score (8/8) would remain
-closed. The run supported it (\path{evidence/kyle-review/}). No before-run
-prediction was preserved for the October work, so none is reconstructed.
-Review also caught the PR 1 RNG-lifetime error described in Joshua's
-section. Kyle's manual functionality-review checkbox remains pending.
+\paragraph{Coverage and review (Kyle).} Kyle's project scope covers the
+verification plan, scoreboard/coverage layer, closure and survivor analysis,
+and cross-review. He provided the existing HW4 testbench used as the
+baseline, including its queue scoreboard and directed/random sequences
+(\path{SOURCE.md}). For the new project work, Codex assisted with drafting
+the plan, coverage instrumentation, analyses and report text, inspecting PRs,
+and executing validation commands. \path{ai_log.md} records that assistance
+and the evidence.
+
+Before the fresh-clone integration run, the recorded prediction was that
+both 36-bin directed/reset crosses, all four HW4 random crosses, XS1 (4/4),
+and the released score (8/8) would remain closed. The run supported it
+(\path{evidence/kyle-review/}). No before-run prediction was preserved for
+the October work, so none is reconstructed. The assisted PR 1 review caught
+the RNG-lifetime error described above. Kyle's manual functionality-review
+checkbox remains pending.
 
 \todo{Jackal. Summarize your AI-drafted constraints and analysis, predictions, evidence and fixes.}
