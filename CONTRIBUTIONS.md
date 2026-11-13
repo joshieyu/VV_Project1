@@ -4,6 +4,13 @@
 **Repo:** https://github.com/joshieyu/VV_Project1
 **Last updated:** 2026-11-12
 
+Kyle's project scope covers the verification plan, the reused HW4 scoreboard,
+functional coverage, closure and survivor analysis, cross-reviews, and the
+corresponding report sections. His existing HW4 testbench supplies the
+baseline driver, monitor, queue scoreboard, and directed/random sequences
+(`SOURCE.md`). The tables below trace that work to commits and evidence;
+`ai_log.md` records the tools used for the new project work.
+
 ## 1. Completed work
 
 | Member | What they owned | Evidence |
@@ -37,11 +44,14 @@ Each member reviews another layer and adds the commit or artifact reviewed
 plus what was checked here. Each person writes their report section and
 contributes to the demo.
 
+Kyle's review entries used Codex for code inspection and validation-command
+execution; the scope and results are recorded in his `ai_log.md` section.
+
 | Reviewer | Reviewed | What was checked | Result |
 |----------|----------|------------------|--------|
-| Kyle Coutray (with Codex, 2026-11-04) | PR 1, corrected head `cced221` | Environment refactor and graduate Monte Carlo seed isolation; reran all 9,000 trials after fresh transaction construction per seed. | Found the continuing-RNG-stream defect before the fix; corrected totals and sample hashes reproduced. [Approval](https://github.com/joshieyu/VV_Project1/pull/1#pullrequestreview-5773473258). |
-| Kyle Coutray (with Codex, 2026-11-12) | PR 4, `04384c1`: monitor, environment observer, S1 checker/stimulus and vplan | Independent clean/strict/released runs, observer timing, raw-data handling, reset/drain contexts and coverage traceability. Repeated clean/mutation from a fresh clone of integration candidate `384eb1e`. | Clean passes; XS1 4/4; 8/8 released, all test-failed; strict mode fails on the documented stale value at 10,011 ns. Coverage matches committed security evidence byte-for-byte. [Review](https://github.com/joshieyu/VV_Project1/pull/4#pullrequestreview-5885378932); `evidence/kyle-review/`. Final submission and Eustis reproduction are not claimed. |
-| Kyle Coutray (with Codex, 2026-11-12) | PR 3, `0e69159`: report skeleton and subtree workflow | Built four-page draft with Tectonic and visually inspected all pages; checked section ownership, evidence references and dependency on PR 4. | Approved as a skeleton; final CRV, report and demo work remains. Preserve subtree merge commits. Overleaf access and prescribed latexmk build remain unverified by Kyle. [Review](https://github.com/joshieyu/VV_Project1/pull/3#pullrequestreview-5885379053). |
+| Kyle Coutray (2026-11-04) | PR 1, corrected head `cced221` | Environment refactor and graduate Monte Carlo seed isolation; reran all 9,000 trials after fresh transaction construction per seed. | Found the continuing-RNG-stream defect before the fix; corrected totals and sample hashes reproduced. [Approval](https://github.com/joshieyu/VV_Project1/pull/1#pullrequestreview-5773473258). |
+| Kyle Coutray (2026-11-12) | PR 4, `04384c1`: monitor, environment observer, S1 checker/stimulus and vplan | Independent clean/strict/released runs, observer timing, raw-data handling, reset/drain contexts and coverage traceability. Repeated clean/mutation from a fresh clone of integration candidate `384eb1e`. | Clean passes; XS1 4/4; 8/8 released, all test-failed; strict mode fails on the documented stale value at 10,011 ns. Coverage matches committed security evidence byte-for-byte. [Review](https://github.com/joshieyu/VV_Project1/pull/4#pullrequestreview-5885378932); `evidence/kyle-review/`. Final submission and Eustis reproduction are not claimed. |
+| Kyle Coutray (2026-11-12) | PR 3, `0e69159`: report skeleton and subtree workflow | Built four-page draft with Tectonic and visually inspected all pages; checked section ownership, evidence references and dependency on PR 4. | Approved as a skeleton; final CRV, report and demo work remains. Preserve subtree merge commits. Overleaf access and prescribed latexmk build remain unverified by Kyle. [Review](https://github.com/joshieyu/VV_Project1/pull/3#pullrequestreview-5885379053). |
 | joshieyu (with Claude Code, 2026-11-12) | Kyle's `7d77943`, `dba08bb`, and `3cc7995`: `vplan.md`, `FifoScoreboard` in `tb/fifo/test_fifo.py`, `lib/fifo_coverage.py`, `closure.md`, `FINDINGS.md` | Scoreboard steps the supplied reference queue and checks count, full, empty, and the head before and after every edge. Coverage bins match vplan C1-C4 and X1-X2, sampled from the reference count before the edge. The startup reset is not sampled, as `closure.md` says. Every closure row (36/36 per phase) matches `evidence/project-baseline/coverage.yml`. Every score in `FINDINGS.md` matches the `mutation.log` files in `evidence/starter/`, `evidence/hw4/`, and `evidence/project-baseline/`. | No errors found. Open items: `vplan.md`, `closure.md`, and `FINDINGS.md` still describe pyvsc as pending and need updating once `crv/` lands; vplan ambiguities 1 and 2 are still unconfirmed with course staff; each reset-cross bin is hit only once, so reset coverage has no margin. |
 
 ## 4. Final checks

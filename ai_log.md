@@ -118,7 +118,17 @@ that script was rerun and its output matched the script.
 The second prompt included the assigned plan, coverage, mutation, AI-log,
 closure, findings, and cross-review work.
 
-### What the assistant drafted or reviewed
+### Project scope and reused work
+
+Kyle's assigned scope is the verification plan, scoreboard/coverage layer,
+closure and survivor analysis, cross-review, and corresponding report text.
+He provided his existing HW4 testbench for the project baseline. Commit
+`7d77943` imports that coursework unchanged, including its driver, monitor,
+queue scoreboard, directed sequences, and Python-random campaigns; see
+`SOURCE.md`. The assistance below covers the new Project 1 changes,
+analysis, validation runs, and documentation.
+
+### Codex assistance within that scope
 
 - Baseline `vplan.md`, `lib/fifo_coverage.py`, coverage hooks in the reused
   HW4 test, `closure.md`, `FINDINGS.md`, and team setup/contribution docs.

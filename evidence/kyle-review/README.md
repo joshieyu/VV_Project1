@@ -107,3 +107,10 @@ commit. `report-preview/actual-latexmk-build.log` and `actual-final-tex.log`
 record the build: six pages and no final-pass warnings. All six PNG renders
 match the visually checked scratch preview byte-for-byte. The PDF preview
 is retained outside the repo; build outputs were cleaned with latexmk -C.
+
+The attribution clarification was rebuilt with the same latexmk command.
+`report-preview/attribution-latexmk-build.log` and
+`attribution-final-tex.log` record six pages with no final-pass warnings.
+Rendered pages 1-4 are unchanged; the revised pages 5-6 were visually checked.
+This edit clarifies project ownership, prior coursework reuse, and the scope
+of assistance; it adds no new functional-validation or manual-review claim.
