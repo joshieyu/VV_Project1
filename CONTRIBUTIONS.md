@@ -4,11 +4,17 @@
 **Repo:** https://github.com/joshieyu/VV_Project1
 **Last updated:** 2026-11-12
 
-Kyle owns the verification plan, scoreboard/coverage work, closure and
-survivor analysis, cross-reviews, and corresponding report sections. The
-baseline reuses his HW4 testbench (`SOURCE.md`). The records below distinguish
-prior coursework, new deliverables, and remaining work; `ai_log.md` documents
-tool assistance.
+Kyle owns the verification plan, scoreboard and coverage work, closure and
+survivor analysis, cross-reviews, and corresponding report sections. His plan
+maps FIFO requirements to tests, coverage bins, and checks. His coverage
+analysis tested whether a compact occupancy/request model concealed holes;
+his starter-survivor analysis separates faults the stimulus did not reach
+from faults the checker did not observe. He also reviewed the environment and
+security integration. The baseline reuses his HW4 queue scoreboard and
+directed/random sequences (`SOURCE.md`); those are prior coursework, not new
+Project 1 code. The records below distinguish completed work from the final
+team CRV analysis and reproduction still pending; `ai_log.md` documents tool
+assistance.
 
 ## 1. Completed work
 

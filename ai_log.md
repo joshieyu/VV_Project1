@@ -124,6 +124,32 @@ that script was rerun and its output matched the script.
 > - Report AI section: summarize your ai_log entries
 > - Review another layer and record it in CONTRIBUTIONS.md section 3
 
+**Additional prompt wording supplied by Kyle (individual prompt dates not recorded):**
+
+> **Understanding the contract**
+>
+> “Before suggesting changes, quiz me on reset priority, simultaneous read/write at empty and full, and FWFT behavior. Let me answer first. Then compare my answers against the supplied FIFO contract and identify misunderstandings.”
+>
+> 1. **Reviewing your existing HW4 testbench**
+>    “Inspect my existing HW4 scoreboard against the Project 1 requirements. Identify which requirements it already checks and which need additional verification. Explain each proposed addition and its purpose before implementing it.”
+> 2. **Developing the verification plan**
+>    “Review this requirement-to-test mapping: [paste my draft]. Identify missing requirements, redundant coverage, and assumptions that need clarification. Keep my structure and explain the reason for each suggested change.”
+> 3. **Making a genuine before-run prediction**
+>    “Before running the experiment, here is my prediction and reasoning: [write my prediction]. Check whether the experiment can distinguish that prediction from an alternative outcome. Preserve my original prediction separately from your feedback, then wait for me to finalize it before execution.”
+> 4. **Interpreting coverage**
+>    “Show me the raw coverage results and ask me to explain what closed and what remains untested. After I answer, check my interpretation. Keep directed coverage separate from random coverage, and explain why 100% occupancy coverage does not establish correct data ordering.”
+> 5. **Analyzing survivors**
+>    “For each survivor, help me distinguish failure to activate the fault from failure to observe its effect. Ask me to propose a catching sequence first. Then evaluate my proposal and identify the exact assertion that should fail.”
+> 6. **Writing the report**
+>    “Edit these notes into a concise report section: [paste my analysis]. Preserve my technical conclusions, flag unsupported claims, and trace every numerical result to evidence. Identify any substantive reasoning you add so I can review it.”
+> 7. **Checking readiness**
+>    “Walk me through reproducing the final revision from a fresh clone. Have me run the commands and interpret the outputs. Record failures and corrections, and leave my manual-review checkbox unchecked until I confirm the review.”
+
+The bracketed fields are retained as supplied; this record does not contain
+the text substituted for them. The prompts describe requested interaction,
+not evidence that every step or the final-revision reproduction occurred.
+The measured work and outstanding checks are recorded below.
+
 Kyle supplied the existing HW4 testbench, imported unchanged at `7d77943`
 (`SOURCE.md`). Its driver, monitor, queue scoreboard and directed/random
 sequences predate this project. The new project assistance was:
