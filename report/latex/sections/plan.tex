@@ -1,11 +1,36 @@
 \section{DUT and verification plan}
 \label{sec:plan}
 
-\todo{Kyle. Summarize the DUT contract from \texttt{dut/specs/fifo.md}
-(WIDTH = DEPTH = 8, FWFT, blocked write when full, ignored read when empty,
-simultaneous read and write).}
+The supplied contract (\path{dut/specs/fifo.md}) is an 8-bit, eight-entry
+synchronous FIFO with a first-word fall-through output. Active-low reset
+clears count and pointers on the rising edge. Acceptance uses pre-edge
+occupancy: writes at full are dropped and reads at empty are ignored.
+With simultaneous requests, only the write is accepted at empty, only the
+read at full, and both in the interior. Count and flags must match the
+reference queue; the valid head must preserve insertion order.
 
-\todo{Kyle. Feature table traced to \texttt{vplan.md}: requirement, test,
-coverpoint or check. Keep the vplan IDs so each later claim can cite one.}
+\begin{center}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.08\textwidth}>{\raggedright\arraybackslash}p{0.32\textwidth}>{\raggedright\arraybackslash}p{0.53\textwidth}@{}}
+\toprule
+vplan ID & Requirement & Test / coverage or check \\
+\midrule
+F1 & Synchronous reset and priority & Reset matrix; C3/C4 and X2; state checks \\
+F2 & Accepted and blocked writes & Fill/overflow sequences; X1; queue contents \\
+F3 & Accepted and ignored reads & Drain/underflow sequences; X1; state checks \\
+F4 & Simultaneous acceptance & Boundary/interior request sweep; X1 \\
+F5 & Count/full/empty & Reference checks before and after each edge \\
+F6 & FWFT head and ordering & Valid-head comparison and campaign drains \\
+F7 & Pointer wrap & Repeated fill/drain and interleaved traffic \\
+S1 & Undefined empty output & Reset/drain empty reads; XS1; exposure observer \\
+\bottomrule
+\end{tabular}
+\end{center}
 
-\todo{Kyle. Risk and priority note, and the ambiguities from vplan section 5.}
+F1-F7 have high priority; the S1 trust observation has medium priority
+because empty output data is outside the functional contract. Full writes
+and empty reads are legal requests, not illegal stimulus. The plan follows
+the supplied packet's FWFT contract; the handout's almost-full/optional-FWFT
+wording still needs clarification. Acceptance of starter survivors for the
+two-survivor requirement also needs confirmation (\path{vplan.md}, section 5).
+Other sizes, between-sample transients, and all possible data histories
+remain outside the demonstrated coverage.
