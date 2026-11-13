@@ -114,7 +114,7 @@ that script was rerun and its output matched the script.
 > plan out what to do, triage/assign tasks to people, then make separate
 > commits for our own work.
 
-**Verification prompts (verbatim):**
+**Verification prompts (paraphrased):**
 
 > **Understanding the contract**
 >
@@ -123,20 +123,17 @@ that script was rerun and its output matched the script.
 > 1. **Reviewing your existing HW4 testbench**
 >    “Inspect my existing HW4 scoreboard against the Project 1 requirements. Identify which requirements it already checks and which need additional verification. Explain each proposed addition and its purpose before implementing it.”
 > 2. **Developing the verification plan**
->    “Review this requirement-to-test mapping: [paste my draft]. Identify missing requirements, redundant coverage, and assumptions that need clarification. Keep my structure and explain the reason for each suggested change.”
+>    “Review the F1–F7 requirement-to-test mapping in my draft `vplan.md`. Identify missing requirements, redundant coverage, and assumptions that need clarification. Keep my structure and explain the reason for each suggested change.”
 > 3. **Making a genuine before-run prediction**
->    “Before running the experiment, here is my prediction and reasoning: [write my prediction]. Check whether the experiment can distinguish that prediction from an alternative outcome. Preserve my original prediction separately from your feedback, then wait for me to finalize it before execution.”
+>    “Before running the experiment, I predict that sampling all four requests only at counts 0, 1, and 8 will close the compact 12-bin model but leave the exact model at 12/36, with every request at counts 2–7 missing. Grouping the interior counts would hide those holes. Check whether the experiment can distinguish that prediction from an alternative outcome. Preserve my prediction separately from your feedback, then wait for me to finalize it before execution.”
 > 4. **Interpreting coverage**
 >    “Show me the raw coverage results and ask me to explain what closed and what remains untested. After I answer, check my interpretation. Keep directed coverage separate from random coverage, and explain why 100% occupancy coverage does not establish correct data ordering.”
 > 5. **Analyzing survivors**
 >    “For each survivor, help me distinguish failure to activate the fault from failure to observe its effect. Ask me to propose a catching sequence first. Then evaluate my proposal and identify the exact assertion that should fail.”
 > 6. **Writing the report**
->    “Edit these notes into a concise report section: [paste my analysis]. Preserve my technical conclusions, flag unsupported claims, and trace every numerical result to evidence. Identify any substantive reasoning you add so I can review it.”
+>    “Edit my analysis into a concise report section: the compact model closed 12/12 on sparse probes while the exact model reached 12/36; the starter did not activate `ignore_full`, and its count-only check could not observe `mem_corrupt`. Preserve my technical conclusions, flag unsupported claims, and trace every numerical result to evidence. Identify any substantive reasoning you add so I can review it.”
 > 7. **Checking readiness**
 >    “Walk me through reproducing the final revision from a fresh clone. Have me run the commands and interpret the outputs. Record failures and corrections, and leave my manual-review checkbox unchecked until I confirm the review.”
-
-The bracketed placeholders are retained as supplied. Results and remaining
-checks are recorded below.
 
 Kyle supplied the existing HW4 testbench, imported unchanged at `7d77943`
 (`SOURCE.md`). Its driver, monitor, queue scoreboard and directed/random
