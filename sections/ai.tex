@@ -1,15 +1,63 @@
 \section{Check the Machine: AI use}
 \label{sec:ai}
 
-\todo{Everyone. For each AI-drafted coverage model or constraint block: the
-prompt, the prediction made before running it, the measured result, and every
-fix. Summarize \texttt{ai\_log.md}; the full record stays there.}
+Each member logged their AI use in \texttt{ai\_log.md}: the prompt, a
+prediction made before running anything, the measured result, and every fix.
+This section summarizes those entries.
 
-Two entries from the environment and extension work, for the summary table.
-We predicted that a roll-plus-\texttt{implies} constraint would not give its
-nominal rate on the pinned pyvsc. It did not: a nominal 0.30 measured 0.37, and
-0.31 with \texttt{solve\_order}. We also predicted that the phased constraint
-would close X1 about as fast as uniform stimulus. That was wrong; it closed
-about twice as fast. Separately, the first Monte Carlo reused one pyvsc object
-across seeds, so its trials were not independent. A teammate's review caught
-it (\texttt{ai\_log.md}, error 5).
+\paragraph{Environment and extension (Joshua).} Claude Code drafted the
+driver and monitor split, the extension's constraint and analysis scripts, and
+the first draft of this report's environment and extension sections. Joshua
+reviewed the code and checked every number against the logged runs.
+\begin{center}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.47\textwidth}>{\raggedright\arraybackslash}p{0.46\textwidth}@{}}
+\toprule
+\textbf{Prediction before running} & \textbf{What we measured} \\
+\midrule
+Splitting the testbench into layers would not change coverage. & Held. Coverage was identical. \\
+Updating the scoreboard from sampled inputs could hide a driver bug without an input check. & Held. The check caught the added driver bugs. \\
+pyvsc would not give the constraint's stated rates. & Held. A stated 0.30 measured 0.37, and 0.31 with a solve order. \\
+The fill and drain constraint would close coverage no faster than uniform requests. & Wrong. It closed about twice as fast. \\
+A pyvsc simulation would match the model's corner probability. & Held, after a fix (below). \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent
+The AI also made mistakes that review caught. The worst was in the corner
+simulation: it reused one random generator across all 3000 seeds, so the
+trials were not independent. Kyle found this in code review. After the fix the
+result moved from 0.9993 to 0.9997, still matching the model. The log lists
+five smaller errors, such as a wrong simulation count in a draft.
+
+\paragraph{Coverage and review (Kyle).} Kyle's project scope covers the
+verification plan, scoreboard/coverage layer, closure and survivor analysis,
+and cross-review. His existing HW4 testbench supplies the baseline queue
+scoreboard and directed/random sequences (\path{SOURCE.md}). Codex supported
+new coverage and documentation drafts, code-review analysis, and validation
+runs; \path{ai_log.md} records the prompts, scope, evidence, and fixes.
+
+\paragraph{Model check.} For F2-F5/X1, commit
+\texttt{ed2b5cc} recorded this prediction before execution: an empty/interior/full model
+could report closure while hiding exact interior-count/request holes.
+A controlled phase sampled every request at counts 0, 1, and 8 on the clean
+DUT; checked setup/reset/drain cycles were outside that sampling phase.
+\begin{center}
+\begin{tabular}{@{}lr@{}}
+\toprule
+Model and sampled phase & Hit / total \\
+\midrule
+Compact model, sparse probes & 12/12 \\
+Exact model, same probes & 12/36 \\
+Exact model, separate full matrix & 36/36 \\
+\bottomrule
+\end{tabular}
+\end{center}
+The prediction held: all four requests at counts 2-7 were absent despite
+100\% compact coverage. The compact candidate was rejected as an X1
+replacement and the exact model retained. No implementation fix was needed
+after the first run. The prompt, original prediction, sampled triples,
+missing bins, command, and passing log are in
+\path{evidence/kyle-check-machine/}. This is a model-quality experiment,
+separate from the team's final CRV regression.
+
+\todo{Jackal. Summarize your AI-drafted constraints and analysis, predictions, evidence and fixes.}

@@ -1,73 +1,56 @@
 \section{Verification environment}
 \label{sec:env}
 
-The cocotb testbench is split into four layers. Each one owns one thing.
+The testbench reuses the HW4 checks, split into layers that each do one job.
 \begin{center}
 \begin{tabular}{@{}l>{\raggedright\arraybackslash}p{0.62\textwidth}@{}}
 \toprule
-\textbf{Layer} & \textbf{Responsibility} \\
+\textbf{Layer} & \textbf{Job} \\
 \midrule
-\texttt{FifoDriver} & The only code that assigns DUT inputs. It drives \texttt{rst\_n}, \texttt{wr\_en}, \texttt{rd\_en} and \texttt{wr\_data} on the falling edge. \\
-\texttt{FifoMonitor} & Reads pins only. Each sample holds the inputs that reached the DUT and the outputs. \\
-Scoreboard & A reference queue (\texttt{FifoModel}) that owns expected state and checks count, flags, and the FWFT head. \\
-\texttt{FifoEnv} & Runs one clock cycle through the other three, and samples coverage. \\
+Driver & The only code that sets DUT inputs. It drives on the falling clock edge. \\
+Monitor & Only reads pins. Each sample records the inputs the DUT received and its outputs. \\
+Scoreboard & A reference queue that predicts count, the flags, and the next word out. \\
+\texttt{FifoEnv} & Runs one clock cycle through the other three and records coverage. \\
 \bottomrule
 \end{tabular}
 \end{center}
 \noindent
-The caller passes the scoreboard and coverage samplers into \texttt{FifoEnv}.
-That lets the directed test and the random test share the pin-level code and
-still use separate coverage phases. Without that, directed cycles could fill
-random-phase holes. The HW4 driver, monitor and scoreboard are reused; the
-Project~1 work moved them into \texttt{tb/fifo/fifo\_driver.py},
-\texttt{fifo\_monitor.py} and \texttt{fifo\_env.py}.
+Directed and random tests use the same layers but record coverage under
+separate names. Directed cycles therefore never count toward random-test
+closure.
 
-\paragraph{Timing.} The clock period is 10~ns. A cycle that starts at falling
-edge $t$ runs in four steps:
-\begin{enumerate}
-\item At $t$ the driver applies the request.
-\item At $t+1$~ns the monitor samples the new inputs and the \emph{old} state.
-The scoreboard checks it before the model moves, including the head that a
-read on this edge will pop.
-\item At $t+5$~ns the rising edge comes, and the DUT acts on the pre-edge state.
-\item At $t+6$~ns the monitor samples the \emph{updated} state, and the
-scoreboard checks it against the stepped model.
-\end{enumerate}
-Reset uses the same path with \texttt{rst\_n} $= 0$. The pre-edge check
-requires the old state to hold until the edge, which is the synchronous-reset
-contract. The post-edge check requires \texttt{count} $= 0$, \texttt{empty}
-$= 1$ and \texttt{full} $= 0$. \texttt{rd\_data} is not checked while the DUT
-reports empty, because the spec leaves it undefined.
+\paragraph{Checking every cycle.} The monitor samples twice per cycle: just
+before the rising edge, and just after it. The scoreboard checks both samples.
+A wrong count or flag (F5) or a wrong output word (F6) is caught on the cycle
+it appears, not later when the queue drains. Reset uses the same path and must
+leave the FIFO empty (F1).
 
-\paragraph{The scoreboard steps on sampled inputs.} The reference queue steps
-on the inputs the monitor saw, not the arguments the test asked for, so it
-models what actually reached the DUT. On its own, that would hide a driver bug:
-a queue fed by a broken driver agrees with the DUT. So \texttt{FifoEnv} first
-checks that every sampled input equals the request. A mismatch fails with a
-message that names the pin.
+\paragraph{Guarding against a broken driver.} The scoreboard updates from the
+inputs the monitor saw, not from what the test asked for. On its own, this
+could hide a driver bug, because the model would follow the same wrong inputs
+as the DUT. So each cycle first checks that the sampled inputs match the
+request. A mismatch fails and names the pin.
 
-\paragraph{Validation.} The extraction had to leave the suite's behavior
-unchanged, and the environment had to catch its own faults.
+\paragraph{Validation.} Moving the code into layers had to leave results
+unchanged, and the new layers had to catch their own mistakes.
 \begin{center}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.5\textwidth}>{\raggedright\arraybackslash}p{0.43\textwidth}@{}}
 \toprule
 \textbf{Check} & \textbf{Result} \\
 \midrule
-Clean suite after extraction & Pass, 552{,}341~ns simulated, same as before \\
-Coverage export against the pre-refactor baseline & Byte-identical \\
-Released mutant pool & 8/8 found, all \texttt{test-failed} \\
-Injected: monitor samples at the falling edge & Fails: \texttt{rst\_n: drove 1, monitor saw 0} \\
-Injected: driver never asserts \texttt{rd\_en} & Fails: \texttt{rd\_en: drove 1, monitor saw 0} \\
-Injected: driver returns at the rising edge & Fails: \texttt{count: got 0, expected 1} \\
+Clean run after the split & Pass, same simulated time \\
+Coverage report vs.\ the earlier baseline & Identical \\
+Released mutant pool & 8/8 found \\
+Bug added: monitor samples too early & Caught \\
+Bug added: driver never asserts read & Caught \\
+Bug added: driver returns too early & Caught \\
 \bottomrule
 \end{tabular}
 \end{center}
 \noindent
-Each injected fault was applied to a working copy and reverted after its run.
-The logs are in \path{evidence/driver-monitor/}. The layers are also reused:
-the random test in \path{grad/tb/test_grad.py} drives pyvsc stimulus through
-the same \texttt{FifoEnv}.
+Each added bug was tried on a scratch copy and then removed. The logs are in
+\path{evidence/driver-monitor/}. The random test in the graduate extension
+reuses the same layers without changes.
 
-\paragraph{Limits.} Outputs are sampled twice per cycle, so a glitch between
-samples is not seen. An X or Z on an output makes \texttt{int(...)} raise, which
-fails the test rather than passing silently. Only WIDTH = DEPTH = 8 is run.
+\paragraph{Limits.} The monitor only sees two moments per cycle, so a glitch
+between them is missed. Only an 8-bit, 8-deep FIFO was tested.
