@@ -151,10 +151,9 @@ sequences predate this project. The new project assistance was:
 
 ### Predictions, measurements and decisions
 
-No before-run prediction was preserved for the October baseline or the
-earlier PR 1 review. Those historical runs are not presented as satisfying
-the before-run prediction step. The dated November experiment below supplies
-a separate, verifiable coverage-model check.
+I forgot to write down a prediction before the October baseline or my earlier
+PR 1 review. On November 12, I made one for a new coverage-model experiment
+and committed it before running the test.
 
 | Before-run record | Measurement | Outcome / decision |
 |-------------------|-------------|--------------------|
