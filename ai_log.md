@@ -114,7 +114,7 @@ that script was rerun and its output matched the script.
 > plan out what to do, triage/assign tasks to people, then make separate
 > commits for our own work.
 
-**Verification prompts (paraphrased):**
+**Verification prompts (verbatim):**
 
 > **Understanding the contract**
 >
