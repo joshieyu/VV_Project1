@@ -98,3 +98,79 @@ that script was rerun and its output matched the script.
 - The first evidence note said every coverage item other than `fifo.trust`
   was unchanged. A YAML diff showed the directed and reset hit counts grew
   (all bins still closed). The note was corrected before commit.
+
+## Kyle Coutray - coverage, reviews, and report
+
+**Tool:** OpenAI Codex, terminal agent.
+
+**Dates:** October 27, November 4, and November 12, 2026.
+
+**Reviewed for functionality by Kyle Coutray:** [x]
+
+### Prompts and scope
+
+**Planning prompt (verbatim excerpt):**
+
+> plan out what to do, triage/assign tasks to people.
+
+**Verification prompts (verbatim):**
+
+> Before we start changing anything, quiz me on reset priority, what happens when reading and writing at the same time when the FIFO is empty or full, and how FWFT works. Let me try answering first, then go over what I got wrong based on the FIFO spec.
+>
+> Can you look through my current HW4 scoreboard and compare it to the Project 1 requirements? Figure out what I'm already testing and what I'm missing. Before adding anything, explain what you think we should add and why.
+>
+> Go through my F1–F7 mapping in `vplan.md` and see if I'm missing any requirements, testing the same thing unnecessarily, or making assumptions I shouldn't be. Try to keep my current format and explain why you'd change anything.
+>
+> My prediction is that if we only test all four requests at counts 0, 1, and 8, we'll get 12/12 coverage with the compact model, but only 12/36 with the exact model. We'd still be missing counts 2–7 for every request, but grouping them together would make it look like we're covering everything. Can you check whether this experiment would actually show that? Keep my prediction separate from your feedback, and let me finalize it before we run anything.
+>
+> Show me the actual coverage results first, then let me try explaining what's covered and what's still missing. After I answer, tell me if I'm interpreting it correctly. Also, keep random and directed coverage separate, and help me understand why hitting 100% occupancy coverage doesn't necessarily mean the FIFO is handling data correctly.
+>
+> For each surviving mutant, help me figure out whether we never triggered the bug or whether we triggered it but didn't catch it. Let me come up with a test sequence first, then tell me whether it'd actually catch the bug and which assertion should fail.
+>
+> Can you help clean up my analysis into a shorter report section? The main findings are that the compact model got 12/12 coverage with sparse testing, while the exact model only got 12/36. Also, the starter tests never triggered `ignore_full`, and the count-only check wouldn't catch `mem_corrupt`. Keep my conclusions the same, but point out anything I'm claiming without evidence and make sure the numbers are backed up. If you add any reasoning of your own, let me know so I can check it.
+>
+> Walk me through how to reproduce the final version from a fresh clone. I want to run the commands myself and make sure I understand the outputs. Keep track of anything that fails and what we do to fix it, and don't mark the manual review as complete until I've actually checked everything.
+
+Kyle supplied the existing HW4 testbench, imported unchanged at `7d77943`
+(`SOURCE.md`). Its driver, monitor, queue scoreboard and directed/random
+sequences predate this project. The new project assistance was:
+
+| Area | Codex assistance | Record |
+|------|------------------|--------|
+| Plan and coverage | Drafted `vplan.md`, `lib/fifo_coverage.py`, coverage hooks, and baseline setup/analysis docs. | `dba08bb`; `closure.md`, `FINDINGS.md` |
+| Cross-review | Inspected PR 1's environment/graduate analysis and PRs 3/4's report/security layers; executed replay, clean, strict, mutation and build commands. | `CONTRIBUTIONS.md` section 3; `evidence/kyle-review/` |
+| Report | Drafted Kyle's plan, coverage, survivor, AI-use and reproduction text; updated findings, closure and contribution records. | `report/latex/sections/`; this log |
+| Model-quality check | Drafted the compact coverage candidate and `test_coverage_probe.py` to test Kyle's before-run prediction. | `ed2b5cc`; `evidence/kyle-check-machine/` |
+
+### Predictions, measurements and decisions
+
+I forgot to write down a prediction before running the new Project 1 coverage
+model in October. The HW4 testbench was reused work. On November 12, I made
+one for a separate coverage-model experiment and committed it before the run.
+
+| Before-run record | Measurement | Outcome / decision |
+|-------------------|-------------|--------------------|
+| November 12 integration prediction: PRs 3/4 should retain directed/reset X1/X2 at 36/36, all four HW4 random crosses at 36/36, XS1 at 4/4, and released mutation score at 8/8. | Fresh clone of `384eb1e` reproduced those results; mutations all failed tests, and coverage matched security evidence byte-for-byte. | Held. Evidence: `evidence/kyle-review/fresh/`. This is baseline integration, not final team CRV. |
+| Kyle's November 12 model prediction, committed with the candidate in `ed2b5cc` before execution: a compact empty/interior/full cross can close while hiding 24 exact count/request pairs. | The same 12 sampled probes gave compact 12/12 and exact 12/36. Counts 2-7 lacked all four requests. A separate full matrix closed exact coverage 36/36. Clean DUT checks passed at 4,571 ns. | Held. Reject the compact candidate as an X1 replacement and retain the existing exact model. No implementation fix was needed after the first run. Evidence: `evidence/kyle-check-machine/`. |
+
+Kyle made the November 12 prediction before execution, and it was committed
+with the candidate source in `ed2b5cc`. The prediction text remains unchanged;
+the file's attribution note was corrected after Kyle clarified authorship.
+Checked setup/reset/drain cycles are excluded from the probe phase.
+
+### Review findings and corrections
+
+- The PR 1 review found a continuing RNG stream across nominal Monte Carlo
+  seeds. After Joshua's fresh-object fix, all 9,000 trials reproduced totals
+  and sample hashes; see his error 5 above and the PR 1 review.
+- Strict mode returned shell status zero even when cocotb failed. Validation
+  used the test summary/JUnit rather than shell status alone.
+- Report drafts distinguish HW4 Python-random and graduate-extension results
+  from the missing team CRV results. Final CRV claims remain pending.
+- A LaTeX spacing warning in the model-check paragraph was fixed by shortening
+  the heading and reflowing its opening sentence. The six-page draft then
+  built without final-pass warnings; current proposal validation is recorded
+  in `report/restructure-validation.md`.
+- The default suite still passes with byte-identical baseline coverage. The
+  opt-in probe does not change the default test, production sampler or DUT.
+  No mutation-score improvement is attributed to it.
