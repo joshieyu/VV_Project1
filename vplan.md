@@ -57,6 +57,7 @@ Sample occupancy from the checked reference queue before its update. Sample the 
 | Simultaneous requests and request-pair sweep | F2-F6 | directed | At empty only write is accepted; at full only read; inside the boundaries both are accepted. |
 | Repeated wrap and data sweeps | F2-F7 | directed | Reference queue and valid head match across repeated reuse of slots. |
 | Existing HW4 seeded traffic | F2-F7 | Python random baseline | Every checked sample agrees with the queue; trailing data drains correctly. |
+| Coverage-model comparison (`MODULE=test_coverage_probe`) | F2-F5, X1 | directed model validation, opt-in | Clean DUT checks pass; the same sparse probes expose the difference between a compact band cross and exact occupancy bins; a separate full matrix closes the exact cross. See `evidence/kyle-check-machine/`. |
 | S1 empty-read sequence | S1, F1 | directed | Reset with a full FIFO and requests during reset, then read at empty alone and racing a write, after reset and after a drain; XS1 closes. |
 | Project constrained-random campaigns | F2-F7 | pyvsc, pending | Multiple recorded seeds pass; normal occupancy x request coverage closes; measured rates support the claimed distribution. |
 

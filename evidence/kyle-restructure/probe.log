@@ -1,0 +1,25 @@
+rm -f results.xml
+"/Library/Developer/CommandLineTools/usr/bin/make" -f Makefile results.xml
+mkdir -p sim_build
+/opt/homebrew/bin/iverilog -o sim_build/sim.vvp -D COCOTB_SIM=1 -s fifo -g2012 -f sim_build/cmds.f  /Users/kylecoutray/EEE4701/tmp/project1-kyle-restructured/tb/fifo/../../dut/fifo.sv
+rm -f results.xml
+MODULE=test_coverage_probe TESTCASE= TOPLEVEL=fifo TOPLEVEL_LANG=verilog \
+         /opt/homebrew/bin/vvp -M /Users/kylecoutray/EEE4701/VV_Project1/.venv/lib/python3.12/site-packages/cocotb/libs -m libcocotbvpi_icarus   sim_build/sim.vvp  
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:109  in set_program_name_in_venv        Using Python virtual environment interpreter at /Users/kylecoutray/EEE4701/VV_Project1/.venv/bin/python
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:101  in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 13.0 (stable)
+     0.00ns INFO     cocotb                             Running tests with cocotb v1.9.2 from /Users/kylecoutray/EEE4701/VV_Project1/.venv/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb                             Seeding Python random module with supplied seed 4701
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb.regression                  Found test test_coverage_probe.compare_compact_and_exact_coverage
+     0.00ns INFO     cocotb.regression                  running compare_compact_and_exact_coverage (1/1)
+  4571.00ns INFO     cocotb.fifo                        Compact 12/12; exact sparse 12/36; exact complete 36/36
+  4571.00ns INFO     cocotb.regression                  compare_compact_and_exact_coverage passed
+  4571.00ns INFO     cocotb.regression                  ****************************************************************************************************************
+                                                        ** TEST                                                    STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        ****************************************************************************************************************
+                                                        ** test_coverage_probe.compare_compact_and_exact_coverage   PASS        4571.00           0.04     123406.38  **
+                                                        ****************************************************************************************************************
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                                         4571.00           0.05      99160.40  **
+                                                        ****************************************************************************************************************
+                                                        
