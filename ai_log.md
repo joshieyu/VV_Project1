@@ -106,17 +106,24 @@ that script was rerun and its output matched the script.
 (PRs 3 and 4, report and evidence updates).
 **Reviewed for functionality by Kyle Coutray:** [ ]
 
-**Prompts (verbatim, abridged):**
+**Planning request (verbatim task excerpt):**
 
-> We gotta plan out what to do, triage/assign tasks to people, then make
-> separate commits for our own work.
+> plan out what to do, triage/assign tasks to people, then make separate
+> commits for our own work.
 
-> can you take a look at the other PRs, and the repo, and the project itself
-> and see what we need to? also you'll have to do the tasks that my
-> parterner assigned. just do it as if you're me: **Kyle**
+**Review and report request (verbatim task-list excerpts):**
 
-The second prompt included the assigned plan, coverage, mutation, AI-log,
-closure, findings, and cross-review work.
+> - Review PR 4 (it adds an S1 row and a cross to vplan.md) and PR 3
+> - Report: plan section (DUT contract, feature table traced to vplan, risks and ambiguities)
+> - Report: coverage section with final numbers and the convergence argument (needs Jackal's crv/)
+> - Report: mutation section with Jackal, two or more survivors, why missed and what would catch them
+> - Update closure.md and FINDINGS.md after the pyvsc regression
+> - Report AI section: summarize your ai_log entries
+> - Review another layer and record it in CONTRIBUTIONS.md section 3
+
+These excerpts identify the requested deliverables. The assistance scope
+below records the drafting, analysis, and validation actually performed;
+final results dependent on Jackal's CRV work remain pending.
 
 ### Project scope and reused work
 
