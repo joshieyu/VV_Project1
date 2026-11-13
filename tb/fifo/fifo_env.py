@@ -4,7 +4,9 @@
 
 The scoreboard and samplers are passed in, so a test chooses its own
 checker and coverage phase. A scoreboard needs `model` (a FifoModel),
-`step(wr_en, rd_en, wr_data)`, and `check(sample)`.
+`step(wr_en, rd_en, wr_data)`, and `check(sample)`. Each callable in
+`observers` is called as `observer(kind, before, after)` after every cycle,
+with kind "cycle" or "reset".
 
 Set FIFO_TRACE=N to log the monitor samples for the first N cycles.
 """
@@ -29,6 +31,7 @@ class FifoEnv:
         # Coverage callbacks: (pre-edge reference count, wr_en, rd_en).
         self.sample_traffic = sample_traffic
         self.sample_reset = sample_reset
+        self.observers = []
         self.cycles = 0
         self.trace = int(os.environ.get("FIFO_TRACE", "0"))
 
@@ -55,7 +58,7 @@ class FifoEnv:
         self.scoreboard.step(before["wr_en"], before["rd_en"], before["wr_data"])
         after = self.monitor.sample()
         self.scoreboard.check(after)
-        self._log(before, after)
+        self._finish("cycle", before, after)
         return before, after
 
     async def reset(self, wr_en=0, rd_en=0, wr_data=0):
@@ -68,7 +71,7 @@ class FifoEnv:
         self.scoreboard.model.reset()
         after = self.monitor.sample()
         self.scoreboard.check(after)
-        self._log(before, after)
+        self._finish("reset", before, after)
         return before, after
 
     async def _drive(self, rst_n, wr_en, rd_en, wr_data):
@@ -83,6 +86,11 @@ class FifoEnv:
                 f"{name}: drove {value}, monitor saw {before[name]}"
         self.cycles += 1
         return before
+
+    def _finish(self, kind, before, after):
+        for observer in self.observers:
+            observer(kind, before, after)
+        self._log(before, after)
 
     def _log(self, before, after):
         if self.cycles <= self.trace:
