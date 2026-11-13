@@ -151,9 +151,9 @@ sequences predate this project. The new project assistance was:
 
 ### Predictions, measurements and decisions
 
-I forgot to write down a prediction before the October baseline or my earlier
-PR 1 review. On November 12, I made one for a new coverage-model experiment
-and committed it before running the test.
+I forgot to write down a prediction before running the new Project 1 coverage
+model in October. The HW4 testbench was reused work. On November 12, I made
+one for a separate coverage-model experiment and committed it before the run.
 
 | Before-run record | Measurement | Outcome / decision |
 |-------------------|-------------|--------------------|
