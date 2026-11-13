@@ -1,0 +1,15 @@
+{
+  "platform": "macOS-27.2-arm64-arm-64bit",
+  "python": "3.12.14",
+  "packages": {
+    "cocotb": "1.9.2",
+    "cocotb-coverage": "1.2.0",
+    "PyYAML": "6.0.3",
+    "pyvsc": "0.9.5.27214109393"
+  },
+  "simulator": "Icarus Verilog 13.0",
+  "random_seed": 4701,
+  "pr3_head": "0e691598a5564746410d039f83e145c973eabbac",
+  "pr4_head": "04384c1eedcc85fd925c160392ccfe40f3e5c15b",
+  "fresh_clone_head": "384eb1e24e7df6b460d174d249b004d9a4295d0c"
+}

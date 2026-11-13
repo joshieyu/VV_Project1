@@ -1,0 +1,59 @@
+{
+  "validated_at_utc": "2026-11-13T04:26:55.098638+00:00",
+  "base_revision": "384eb1e24e7df6b460d174d249b004d9a4295d0c",
+  "working_tree": "local replacement, report commit pending",
+  "tests": {
+    "probe": {
+      "testcases": 1,
+      "failures": 0
+    },
+    "clean": {
+      "testcases": 1,
+      "failures": 0
+    }
+  },
+  "probe_counts": {
+    "compact": {
+      "hit": 12,
+      "total": 12
+    },
+    "exact_sparse": {
+      "hit": 12,
+      "total": 36
+    },
+    "exact_complete": {
+      "hit": 36,
+      "total": 36
+    }
+  },
+  "baseline_coverage_byte_identical": true,
+  "baseline_coverage_sha256": "dd0c62cc4098c06f6602abbfc7eaf6f9791b564e4ba7c4178b7f92b2bd170c8e",
+  "retained_evidence_matches_backup": [
+    "evidence/kyle-review/environment.json",
+    "evidence/kyle-review/fresh/clean.log",
+    "evidence/kyle-review/fresh/coverage.yml",
+    "evidence/kyle-review/fresh/mutation.json",
+    "evidence/kyle-review/fresh/mutation.log",
+    "evidence/kyle-review/fresh/results.xml",
+    "evidence/kyle-review/pr4/clean.log",
+    "evidence/kyle-review/pr4/coverage.yml",
+    "evidence/kyle-review/pr4/mutation.json",
+    "evidence/kyle-review/pr4/mutation.log",
+    "evidence/kyle-review/pr4/results.xml",
+    "evidence/kyle-review/pr4/strict.log",
+    "evidence/kyle-review/validation.json",
+    "evidence/kyle-check-machine/coverage.yml",
+    "evidence/kyle-check-machine/default-suite.log",
+    "evidence/kyle-check-machine/default-suite.xml",
+    "evidence/kyle-check-machine/prediction.md",
+    "evidence/kyle-check-machine/results.json",
+    "evidence/kyle-check-machine/results.xml",
+    "evidence/kyle-check-machine/run.log",
+    "evidence/kyle-check-machine/source-revision.txt"
+  ],
+  "report": {
+    "pages": 6,
+    "final_pass_warnings": 0,
+    "pdf_sha256": "2047cb5ea998b0d69d3ac115462acccd0a2e5d76a3193c9d3a397f47512917b9"
+  }
+}
