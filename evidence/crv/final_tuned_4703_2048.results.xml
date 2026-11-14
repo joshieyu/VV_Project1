@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1794684581" />
+    <testcase name="test_crv" classname="test_crv" file="/home/net/aa746663/VV_Project1-main/crv/tb/test_crv.py" lineno="37" time="34.979615211486816" sim_time_ns="20571.001" ratio_time="588.085399900133" />
+  </testsuite>
+</testsuites>
