@@ -21,5 +21,7 @@ the number of writes, which no bin tracks. A pointer-wrap coverpoint would
 close that gap.
 \end{itemize}
 
-\todo{Joshua. Rerun the extension on the team \texttt{crv/} class once it is
-merged, or say here that the extension uses its own constraint.}
+The team's tuned mode (\path{crv/stimulus.py}) uses the same constraint: 75\%
+in the interior, 50\% at empty and full, and the same solve order. So the
+rates and the corner bound apply to the team regression. The 80 runs above
+used the extension's own copy in \path{grad/}, not \path{crv/}.

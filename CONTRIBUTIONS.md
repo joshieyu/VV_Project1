@@ -1,6 +1,6 @@
 # Contributions - Project 1 FIFO
 
-**Members:** Kyle Coutray (`kylecoutray`), `joshieyu`, Aaron Money (Jackal, `atm101010`).
+**Members:** Kyle Coutray (`kylecoutray`), `joshieyu`, Aaron Money (Jackal, `atm101010-cyber`).
 **Repo:** https://github.com/joshieyu/VV_Project1
 **Last updated:** 2026-11-14
 
@@ -40,7 +40,7 @@ not claimed as new Project 1 code. Reviews are recorded in section 3.
 | Member | Proposed work | Status |
 |--------|---------------|--------|
 | Kyle Coutray | Scoreboard, coverage model, vplan, and closure analysis. | Baseline, model-quality check and cross-reviews complete; report sections drafted. Final team CRV analysis and final-revision reproduction pending. |
-| joshieyu | Driver/monitor extraction, sampled interface, environment demo, Security & Trust thread, report setup. | Environment validated locally and on Eustis. Security code, report sections, and demo written and recorded. |
+| joshieyu | Driver/monitor extraction, sampled interface, environment demo, Security & Trust thread, report setup. | Environment validated locally and on Eustis. Security code, report sections, and demo written and recorded. Extension tied to the team `crv/` constraint. |
 | Jackal | pyvsc transactions, constraints, seeded regression, mutation campaigns. | Awaiting team agreement. |
 
 ## 3. Reviews and shared work
@@ -62,7 +62,7 @@ execution; the scope and results are recorded in his `ai_log.md` section.
 ## 4. Final checks
 
 - [x] Third member identified: Jackal.
-- [ ] Jackal's GitHub username and repo access confirmed.
+- [x] Jackal's GitHub username and repo access confirmed (`atm101010-cyber`, collaborator as of 2026-11-14).
 - [ ] Each member has made their own commits.
 - [ ] Every completed-work claim has supporting code or evidence.
 - [ ] Each member has reviewed another layer.
