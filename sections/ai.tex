@@ -5,29 +5,29 @@ Each member logged their AI use in \texttt{ai\_log.md}: the prompt, a
 prediction made before running anything, the measured result, and every fix.
 This section summarizes those entries.
 
-\paragraph{Environment and extension (Joshua).} Claude Code drafted the
-driver and monitor split, the extension's constraint and analysis scripts, and
-the first draft of this report's environment and extension sections. Joshua
+\paragraph{Environment, extension, and security (Joshua).} Claude Code
+drafted the driver and monitor split, the extension's constraint and analysis,
+the S1 coverpoint, and first drafts of Joshua's report sections. Joshua
 reviewed the code and checked every number against the logged runs.
 \begin{center}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.47\textwidth}>{\raggedright\arraybackslash}p{0.46\textwidth}@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.6\textwidth}>{\raggedright\arraybackslash}p{0.33\textwidth}@{}}
 \toprule
-\textbf{Prediction before running} & \textbf{What we measured} \\
+\textbf{Prediction before running} & \textbf{Measured} \\
 \midrule
-Splitting the testbench into layers would not change coverage. & Held. Coverage was identical. \\
-Updating the scoreboard from sampled inputs could hide a driver bug without an input check. & Held. The check caught the added driver bugs. \\
-pyvsc would not give the constraint's stated rates. & Held. A stated 0.30 measured 0.37, and 0.31 with a solve order. \\
-The fill and drain constraint would close coverage no faster than uniform requests. & Wrong. It closed about twice as fast. \\
-A pyvsc simulation would match the model's corner probability. & Held, after a fix (below). \\
+The layer split would not change coverage. & Held: identical. \\
+Updating from sampled inputs needs an input check. & Held: it caught the added bugs. \\
+pyvsc would not give the stated rates. & Held: 0.30 measured 0.37. \\
+Fill and drain would close no faster than uniform. & Wrong: about twice as fast. \\
+pyvsc would match the corner probability. & Held, after a fix. \\
+Reset would leave old data visible at empty (S1). & Held: 2439 of 7058. \\
 \bottomrule
 \end{tabular}
 \end{center}
 \noindent
-The AI also made mistakes that review caught. The worst was in the corner
-simulation: it reused one random generator across all 3000 seeds, so the
-trials were not independent. Kyle found this in code review. After the fix the
-result moved from 0.9993 to 0.9997, still matching the model. The log lists
-five smaller errors, such as a wrong simulation count in a draft.
+The worst AI error was in the corner simulation: one random generator was
+reused across all 3000 seeds, so the trials were not independent. Kyle found
+it in review; after the fix the result moved from 0.9993 to 0.9997. The log
+lists seven smaller errors.
 
 \paragraph{Coverage and review (Kyle).} Kyle's project scope covers the
 verification plan, scoreboard/coverage layer, closure and survivor analysis,
