@@ -4,6 +4,12 @@
 \todo{Aaron. Released found/total on the final suite, the harness command,
 and the starter's 1/8 for comparison.}
 
+The final tuned CRV regression (seed 4701, 2048 requests) detected 8/8
+released mutants (100\%, all test failures), exceeding the 90\% threshold.
+Evidence: \path{evidence/crv/mutation.log} and \path{evidence/crv/mutation.json}.
+The starter found 1/8; the earlier HW4 suite already found 8/8. Thus CRV
+independently reproduces, but did not cause, the mutation improvement.
+
 The examples below are
 measured starter survivors, not survivors of the final project suite.
 \path{evidence/starter/mutation.log} records 1/8; the reused HW4 and current

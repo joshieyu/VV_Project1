@@ -1,12 +1,17 @@
 \section{Constrained-random stimulus}
 \label{sec:crv}
 
-\todo{Jackal. The pyvsc transaction class in \texttt{crv/}: fields, the
-constraints that keep every request legal, and how they reach near-full,
-near-empty, bursts, and simultaneous read and write.}
 
-\todo{Jackal. The distribution the constraints induce, measured, not read off
-the constraint text. pyvsc compresses \texttt{implies} rates toward 0.5 unless
-\texttt{solve\_order} is set (Section~\ref{sec:ext}).}
 
-\todo{Jackal. The seeded regression: seeds, draws per seed, and command line.}
+A \texttt{pyvsc} transaction randomizes \texttt{wr\_en}, \texttt{rd\_en},
+and 8-bit \texttt{wr\_data}; reference occupancy and fill/drain phase are
+nonrandom inputs. All four request pairs are legal, including blocked writes
+at full and reads at empty. Uniform mode gives each enable a nominal 50\%
+rate. Tuned mode uses 75\% write/25\% read in the interior fill phase,
+reverses these rates in drain, and uses 50\%/50\% at both boundaries.
+Independent enables permit simultaneous requests; \texttt{solve\_order}
+prevents pyvsc implication bias. The phases reach near-full/near-empty and
+produce bursts. At 128 cycles (seed 4701), observed write/read rates were
+48.44\%/44.53\% (uniform) versus 53.91\%/50.00\% (tuned); occupancy 0--2
+samples increased from 12 to 37. At 2048 tuned cycles the rates were
+51.07\%/51.07\%, with longest write-only and read-only bursts of eight.
