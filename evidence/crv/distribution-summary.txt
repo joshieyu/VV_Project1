@@ -1,0 +1,45 @@
+
+before_uniform_4701_128
+Coverage: 32 /36
+Write rate: 48.44 %
+Read rate: 44.53 %
+Occupancy: {'0': 5, '1': 2, '2': 5, '3': 11, '4': 14, '5': 35, '6': 23, '7': 22, '8': 11}
+Longest write-only burst: 4
+Longest read-only burst: 3
+Last new bin cycle: 128
+
+after_short_tuned_4701_128
+Coverage: 34 /36
+Write rate: 53.91 %
+Read rate: 50.0 %
+Occupancy: {'0': 12, '1': 11, '2': 14, '3': 19, '4': 17, '5': 14, '6': 15, '7': 13, '8': 13}
+Longest write-only burst: 5
+Longest read-only burst: 3
+Last new bin cycle: 111
+
+final_tuned_4701_2048
+Coverage: 36 /36
+Write rate: 51.07 %
+Read rate: 51.07 %
+Occupancy: {'0': 134, '1': 230, '2': 253, '3': 266, '4': 277, '5': 256, '6': 255, '7': 245, '8': 132}
+Longest write-only burst: 8
+Longest read-only burst: 8
+Last new bin cycle: 196
+
+final_tuned_4702_2048
+Coverage: 36 /36
+Write rate: 50.78 %
+Read rate: 51.32 %
+Occupancy: {'0': 142, '1': 279, '2': 256, '3': 236, '4': 249, '5': 256, '6': 282, '7': 227, '8': 121}
+Longest write-only burst: 10
+Longest read-only burst: 7
+Last new bin cycle: 202
+
+final_tuned_4703_2048
+Coverage: 36 /36
+Write rate: 49.61 %
+Read rate: 48.93 %
+Occupancy: {'0': 157, '1': 233, '2': 239, '3': 264, '4': 256, '5': 256, '6': 249, '7': 239, '8': 155}
+Longest write-only burst: 9
+Longest read-only burst: 8
+Last new bin cycle: 131

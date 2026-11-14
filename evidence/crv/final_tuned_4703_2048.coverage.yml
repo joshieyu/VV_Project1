@@ -1,0 +1,83 @@
+fifo:
+  cover_percentage: 100.0
+  coverage: 49
+  size: 49
+  type: <class 'cocotb_coverage.coverage.CoverItem'>
+fifo.crv_tuned_seed_4703:
+  cover_percentage: 100.0
+  coverage: 49
+  size: 49
+  type: <class 'cocotb_coverage.coverage.CoverItem'>
+fifo.crv_tuned_seed_4703.occupancy:
+  at_least: 1
+  bins:_hits:
+    0: 157
+    1: 233
+    2: 239
+    3: 264
+    4: 256
+    5: 256
+    6: 249
+    7: 239
+    8: 155
+  cover_percentage: 100.0
+  coverage: 9
+  size: 9
+  type: <class 'cocotb_coverage.coverage.CoverPoint'>
+  weight: 1
+fifo.crv_tuned_seed_4703.occupancy_x_request:
+  at_least: 1
+  bins:_hits:
+    (0, 'idle'): 50
+    (0, 'read'): 30
+    (0, 'simultaneous'): 42
+    (0, 'write'): 35
+    (1, 'idle'): 39
+    (1, 'read'): 76
+    (1, 'simultaneous'): 39
+    (1, 'write'): 79
+    (2, 'idle'): 39
+    (2, 'read'): 78
+    (2, 'simultaneous'): 35
+    (2, 'write'): 87
+    (3, 'idle'): 42
+    (3, 'read'): 86
+    (3, 'simultaneous'): 52
+    (3, 'write'): 84
+    (4, 'idle'): 49
+    (4, 'read'): 83
+    (4, 'simultaneous'): 43
+    (4, 'write'): 81
+    (5, 'idle'): 50
+    (5, 'read'): 80
+    (5, 'simultaneous'): 46
+    (5, 'write'): 80
+    (6, 'idle'): 57
+    (6, 'read'): 79
+    (6, 'simultaneous'): 34
+    (6, 'write'): 79
+    (7, 'idle'): 40
+    (7, 'read'): 78
+    (7, 'simultaneous'): 49
+    (7, 'write'): 72
+    (8, 'idle'): 38
+    (8, 'read'): 38
+    (8, 'simultaneous'): 34
+    (8, 'write'): 45
+  cover_percentage: 100.0
+  coverage: 36
+  size: 36
+  type: <class 'cocotb_coverage.coverage.CoverCross'>
+  weight: 1
+fifo.crv_tuned_seed_4703.request:
+  at_least: 1
+  bins:_hits:
+    idle: 404
+    read: 628
+    simultaneous: 374
+    write: 642
+  cover_percentage: 100.0
+  coverage: 4
+  size: 4
+  type: <class 'cocotb_coverage.coverage.CoverPoint'>
+  weight: 1

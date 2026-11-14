@@ -1,0 +1,36 @@
+COMMAND: make -s -C /home/net/aa746663/VV_Project1-main/crv/tb SIM=icarus SIM_BUILD=/home/net/aa746663/VV_Project1-main/evidence/crv/before_uniform_4701_128.sim_build COCOTB_RESULTS_FILE=/home/net/aa746663/VV_Project1-main/evidence/crv/before_uniform_4701_128.results.xml
+CRV_MODE=uniform CRV_SEED=4701 CRV_CYCLES=128
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:108  in set_program_name_in_venv        Using Python virtual environment interpreter at /opt/course/cocotb-env/bin/python
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:101  in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 12.0 (stable)
+     0.00ns INFO     cocotb                             Running tests with cocotb v1.9.2 from /opt/course/cocotb-env/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb                             Seeding Python random module with 1794684459
+     0.00ns INFO     cocotb.regression                  Found test test_crv.test_crv
+     0.00ns INFO     cocotb.regression                  running test_crv (1/1)
+/opt/course/cocotb-env/lib/python3.12/site-packages/vsc/model/field_scalar_model.py:93: DeprecationWarning: __int__ returned non-int (type ValueInt).  The ability to return an instance of a strict subclass of int is deprecated, and may be removed in a future version of Python.
+  self.val.v = int(val)
+/opt/course/cocotb-env/lib/python3.12/site-packages/vsc/model/value_scalar.py:80: DeprecationWarning: __int__ returned non-int (type ValueInt).  The ability to return an instance of a strict subclass of int is deprecated, and may be removed in a future version of Python.
+  v = int(rhs)
+/opt/course/cocotb-env/lib/python3.12/site-packages/vsc/model/variable_bound_expr_max_propagator.py:19: DeprecationWarning: __int__ returned non-int (type ValueInt).  The ability to return an instance of a strict subclass of int is deprecated, and may be removed in a future version of Python.
+  return int(self.max_e.val())
+/opt/course/cocotb-env/lib/python3.12/site-packages/vsc/model/value_scalar.py:48: DeprecationWarning: __int__ returned non-int (type ValueInt).  The ability to return an instance of a strict subclass of int is deprecated, and may be removed in a future version of Python.
+  v = int(rhs)
+/opt/course/cocotb-env/lib/python3.12/site-packages/vsc/model/expr_literal_model.py:42: DeprecationWarning: __int__ returned non-int (type ValueInt).  The ability to return an instance of a strict subclass of int is deprecated, and may be removed in a future version of Python.
+  return btor.Const(int(self.val()), ctx_width)
+/opt/course/cocotb-env/lib/python3.12/site-packages/vsc/model/expr_partselect_model.py:40: DeprecationWarning: __int__ returned non-int (type ValueInt).  The ability to return an instance of a strict subclass of int is deprecated, and may be removed in a future version of Python.
+  return btor.Slice(
+  1371.00ns INFO     cocotb.fifo                        CRV mode=uniform seed=4701 cycles=128 X1=32/36 missing=['0,1,1', '1,0,0', '1,0,1', '2,0,0'] last_new_bin=128 trace_sha256=44ee6332838edad852d9f4923ce781b4c6ef1962fa7357f72acdf88f5465aff5
+  1371.00ns INFO     cocotb.fifo                        fifo : <cocotb_coverage.coverage.CoverItem object at 0x7426c03bd370>, coverage=45, size=49 
+  1371.00ns INFO     cocotb.fifo                           fifo.crv_uniform_seed_4701 : <cocotb_coverage.coverage.CoverItem object at 0x7426c03bd310>, coverage=45, size=49 
+  1371.00ns INFO     cocotb.fifo                              fifo.crv_uniform_seed_4701.occupancy : <cocotb_coverage.coverage.CoverPoint object at 0x7426c03bd2e0>, coverage=9, size=9 
+  1371.00ns INFO     cocotb.fifo                              fifo.crv_uniform_seed_4701.occupancy_x_request : <cocotb_coverage.coverage.CoverCross object at 0x7426c03bd250>, coverage=32, size=36 
+  1371.00ns INFO     cocotb.fifo                              fifo.crv_uniform_seed_4701.request : <cocotb_coverage.coverage.CoverPoint object at 0x7426c03bd3a0>, coverage=4, size=4 
+  1371.00ns INFO     cocotb.regression                  test_crv passed
+  1371.00ns INFO     cocotb.regression                  **************************************************************************************
+                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        **************************************************************************************
+                                                        ** test_crv.test_crv              PASS        1371.00           2.22        616.92  **
+                                                        **************************************************************************************
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0               1371.00           5.06        270.95  **
+                                                        **************************************************************************************
+                                                        
