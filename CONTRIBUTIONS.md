@@ -62,7 +62,7 @@ execution; the scope and results are recorded in his `ai_log.md` section.
 ## 4. Final checks
 
 - [x] Third member identified: Jackal.
-- [x] Jackal's GitHub username and repo access confirmed (`atm101010`, collaborator as of 2026-11-14).
+- [ ] Jackal's GitHub username and repo access confirmed.
 - [ ] Each member has made their own commits.
 - [ ] Every completed-work claim has supporting code or evidence.
 - [ ] Each member has reviewed another layer.
