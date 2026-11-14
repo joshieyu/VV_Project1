@@ -2,7 +2,9 @@
 
 EEE4701 team repo. The current starting point is Kyle's HW4 FIFO testbench,
 with a project verification plan and functional-coverage instrumentation.
-The pyvsc regression, final report, and demo are still pending.
+The pyvsc regression and final report are still pending.
+
+**Demo:** https://youtu.be/8VbUyT3RlDk
 
 **Deadline:** November 8, 2026 (Webcourses date confirmed by Kyle).
 
