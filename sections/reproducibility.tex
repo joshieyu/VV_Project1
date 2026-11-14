@@ -11,6 +11,15 @@ same simulated time as locally (\texttt{evidence/driver-monitor/eustis-clean.log
 
 \todo{Jackal. The seeded random regression command and its seeds.}
 
+The final CRV regression and released mutant campaign ran on the course VM:
+\begin{verbatim}
+python crv/run_regression.py --sim icarus \
+  --seeds 4701,4702,4703 --short-cycles 128 \
+  --cycles 2048 --mutate
+\end{verbatim}
+Results: random-only X1 36/36 per seed, exact seed-4701 replay, and 8/8
+released mutants (\path{evidence/crv/}).
+
 \paragraph{Kyle\textquotesingle s integration check.} Kyle's fresh clone of candidate \path{384eb1e} reproduced clean coverage and
 8/8 released, using Icarus 13.0 and the existing Python environment. This
 does not replace reproduction of the final integrated submission or an
@@ -21,7 +30,7 @@ scoreboard, baseline survivor analysis, and reviews recorded in
 \todo{Everyone. Name the teammate who reproduced the final revision, and the
 commit they reproduced.}
 
-\paragraph{Demo.} \todo{Demo link.}
+\paragraph{Demo.} \url{https://youtu.be/8VbUyT3RlDk}
 
 \paragraph{Contributions.} \todo{Everyone. One line per member, matching
 \texttt{CONTRIBUTIONS.md}.}

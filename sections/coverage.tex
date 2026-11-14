@@ -41,3 +41,14 @@ experiment is separate from Jackal's pending team \path{crv/} implementation.
 hits/holes, seeds and budgets, measured request rates, constraint changes,
 the last-new-bin draw index, replay results, and continued checking/drain.
 Justify any directed closure separately. See \path{closure.md}.}
+
+\paragraph{Random-only X1 closure.} Uniform seed 4701 at 128 cycles covered
+32/36 bins, missing $(0,1,1)$, $(1,0,0)$, $(1,0,1)$, and $(2,0,0)$
+(pre-edge occupancy, write, read). Switching to the prewritten tuned mode
+at the same budget covered 34/36, missing $(2,0,0)$ and $(5,1,1)$.
+At 2048 tuned cycles, seeds 4701/4702/4703 each covered 36/36; the last
+new-bin cycles were 196/202/131. Increasing the budget, not an undocumented
+code patch, closed the remaining holes. The random-only sampler was disabled
+before the final checked drain, which did not contribute X1 hits. Replaying
+4701 in a fresh process produced an identical transaction CSV. Evidence:
+\path{evidence/crv/}.
