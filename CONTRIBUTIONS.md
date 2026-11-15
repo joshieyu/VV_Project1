@@ -1,8 +1,8 @@
 # Contributions - Project 1 FIFO
 
-**Members:** Kyle Coutray (`kylecoutray`), `joshieyu`, Jackal (`atm101010`).
+**Members:** Kyle Coutray (`kylecoutray`), `joshieyu`, Aaron Money (Jackal, `atm101010-cyber`).
 **Repo:** https://github.com/joshieyu/VV_Project1
-**Last updated:** 2026-11-12
+**Last updated:** 2026-11-14
 
 Kyle owns the verification plan, scoreboard and coverage work, closure and
 survivor analysis, cross-reviews, and corresponding report sections. His plan
@@ -12,9 +12,9 @@ his starter-survivor analysis separates faults the stimulus did not reach
 from faults the checker did not observe. He also reviewed the environment and
 security integration. The baseline reuses his HW4 queue scoreboard and
 directed/random sequences (`SOURCE.md`); those are prior coursework, not new
-Project 1 code. The records below distinguish completed work from the final
-team CRV analysis and reproduction still pending; `ai_log.md` documents tool
-assistance.
+Project 1 code. The records below distinguish the drafted team CRV writeup
+from final-revision reproduction, which is pending; `ai_log.md` documents
+tool assistance.
 
 ## 1. Completed work
 
@@ -25,12 +25,12 @@ assistance.
 | Kyle Coutray | Coverage closure and mutation analysis, including reachability and observability explanations for two starter survivors. | `closure.md`, `FINDINGS.md`; retained clean/mutation evidence |
 | Kyle Coutray | Cross-reviewed PRs 1, 3 and 4; reproduced the report/security integration from a fresh clone. | Section 3; `evidence/kyle-review/` |
 | Kyle Coutray | Validated coverage-model granularity with a before-run prediction and controlled DUT probes; retained the exact model after the compact model hid 24 holes. | `ed2b5cc`; `tb/fifo/test_coverage_probe.py`; `evidence/kyle-check-machine/` |
-| Kyle Coutray | Report contract/feature table, baseline coverage, survivor analysis, own AI-use summary and reproduction note. | Owned portions of `report/latex/sections/`; final team CRV results remain pending. |
+| Kyle Coutray | Report contract/feature table, baseline coverage, survivor analysis, own AI-use summary and reproduction note. | Owned portions of `report/latex/sections/`; team CRV writeup drafted from retained evidence. |
 | joshieyu | Extracted the driver and monitor into `tb/fifo/fifo_driver.py` and `fifo_monitor.py`, added the shared per-cycle `FifoEnv`, extended monitor samples with `rst_n`/`wr_en`/`rd_en`/`wr_data`, and stepped the scoreboard from sampled inputs after checking them against the request. Validated by an unchanged clean run (byte-identical coverage), 8/8 released, and three injected environment faults. | branch `josh-driver-monitor`; `evidence/driver-monitor/`; `report/environment.md` |
 | joshieyu | EEE5703 graduate extension: measured pyvsc rates, Markov-chain occupancy and corner bound, and a coverage vs. found/total regression. | `grad/` |
 | joshieyu | Security & Trust thread (vplan S1): coverpoint for read requests while empty after a reset or a drain, an exposure count for pre-reset data on `rd_data`, and an opt-in strict assertion. Shows the clean RTL leaks pre-reset data while empty, which the spec allows. 8/8 released still found. | branch `josh-security-trust`; `tb/fifo/fifo_trust.py`; `evidence/security/` |
 | joshieyu | Team report setup: LaTeX skeleton synced with Overleaf, build and sync instructions, and `AGENTS.md` rules for teammates' AI agents. Wrote the environment, graduate extension, security, and AI-use (environment and extension part) sections. | branch `josh-report-skeleton`; `report/latex/`, `report/README.md`, `AGENTS.md` |
-| joshieyu | Demo script for the environment and security segment, with each command checked against a run. | `report/demo_environment.md` |
+| joshieyu | Demo script for the environment and security segment, with each command checked against a run. Recorded and uploaded the demo. | `report/demo_environment.md`; https://youtu.be/8VbUyT3RlDk |
 
 The HW4 driver, monitor, scoreboard, and sequences are reused work. They are
 not claimed as new Project 1 code. Reviews are recorded in section 3.
@@ -39,8 +39,8 @@ not claimed as new Project 1 code. Reviews are recorded in section 3.
 
 | Member | Proposed work | Status |
 |--------|---------------|--------|
-| Kyle Coutray | Scoreboard, coverage model, vplan, and closure analysis. | Baseline, model-quality check and cross-reviews complete; report sections drafted. Final team CRV analysis and final-revision reproduction pending. |
-| joshieyu | Driver/monitor extraction, sampled interface, environment demo, Security & Trust thread, report setup. | Environment validated locally and on Eustis. Security code, report sections, and demo script written; demo recording pending. |
+| Kyle Coutray | Scoreboard, coverage model, vplan, and closure analysis. | Baseline, model-quality check and cross-reviews complete; team CRV writeup drafted. Final-revision reproduction pending. |
+| joshieyu | Driver/monitor extraction, sampled interface, environment demo, Security & Trust thread, report setup. | Environment validated locally and on Eustis. Security code, report sections, and demo written and recorded. Extension tied to the team `crv/` constraint. |
 | Jackal | pyvsc transactions, constraints, seeded regression, mutation campaigns. | Awaiting team agreement. |
 
 ## 3. Reviews and shared work
@@ -62,7 +62,7 @@ execution; the scope and results are recorded in his `ai_log.md` section.
 ## 4. Final checks
 
 - [x] Third member identified: Jackal.
-- [ ] Jackal's GitHub username and repo access confirmed.
+- [x] Jackal's GitHub username and repo access confirmed (`atm101010-cyber`, collaborator as of 2026-11-14).
 - [ ] Each member has made their own commits.
 - [ ] Every completed-work claim has supporting code or evidence.
 - [ ] Each member has reviewed another layer.

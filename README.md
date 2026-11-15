@@ -2,7 +2,10 @@
 
 EEE4701 team repo. The current starting point is Kyle's HW4 FIFO testbench,
 with a project verification plan and functional-coverage instrumentation.
-The pyvsc regression, final report, and demo are still pending.
+The team pyvsc regression has retained results in `evidence/crv/`; the final
+report is pending.
+
+**Demo:** https://youtu.be/8VbUyT3RlDk
 
 **Deadline:** November 8, 2026 (Webcourses date confirmed by Kyle).
 
@@ -74,7 +77,7 @@ evidence so the report cannot be mistaken for a clean run after a mutant run.
 | `tb/fifo/fifo_driver.py`, `fifo_monitor.py` | Pin driver and monitor, extracted from the HW4 test. |
 | `tb/fifo/fifo_env.py` | Per-cycle glue shared by directed and random tests. |
 | `tb/fifo/fifo_trust.py` | Security & Trust coverpoint (vplan S1): what `rd_data` shows while empty. |
-| `crv/` | Handoff for the constrained-random work; implementation pending. |
+| `crv/` | Team pyvsc stimulus and seeded regression. |
 | `vplan.md` | Requirements, coverage model, test matrix, and closure criteria. |
 | `TASKS.md` | Proposed ownership, interface agreement, and remaining work. |
 | `FINDINGS.md` | Mutation evidence and residual risk. |

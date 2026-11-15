@@ -165,8 +165,6 @@ Checked setup/reset/drain cycles are excluded from the probe phase.
   and sample hashes; see his error 5 above and the PR 1 review.
 - Strict mode returned shell status zero even when cocotb failed. Validation
   used the test summary/JUnit rather than shell status alone.
-- Report drafts distinguish HW4 Python-random and graduate-extension results
-  from the missing team CRV results. Final CRV claims remain pending.
 - A LaTeX spacing warning in the model-check paragraph was fixed by shortening
   the heading and reflowing its opening sentence. The six-page draft then
   built without final-pass warnings; current proposal validation is recorded

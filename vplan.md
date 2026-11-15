@@ -59,7 +59,7 @@ Sample occupancy from the checked reference queue before its update. Sample the 
 | Existing HW4 seeded traffic | F2-F7 | Python random baseline | Every checked sample agrees with the queue; trailing data drains correctly. |
 | Coverage-model comparison (`MODULE=test_coverage_probe`) | F2-F5, X1 | directed model validation, opt-in | Clean DUT checks pass; the same sparse probes expose the difference between a compact band cross and exact occupancy bins; a separate full matrix closes the exact cross. See `evidence/kyle-check-machine/`. |
 | S1 empty-read sequence | S1, F1 | directed | Reset with a full FIFO and requests during reset, then read at empty alone and racing a write, after reset and after a drain; XS1 closes. |
-| Project constrained-random campaigns | F2-F7 | pyvsc, pending | Multiple recorded seeds pass; normal occupancy x request coverage closes; measured rates support the claimed distribution. |
+| Project constrained-random campaigns | F2-F7 | pyvsc, measured | Three recorded seeds each close random-only X1 at 36/36; measured rates and seed replay are retained in `evidence/crv/`. |
 
 ## 5. Risk and spec ambiguity
 
@@ -68,7 +68,7 @@ Sample occupancy from the checked reference queue before its update. Sample the 
 | 1 | Handout mentions almost_full and optional FWFT; packet has neither option. | Handout vs. ports/parameters | Plan follows the packet's FWFT contract. | Confirm whether Webcourses supplies a newer project DUT. |
 | 2 | Handout asks for two survivor analyses even if final released score is perfect. | Mutation task | Preserve measured starter survivors and compare them with the improved suite. | Confirm that baseline survivor analysis is acceptable. |
 | 3 | Security task asks for illegal/undefined controls, but example reset/boundary cases are defined here. | Handout Security & Trust | Cover reset with requests and boundary behavior; describe the contract accurately. Added S1 for the one undefined output: `rd_data` while empty. | S1 shows the clean RTL exposes pre-reset data while empty. This is allowed by the spec, so it is reported as a trust finding, not a failure. |
-| 4 | A high score can hide weak random stimulus. | Project coverage/reproducibility tasks | Keep phase-specific coverage and measure distributions. | CRV and seed replay remain pending. |
+| 4 | A high score can hide weak random stimulus. | Project coverage/reproducibility tasks | Keep phase-specific coverage and measure distributions. | CRV seed 4701 replayed; final integrated-revision reproduction remains pending. |
 
 ## 6. Closure criteria
 

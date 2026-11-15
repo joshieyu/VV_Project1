@@ -31,13 +31,20 @@ S1 reset/drain context x empty-read request & 4/4 \\
 \end{tabular}
 \end{center}
 
-These are baseline results, not final team CRV closure. The directed matrix
+These are baseline results. The directed matrix
 explicitly visits each occupancy/request pair, so its closure is expected.
-The final YAML gives hit totals, not the order of holes closing. F6/F7
+The baseline YAML gives hit totals, not the order of holes closing. F6/F7
 still require data/order checks after bin closure. Joshua's \path{grad/}
-experiment is separate from Jackal's pending team \path{crv/} implementation.
+experiment is separate from the team \path{crv/} regression.
 
-\todo{Kyle and Jackal: after the team regression, report random-only
-hits/holes, seeds and budgets, measured request rates, constraint changes,
-the last-new-bin draw index, replay results, and continued checking/drain.
-Justify any directed closure separately. See \path{closure.md}.}
+\paragraph{Random-only X1 closure.} Uniform seed 4701 at 128 cycles covered
+32/36 bins, missing $(0,1,1)$, $(1,0,0)$, $(1,0,1)$, and $(2,0,0)$
+(pre-edge occupancy, write, read). Switching to the prewritten tuned mode
+at the same budget covered 34/36, missing $(2,0,0)$ and $(5,1,1)$.
+Observed write/read rates were 48.44\%/44.53\% (uniform) and
+53.91\%/50.00\% (short tuned). At 2048 tuned cycles, seeds 4701/4702/4703
+each covered 36/36; their last new bins appeared at cycles 196/202/131.
+Increasing the budget closed the remaining holes. Checking continued after
+closure; the random-only sampler was disabled before the final checked drain.
+Replaying 4701 in a fresh process produced an identical transaction CSV.
+Evidence: \path{evidence/crv/}; analysis: \path{closure.md}.
