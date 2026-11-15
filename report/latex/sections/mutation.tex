@@ -1,7 +1,6 @@
 \section{Mutation quality}
 \label{sec:mutation}
 
-
 The final tuned CRV regression (seed 4701, 2048 requests) detected 8/8
 released mutants (100\%, all test failures), exceeding the 90\% threshold.
 Evidence: \path{evidence/crv/mutation.log} and \path{evidence/crv/mutation.json}.
@@ -25,7 +24,6 @@ Survivor & Why missed & What catches it \\
 \end{tabular}
 \end{center}
 
-Both are caught by the reused HW4 and reviewed integration suite. No
-released mutant survives those suites. Confirm that baseline survivors
-satisfy the assignment before treating this as the final survivor analysis;
-retain Jackal's final run and any additional survivors when available.
+Both are caught by the reused HW4, reviewed integration, and final CRV suites.
+No released mutant survives the final CRV suite. Whether starter survivors
+satisfy the assignment's two-survivor requirement still needs confirmation.

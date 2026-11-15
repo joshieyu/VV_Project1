@@ -9,9 +9,6 @@ make -C tb/fifo SIM=icarus RANDOM_SEED=4701
 It passes on the course machine (Eustis, Icarus 12.0, cocotb 1.9.2) with the
 same simulated time as locally (\texttt{evidence/driver-monitor/eustis-clean.log}).
 
-
-\todo{Aaron. The seeded random regression command and its seeds.}
-
 The final CRV regression and released mutant campaign ran on the course VM:
 \begin{verbatim}
 python crv/run_regression.py --sim icarus \

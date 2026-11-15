@@ -103,7 +103,7 @@ that script was rerun and its output matched the script.
 
 **Tool:** OpenAI Codex, terminal agent.
 
-**Dates:** October 27, November 4, and November 12, 2026.
+**Dates:** October 27, November 4, November 12, and November 14, 2026.
 
 **Reviewed for functionality by Kyle Coutray:** [x]
 
@@ -165,8 +165,9 @@ Checked setup/reset/drain cycles are excluded from the probe phase.
   and sample hashes; see his error 5 above and the PR 1 review.
 - Strict mode returned shell status zero even when cocotb failed. Validation
   used the test summary/JUnit rather than shell status alone.
-- Report drafts distinguish HW4 Python-random and graduate-extension results
-  from the missing team CRV results. Final CRV claims remain pending.
+- Earlier report drafts distinguished HW4 Python-random and graduate-extension
+  results from the then-pending team CRV run. The November 14 update below
+  uses the retained team CRV evidence.
 - A LaTeX spacing warning in the model-check paragraph was fixed by shortening
   the heading and reflowing its opening sentence. The six-page draft then
   built without final-pass warnings; current proposal validation is recorded
@@ -174,3 +175,25 @@ Checked setup/reset/drain cycles are excluded from the probe phase.
 - The default suite still passes with byte-identical baseline coverage. The
   opt-in probe does not change the default test, production sampler or DUT.
   No mutation-score improvement is attributed to it.
+
+### November 14 CRV writeup update
+
+**Prompt (verbatim excerpts):**
+
+> okay I think I have to review joshies PR and then I need to wrap up whatever is left for me to get full credit and for us to finish... what do we gotta do to bring this home
+>
+> why dont I just make the change and push to this PR no?
+
+Codex read the already-retained `evidence/crv/` results and drafted updates to
+`vplan.md`, `closure.md`, `FINDINGS.md`, and Kyle's report coverage and mutation
+text. It also removed stale completed-result TODOs and duplicate coverage
+prose from the shared report. This was an analysis of an existing run, not a
+new AI-drafted experiment; no new before-run prediction was made or claimed.
+The source files are the per-run statistics and coverage YAML,
+`regression_summary.json`, and `mutation.log`/`mutation.json` in
+`evidence/crv/`. The writeup keeps the 128-draw uniform 32/36, tuned 34/36,
+three 2048-draw tuned 36/36 results, seed-4701 replay, and released 8/8
+separate from the earlier HW4 baseline. The report build is checked after the
+edit. Kyle's review of this new writeup is pending.
+
+**Reviewed for functionality by Kyle Coutray (November 14 update):** [ ]

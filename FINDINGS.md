@@ -9,6 +9,7 @@
 | HW4 with Project 1 coverage / released | 8 | 8 | 100% |
 | PR 4 security integration / released | 8 | 8 | 100% |
 | Fresh-clone report/security integration candidate / released | 8 | 8 | 100% |
+| Final tuned CRV, seed 4701 (2,048 requests) / released | 8 | 8 | 100% |
 | Hidden (reported at grading) | not run | not available | - |
 
 **Command run:**
@@ -35,11 +36,19 @@ candidate at `384eb1e` from a fresh clone. Both passed clean RTL and found
 8/8 through `test-failed`; see `evidence/kyle-review/` for logs, JSON, source
 heads, and versions. No final team `crv/` campaign is claimed by these rows.
 
+The team CRV campaign used `python crv/run_regression.py --sim icarus
+--seeds 4701,4702,4703 --short-cycles 128 --cycles 2048 --mutate` on the
+course VM. Its tuned seed-4701 mutation run passed clean RTL and found all
+eight released mutants through test failures. The score and command are in
+`evidence/crv/mutation.log` and `evidence/crv/mutation.json`. The CRV result
+reproduces the earlier 8/8 score; it does not establish a gain due to tuning.
+
 ## Survivors
 
 These are measured **starter survivors**, not survivors of the final project
-suite. The project still needs its pyvsc regression. Confirm with course staff
-that baseline survivor analysis meets the handout's two-survivor requirement.
+suite. The final CRV run found all eight released mutants. Confirm with course
+staff that baseline survivor analysis meets the handout's two-survivor
+requirement.
 
 | Mutant | What it changes | Reachable by starter stimulus? | Observable by starter checks? | Why it survived / what catches it |
 |--------|-----------------|--------------------------------|-------------------------------|---------------------------------|
@@ -70,8 +79,8 @@ been implemented or that coverage improvements caused the baseline score.
 
 1. Reachability: only WIDTH=8 and DEPTH=8 are tested. Coverage of every count
    and request pair does not cover every stored-data combination or long
-   request history. The team CRV distribution and replay remain pending;
-   Joshua's measured pyvsc graduate experiment in `grad/` is separate.
+   request history. The team CRV distribution and seed-4701 replay are in
+   `evidence/crv/`; Joshua's graduate experiment in `grad/` is separate.
 2. Observability: count, flags, and valid head data are sampled before and after
    the active edge. Between-sample glitches can be missed. Empty `rd_data` is
    excluded from functional correctness checks because the contract leaves
@@ -82,6 +91,6 @@ been implemented or that coverage improvements caused the baseline score.
 3. The released pool has only eight mutants. A perfect released score does
    not establish the hidden score or correctness for every fault class.
 
-**If I had another day:** I would finish the pyvsc campaigns, measure their
-distribution and coverage independently of the directed checks, and replay
-the same seeds before making closure claims.
+**If I had another day:** I would exercise more parameter values and longer
+histories, and compare additional fault classes beyond the eight released
+mutants.

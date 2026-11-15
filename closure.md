@@ -1,4 +1,4 @@
-# Coverage closure - FIFO baseline - Kyle Coutray
+# Coverage closure - FIFO baseline and CRV - Kyle Coutray
 
 ## 1. The number
 
@@ -14,9 +14,12 @@ closed. The target in `vplan.md` is 100%.
 | HW4 Python random, seed 4702 (2,048 cycles) | 36/36 |
 | HW4 Python random, seed 4703 (2,048 cycles) | 36/36 |
 | HW4 Python random, seed 4704 (2,048 cycles) | 36/36 |
+| CRV uniform, seed 4701 (128 draws) | 32/36 |
+| CRV tuned, seed 4701 (128 draws) | 34/36 |
+| CRV tuned, seeds 4701, 4702, 4703 (2,048 draws each) | 36/36 each |
 
 The November 12 review of PR 4 (`04384c1`) and a fresh-clone integration
-run (`384eb1e`) reproduced every row above. S1 additionally closes **XS1
+run (`384eb1e`) reproduced the directed and HW4 rows above. S1 additionally closes **XS1
 4/4**, with both context and request coverpoints at 2/2. Clean logs, JUnit,
 coverage, commands, and versions are retained in `evidence/kyle-review/`.
 Coverage was copied only after rerunning clean RTL after mutation.
@@ -24,18 +27,17 @@ Coverage was copied only after rerunning clean RTL after mutation.
 Final directed drains are counted in the directed group, not in random groups.
 Each row's cross has its own nine occupancy bins and four request bins.
 
-The current HW4 campaigns use Python random, not pyvsc. Their per-seed reports
-are separate from directed coverage. Project constrained-random closure is
-**pending**, even if the baseline bins are already closed.
+The HW4 campaigns use Python random. The team `crv/` campaigns use pyvsc and
+record random-only X1 separately from the HW4 and directed phases. Their
+per-run YAML, transaction CSV, statistics, and logs are in `evidence/crv/`.
+Joshua's `grad/` experiment is a separate extension.
 
-Joshua's `grad/` experiment does use pyvsc, with its own regression and
-analysis. It does not implement the separate team `crv/` deliverable. The
-remote branches inspected on November 12 still contain only `crv/README.md`.
-
-**How the report was produced:**
+**Commands for the retained runs:**
 
 ```bash
 make -C tb/fifo SIM=icarus RANDOM_SEED=4701
+python crv/run_regression.py --sim icarus --seeds 4701,4702,4703 \
+  --short-cycles 128 --cycles 2048 --mutate
 ```
 
 `lib/fifo_coverage.py` exports `artifacts/coverage.yml`. A retained clean-run
@@ -43,22 +45,24 @@ copy and simulation log are stored in `evidence/project-baseline/`.
 
 ## 2. The convergence argument
 
-No pyvsc tuning/convergence result is claimed yet. The existing directed
-matrix explicitly visits every occupancy and request pair; its closed bins
-are expected. It was retained to check the spec and establish a working
-baseline before changing the stimulus.
+The directed matrix explicitly visits every occupancy/request pair, so its
+closed bins are expected. For random-only X1, the same 128-draw seed covered
+32/36 with uniform requests. It missed `0,1,1`, `1,0,0`, `1,0,1`, and `2,0,0`
+(pre-edge count, write, read). The prewritten tuned fill/drain mode covered
+34/36 at that budget, missing `2,0,0` and `5,1,1`. Observed write/read rates
+were 48.44%/44.53% (uniform) and 53.91%/50.00% (tuned). These measured rates
+do not by themselves prove closure.
 
-The constraints owner should save the first random-phase report, identify
-missing bins, change constraints, and compare the next report using recorded
-seeds and cycle budgets. Record vectors to closure and continued checking
-after closure. Justify any directed closure separately.
-
-To finish this section after Jackal's code lands, retain: the exact source
-revision and command; seeds and per-seed draw budgets; random-only bin hits
-and holes before/after each constraint change; measured request rates;
-transaction replay comparisons; the last-new-bin draw index; and the
-continued checks/drain after that index. Do not infer a first-hit time from
-the final accumulated YAML, which contains totals rather than chronology.
+With tuned mode and 2,048 draws, seeds 4701, 4702, and 4703 each reached
+36/36. Their last new bins appeared at draws 196, 202, and 131, leaving
+1,852, 1,846, and 1,917 additional checked random requests, respectively.
+The test then disabled random-only sampling and drained the reference queue
+through checked cycles. Seed 4701 was replayed in a fresh process and its
+transaction CSV matched byte for byte. The equal-budget comparison shows
+that tuning reduced holes from four to two; the larger budget closed the
+remaining holes. The retained stats record first-hit cycles, unlike the
+accumulated YAML. Evidence: `evidence/crv/regression_summary.json`, the
+per-run `.stats.json` files, and the matching logs and coverage YAML.
 
 ## 3. Bin justification
 
@@ -94,7 +98,7 @@ the head and data order even after every cross bin has been hit.
 2. These crosses do not measure all pointer positions or parameter values.
 3. Sampled checks can miss transient errors between sampling points.
 4. A closed directed model says nothing about the pyvsc distribution or seed
-   replay until those are implemented and measured independently.
+   replay; those were measured independently in `evidence/crv/`.
 5. XS1 measures sampled empty reads in two contexts. Its exposure count uses
    byte values seen before but not since reset; repeated values can hide
    provenance. It is not a complete data-remanence measurement.
@@ -104,6 +108,8 @@ the head and data order even after every cross bin has been hit.
 The starter scored 1/8 and the reused HW4 suite scored 8/8. That improvement
 predates the new coverage instrumentation, so it is not a measured effect of
 constraint tuning. See `FINDINGS.md` for the two baseline survivor analyses.
-The PR 4 and fresh-clone runs also found 8/8 released mutants, all through
-test failures (`evidence/kyle-review/`). Final team CRV closure and its
-mutation correlation remain pending.
+The PR 4 and fresh-clone runs also found 8/8 released mutants through test
+failures (`evidence/kyle-review/`). The final tuned CRV run independently
+found 8/8 through test failures (`evidence/crv/mutation.log`). Because the
+HW4 suite already found 8/8, this does not show a mutation-score gain from
+CRV tuning. The released pool cannot establish a hidden-pool result.

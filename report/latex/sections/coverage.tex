@@ -31,53 +31,20 @@ S1 reset/drain context x empty-read request & 4/4 \\
 \end{tabular}
 \end{center}
 
-These are baseline results, not final team CRV closure. The directed matrix
+These are baseline results. The directed matrix
 explicitly visits each occupancy/request pair, so its closure is expected.
-The final YAML gives hit totals, not the order of holes closing. F6/F7
+The baseline YAML gives hit totals, not the order of holes closing. F6/F7
 still require data/order checks after bin closure. Joshua's \path{grad/}
-experiment is separate from Jackal's pending team \path{crv/} implementation.
-
-\todo{Kyle and Jackal: after the team regression, report random-only
-hits/holes, seeds and budgets, measured request rates, constraint changes,
-the last-new-bin draw index, replay results, and continued checking/drain.
-Justify any directed closure separately. See \path{closure.md}.}
+experiment is separate from the team \path{crv/} regression.
 
 \paragraph{Random-only X1 closure.} Uniform seed 4701 at 128 cycles covered
 32/36 bins, missing $(0,1,1)$, $(1,0,0)$, $(1,0,1)$, and $(2,0,0)$
 (pre-edge occupancy, write, read). Switching to the prewritten tuned mode
 at the same budget covered 34/36, missing $(2,0,0)$ and $(5,1,1)$.
-At 2048 tuned cycles, seeds 4701/4702/4703 each covered 36/36; the last
-new-bin cycles were 196/202/131. Increasing the budget, not an undocumented
-code patch, closed the remaining holes. The random-only sampler was disabled
-before the final checked drain, which did not contribute X1 hits. Replaying
-4701 in a fresh process produced an identical transaction CSV. Evidence:
-\path{evidence/crv/}.
-
-\begin{table}[htbp]
-\centering
-\caption{Constrained-Random Coverage Results}
-\label{tab:crv_coverage}
-\small
-\begin{tabular}{lrrr}
-\hline
-\textbf{Configuration} & \textbf{Cycles} &
-\textbf{Bins} & \textbf{Coverage} \\
-\hline
-Uniform (4701) & 128 & 32/36 & 88.9\% \\
-Tuned (4701) & 128 & 34/36 & 94.4\% \\
-Tuned (4701) & 2048 & 36/36 & 100\% \\
-Tuned (4702) & 2048 & 36/36 & 100\% \\
-Tuned (4703) & 2048 & 36/36 & 100\% \\
-\hline
-\end{tabular}
-\end{table}
-
-The initial uniform-random regression achieved 88.9\%
-coverage (32/36 bins). Constraint tuning increased
-coverage to 94.4\% (34/36 bins) using the same
-128-cycle budget. Extending the tuned regression to
-2048 cycles achieved 100\% coverage for all three
-independent seeds (4701, 4702, and 4703). The final missing coverage bins were reached by
-cycles 196, 202, and 131, respectively. Seed replay
-also produced byte-identical transaction traces,
-confirming reproducibility.
+Observed write/read rates were 48.44\%/44.53\% (uniform) and
+53.91\%/50.00\% (short tuned). At 2048 tuned cycles, seeds 4701/4702/4703
+each covered 36/36; their last new bins appeared at cycles 196/202/131.
+Increasing the budget closed the remaining holes. Checking continued after
+closure; the random-only sampler was disabled before the final checked drain.
+Replaying 4701 in a fresh process produced an identical transaction CSV.
+Evidence: \path{evidence/crv/}; analysis: \path{closure.md}.
