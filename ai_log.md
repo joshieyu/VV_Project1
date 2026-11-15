@@ -99,6 +99,20 @@ that script was rerun and its output matched the script.
   was unchanged. A YAML diff showed the directed and reset hit counts grew
   (all bins still closed). The note was corrected before commit.
 
+### Final reproduction and wrap-up (2026-11-14)
+
+**Prompt:** "What can I do now to submit and be done?"
+**Reviewed for functionality by joshieyu:** [ ]
+
+The assistant ran a fresh-clone reproduction of `main` at `0c28a28`
+(`evidence/final-repro/`). It also drafted the reproducibility and
+contributions paragraphs in `report/latex/sections/reproducibility.tex`, the
+sentences tying the extension to the team `crv/` constraint in
+`grad/Project1_Extension.tex`, `grad/README.md`, and `extension.tex`, and
+built `REPORT.pdf`. No new analysis was drafted. The prediction was that the
+fresh clone would match `evidence/crv/`. It held: all six transaction CSVs
+matched byte for byte and the score was 8/8.
+
 ## Kyle Coutray - coverage, reviews, and report
 
 **Tool:** OpenAI Codex, terminal agent.

@@ -22,8 +22,9 @@
 \section*{Graduate Extension: What the Constraints Induce, and Whether Closure Finds Mutants, Project 1}
 
 \paragraph{What is analyzed.}
-The team's \texttt{crv/} layer was still in progress when this was written, so
-the analysis uses the constraint in \texttt{grad/stimulus.py}. It is a two-phase
+The analysis uses the constraint in \texttt{grad/stimulus.py}. The team's
+tuned mode in \texttt{crv/stimulus.py}, written later, uses the same
+constraint with the same solve order, so these results apply to it. It is a two-phase
 sweep. In FILL, $P(\texttt{wr\_en}) = a$ and $P(\texttt{rd\_en}) = 1-a$. DRAIN
 is the mirror image. At \texttt{count} $0$ and $8$ both enables are $1/2$. The
 phase flips when the \emph{reference} queue reaches full or empty, and the
@@ -32,7 +33,6 @@ the spec defines a write while full and a read while empty. The baseline is an
 unshaped \texttt{UniformTxn}. Stimulus runs through the team's driver, monitor,
 \texttt{FifoEnv} and queue scoreboard, with its own coverage phase, so no
 directed cycle earns credit. The scripts accept any class with the same fields.
-The tables below are regenerated when the team class lands.
 
 \paragraph{The rates are measured, not read off the constraint.}
 Each enable is an \texttt{implies} on a uniform roll. On the pinned pyvsc that
@@ -244,8 +244,8 @@ show up in this correlation either.
 
 \paragraph{Limits.}
 Five seeds per point. The released pool has eight mutants, and the hidden pool
-may weight the classes differently. WIDTH and DEPTH are both 8. The constraint
-analyzed is the extension's own, not the team's final \texttt{crv/} class.
+may weight the classes differently. WIDTH and DEPTH are both 8. The runs used the
+extension's own copy of the constraint, not the \texttt{crv/} class.
 Commands, seeds and per-run stream hashes are in \texttt{grad/README.md} and
 \texttt{grad/results/}. All 80 streams are distinct. Rerunning
 \texttt{analyze.py} reproduces \texttt{analysis.json} byte for byte, and
