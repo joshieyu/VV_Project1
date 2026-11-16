@@ -1,18 +1,14 @@
 # Project 1 - synchronous FIFO verification
 
-EEE4701 team repo. The current starting point is Kyle's HW4 FIFO testbench,
-with a project verification plan and functional-coverage instrumentation.
-The team pyvsc regression has retained results in `evidence/crv/`; the final
-report is pending.
+EEE4701/EEE5703 team repo. It builds on Kyle's HW4 FIFO testbench, with a
+verification plan, functional coverage, a layered environment, and a seeded
+pyvsc regression (`evidence/crv/`). The report is `REPORT.pdf`.
 
-**Demo:** 
-_waiting on aaron to merge our videos together. putting links for the time being so I can submit._
+**Demo** (three parts):
 
-Part 1: (Josh) https://youtu.be/8VbUyT3RlDk
-
-Part 2: (Aaron) No video link
-
-Part 3: (Kyle) https://drive.google.com/file/d/1wN9eM3VxzRqkz6Tgfltla_JXCvuArmtA/view?usp=sharing
+- Part 1 (Joshua): https://youtu.be/8VbUyT3RlDk
+- Part 2 (Aaron): not yet recorded
+- Part 3 (Kyle): https://drive.google.com/file/d/1wN9eM3VxzRqkz6Tgfltla_JXCvuArmtA/view?usp=sharing
 
 **Deadline:** November 8, 2026 (Webcourses date confirmed by Kyle).
 
