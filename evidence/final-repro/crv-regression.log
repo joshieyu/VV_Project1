@@ -1,0 +1,12 @@
+before_uniform_4701_128: X1 32/36  first/last=128, stream=44ee6332838edad8
+after_short_tuned_4701_128: X1 34/36  first/last=111, stream=cc4d37f7683b2c92
+At equal budget: baseline holes=['0,1,1', '1,0,0', '1,0,1', '2,0,0'] 
+At equal budget: tuned holes=['2,0,0', '5,1,1']
+final_tuned_4701_2048: X1 36/36  first/last=196, stream=053d4b9390f784d6
+final_tuned_4702_2048: X1 36/36  first/last=202, stream=53014bcec0d32128
+final_tuned_4703_2048: X1 36/36  first/last=131, stream=cc9985e8be3a0a37
+Random-only aggregate X1 36/36; holes=[]
+replay_tuned_4701_2048: X1 36/36  first/last=196, stream=053d4b9390f784d6
+Replay seed=4701 byte-for-byte CSV match: True
+Released mutation: 8/8 (100.0%). See <clone>-crv/mutation.log
+PASS: random-only X1 closure and seed replay; evidence saved to <clone>-crv

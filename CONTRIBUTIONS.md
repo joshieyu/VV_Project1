@@ -31,6 +31,7 @@ tool assistance.
 | joshieyu | Security & Trust thread (vplan S1): coverpoint for read requests while empty after a reset or a drain, an exposure count for pre-reset data on `rd_data`, and an opt-in strict assertion. Shows the clean RTL leaks pre-reset data while empty, which the spec allows. 8/8 released still found. | branch `josh-security-trust`; `tb/fifo/fifo_trust.py`; `evidence/security/` |
 | joshieyu | Team report setup: LaTeX skeleton synced with Overleaf, build and sync instructions, and `AGENTS.md` rules for teammates' AI agents. Wrote the environment, graduate extension, security, and AI-use (environment and extension part) sections. | branch `josh-report-skeleton`; `report/latex/`, `report/README.md`, `AGENTS.md` |
 | joshieyu | Demo script for the environment and security segment, with each command checked against a run. Recorded and uploaded the demo. | `report/demo_environment.md`; https://youtu.be/8VbUyT3RlDk |
+| joshieyu | Fresh-clone reproduction of the final revision `0c28a28`: clean suite, CRV regression, and mutation; all six CRV transaction files match `evidence/crv/`. Updated the extension write-up for the merged `crv/` and built `REPORT.pdf`. | `evidence/final-repro/`; `grad/`; `REPORT.pdf` |
 
 The HW4 driver, monitor, scoreboard, and sequences are reused work. They are
 not claimed as new Project 1 code. Reviews are recorded in section 3.

@@ -25,10 +25,22 @@ Eustis run. Kyle owns the vplan, coverage and closure analysis, reused HW4
 scoreboard, baseline survivor analysis, and reviews recorded in
 \path{CONTRIBUTIONS.md} section 3. Other members complete their own records.
 
-\todo{Everyone. Name the teammate who reproduced the final revision, and the
-commit they reproduced.}
+\paragraph{Final revision.} Joshua reproduced \path{0c28a28} from a fresh
+clone (macOS, Icarus 13.0). The clean suite passed, the regression gave the
+same X1 results and 8/8, and all six transaction files matched the Eustis
+run byte for byte (\path{evidence/final-repro/}).
 
 \paragraph{Demo.} \url{https://youtu.be/8VbUyT3RlDk}
 
-\paragraph{Contributions.} \todo{Everyone. One line per member, matching
-\texttt{CONTRIBUTIONS.md}.}
+\paragraph{Contributions.} Full records and reviews are in
+\path{CONTRIBUTIONS.md}.
+\begin{itemize}
+\item \textbf{Kyle Coutray:} HW4 baseline and scoreboard, vplan, coverage
+model, closure and survivor analysis, model-quality check, CRV writeup, and
+reviews of PRs 1, 3, and 4.
+\item \textbf{Joshua Yu:} driver, monitor, and \texttt{FifoEnv}; Security and
+Trust coverpoint; graduate extension; report setup; demo.
+\item \textbf{Aaron Money:} pyvsc transaction and constraints, seeded CRV
+regression and replay, and the CRV mutation run (\path{crv/},
+\path{evidence/crv/}).
+\end{itemize}
