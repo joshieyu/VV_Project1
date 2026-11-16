@@ -5,7 +5,11 @@ with a project verification plan and functional-coverage instrumentation.
 The team pyvsc regression has retained results in `evidence/crv/`; the final
 report is pending.
 
-**Demo:** https://youtu.be/8VbUyT3RlDk
+**Demo:** 
+_waiting on aaron to merge our videos together. putting links for the time being so I can submit._
+Part 1: (Josh) https://youtu.be/8VbUyT3RlDk
+Part 2: (Aaron) No video link
+Part 3: (Kyle) https://drive.google.com/file/d/1wN9eM3VxzRqkz6Tgfltla_JXCvuArmtA/view?usp=sharing
 
 **Deadline:** November 8, 2026 (Webcourses date confirmed by Kyle).
 
